@@ -83,17 +83,17 @@ OnBoot //Normal booting
 		AutoUpdates[1] = 0 //Just in case
 	}
 	--
-	OnHydrateGhost.GetStats
+	OnSendStats
 }
 
 OnOtherGhostBooted
 {
-	OnHydrateGhost.GetStats
+	OnSendStats
 }
 
 OnGhostCallComplete
 {
-	OnHydrateGhost.GetStats
+	OnSendStats
 }
 
 OnClose

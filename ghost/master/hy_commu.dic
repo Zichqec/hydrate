@@ -19,6 +19,12 @@
 	reference11: Number of extra sips total
 */
 
+//This intermediary step is because otherwise the boot events passed along their own references...
+OnSendStats
+{
+	"\![embed,OnHydrateGhost.GetStats]"
+}
+
 OnHydrateGhost.GetStats : all
 {
 	_type = "notify"
@@ -39,7 +45,7 @@ OnHydrateGhost.GetStats : all
 	{
 		"\![raiseother,%(reference0),OnHydrateGhost.GetStats,""%(reference0)"",""%(reference1)"","
 	}
-	"""%(nowshell)"",,%(nowscale),%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
+	"""%(nowshell)"",,%(nowscale),,%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
 }
 
 
