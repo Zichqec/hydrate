@@ -287,7 +287,7 @@ OnDressupMenu
 	}
 	elseif reference0 != ""
 	{
-		if _items > 18; "%(b4)\n\n[half]\![*]\q[Back,OnDressupMenu]"
+		if _items > 18; "%(b4)\n\n[half]\![*]\q[Back,OnDressupMenu]\n"
 		elseif _items > 11; "%(b4)"
 		else; "\b2"
 		--
@@ -387,12 +387,12 @@ OnWaterStats
 	_h = "\f[color,default.anchor]"
 	_d = "\f[color,default]"
 	
-	"\0\*\b2\_q"
+	"\0\*\b[4]\_q"
 	--
 	"\f[align,center]— Stats —\n\n\f[align,default]"
 	--
 	_s = ""; if todayswaters != 1; _s = "s"
-	"\![*]%(_h)%(todayswaters)%(_d) drink%(_s) taken today\n"
+	"\![*]%(_h)%(todayswaters)%(_d) drink%(_s) taken this session\n"
 	--
 	_s = ""; if totalwaters != 1; _s = "s"
 	"\![*]%(_h)%(totalwaters)%(_d) drink%(_s) taken in total\n"
@@ -404,7 +404,7 @@ OnWaterStats
 	"\![*]%(_h)%(extrasipstoday)%(_d) extra sip%(_s) taken today\n"
 	--
 	_s = ""; if extrasipstotal != 1; _s = "s"
-	"\![*]%(_h)%(extrasipstotal)%(_d) extra sip%(_s) taken in total\n\n\n"
+	"\![*]%(_h)%(extrasipstotal)%(_d) extra sip%(_s) taken in total\n\n"
 	--
 	"(You're doing awesome, keep it up!)"
 	"(Good job, keep going!)"
