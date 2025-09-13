@@ -189,40 +189,7 @@ ghostver
 
 OnChangeLog : all
 {
-	"\![set,autoscroll,disable]\_q\b2"
-	
-	"\f[align,center]— Version 1.2.1 —\n\f[align,default]\n"
-	
-	"• Added unique switch dialogues for all currently known shells.\n\n"
-	"• Added an option to swap to a random shell.\n\n"
-	"• Changing shells will now check for shell updates if you have auto update checks on.\n\n"
-	"• Fixed the auto updates system, it now does what it says it does!\n\n"
-	"• Fixed a bug where the shell would not be placed correctly when changing shells.\n\n"
-	"• Fixed a bug where if you installed another ghost, the buttons to change to/call the other ghost had their labels swapped.\n\n"
-	"• Fixed some minor formatting issues.\n\n"
-	"• Changed the right click menu to include functions I had previously excluded.\n\n"
-	"• Changed the slider input when changing the reminder rate back to a normal input box. This should allow finer control, independent of balloon. Also you can set your reminders to absurd lengths now."
-	
-	"\n\n"
-	
-	"\f[align,center]— Version 1.2.0 —\n\f[align,default]\n"
-	
-	"• You can now choose to have a sound play when a reminder pops up! Choose from 6 defaults, or set your own custom sound.\n\n"
-	"• Added pause mode; pause your drink reminders when you step away from your computer, without losing your drink streak!\n\n"
-	"• Hydrate's auto update checks will now automatically check for updates to the current shell and balloon as well.\n\n"
-	"• Added an option to pick randomly from available designs.\n\n"
-	"• Added an option to toggle off hour notifications.\n\n"
-	"• Added a few new dialogues.\n\n"
-	"• Reorganized the config menu.\n\n"
-	"• Prettied up some of the other menus a little.\n\n"
-	"• Updated to YAYAtc571-3.\n\n"
-	"• Updates to some of the old code."
-	
-	"\n\n\n"
-	
-	
-	if reference0 == "FromMenu";"\![*]\q[Back to Config,OnConfigMenu]\n" //Checks to see if the user came here from the functions menu
-	"\![*]\q[Done,cancelnodialogue]\e"
+	"\j[https://ukagaka.zichqec.com/ghost/hydrate#version_history]"
 }
 
 OnUpdate.OnDownloadBegin //Taken from the GT template because I see no reason to redo this and probably break it
