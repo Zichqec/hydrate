@@ -890,6 +890,7 @@ OnSecondChange
 	{
 		passsec++
 	}
+	
 	if mikireflag == 1 && reference1 == 0
 	{
 		EndMikireTalk
@@ -900,8 +901,10 @@ OnSecondChange
 		if _b == 0; WaitingCommu
 	}
 	
-		
-	}*/
+	LOGGING("====================================================================")
+	mikireflag = reference1
+	LOGGING("mikireflag: %(mikireflag)")
+	LOGGING("reference: %(reference)")
 	
 	//Create arrays if none exist
 	if !ISVAR("ErrorsToPush.level"); ErrorsToPush.level = IARRAY
