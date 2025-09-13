@@ -111,22 +111,11 @@ WaitingCommu
 	"\![raise,OnCommunicate,|-|waitingcommu|-|]"
 }
 
-//As the name implies, this checks if the balloon is currently open or not. This was written by Levidre!
+//As the name implies, this checks if the balloon is currently open or not.
 //To use it I would do this, so you don't have to copy this whole chunk of code:
-//_b = BalloonCheck
-//if _b == 0 //_b will be 0 if the balloon is not open, or 1 if it is open
+//if BalloonCheck
 BalloonCheck
 {
-	if ASEARCH("Status",var.req.key) != -1
-    {
-        _currentstatus = var.req.value[ASEARCH("Status",var.req.key)]
-        if "balloon" _in_ _currentstatus
-        {
-            1
-        }
-        else
-        {
-            0
-        }
-    }
+	"balloon" _in_ status
+}
 }
