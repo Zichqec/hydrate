@@ -1,0 +1,6 @@
+shell/*
+!shell/master/
+/ghost/master/profile
+/shell/master/profile
+ghost/master/yaya_variable.cfg
+h2o/
