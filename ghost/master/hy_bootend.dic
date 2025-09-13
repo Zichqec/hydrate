@@ -406,6 +406,8 @@ OnShellAuthor
 
 OnUpdateVars
 {
+	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
+	
 	//---1.1.0---
 	/*
 	totalwaters = 0
