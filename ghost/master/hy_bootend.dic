@@ -76,12 +76,11 @@ OnBoot //Normal booting
 	if AutoUpdates[0] == "ON"
 	{
 		AutoUpdates[1] = 1
-		"\![updatebymyself,checkonly]\e"
+		"\![updatebymyself,checkonly]"
 	}
 	else
 	{
 		AutoUpdates[1] = 0 //Just in case
-		"\e"
 	}
 }
 
@@ -411,8 +410,6 @@ OnShellAuthor
 	shellauthor[1] = reference1 //craftmanw
 	shellauthor[2] = reference2 //craftmanurl
 }
-
-
 
 OnUpdateVars
 {
