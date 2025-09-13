@@ -29,7 +29,14 @@ OnFirstBoot //Dialogue when you first open the ghost
 	
 	booting = 0 //This will be set to 0 after firstboot is complete
 	
+	Config.OffscreenDialogue = 0
+	
 	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
+}
+
+OnInitialize
+{
+	OnUpdateVars //Ensure these are set even if updated via things other than normal network update
 }
 
 OnBoot //Normal booting
@@ -409,6 +416,8 @@ OnShellAuthor
 
 OnUpdateVars
 {
+	//——— 2.0.0 ———
+	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 1
 	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
 	
 	//---1.1.0---

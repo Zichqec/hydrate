@@ -445,6 +445,7 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
 	
 	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(HourNotifs)\_a\n"
+	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
 	"Enable Uninstall? \![*]\_a[OnToggleUninstall]%(deleteshitai)\_a\n\n"
 	"\![*]\q[Back to the menu,OnMenuRun]"
 	"\![unlock,balloonrepaint]"
@@ -662,6 +663,13 @@ OnToggleHourNotifs
 		HourNotifs = "OFF"
 	}
 	
+	OnConfigMenu
+}
+
+OnToggleOffscreenTalk
+{
+	if Config.OffscreenDialogue != 1; Config.OffscreenDialogue = 1
+	else; Config.OffscreenDialogue = 0
 	OnConfigMenu
 }
 
@@ -892,8 +900,6 @@ OnSecondChange
 		if _b == 0; WaitingCommu
 	}
 	
-	/*if reference2 == 1 //This is for if your Sakura and Kero are overlapping
-	{
 		
 	}*/
 	
@@ -923,9 +929,14 @@ OnSecondChange
 	mikireflag = reference1
 }
 
-MikireTalk //Off the screen dialogue. Ctrl Shift F12 will bring characters back onto the screen
+MikireTalk
 {
-	"\0\s[0](To continue hydrating, press Ctrl Shift F12.)\e"
+	//TODO maybe fuss more with this later to try and make it behave better when it's on? need to experiment
+	//TODO not working on my computer but my SSP might be bugged???
+	if Config.OffscreenDialogue
+	{
+		"\0\s[0](To continue hydrating, press Ctrl Shift F12.)"
+	}
 }
 
 OnKeyPress
