@@ -929,5 +929,5 @@ OnKeyPress
 
 OnTestVar
 {
-	"\_q\![set,autoscroll,disable]Current: %(currentdressups)\n\nAvailable: %(availabledressups)\x"
+	//"\_q\![set,autoscroll,disable]Current: %(currentdressups)\n\nAvailable: %(availabledressups)\x"
 }
