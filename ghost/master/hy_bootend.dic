@@ -153,35 +153,6 @@ OnGetCoords2
 	shellchange[5] = TOINT(reference0[3]) - TOINT(reference0[1]) //Frame height
 	shellchange[6] = TOINT(shellchange[1]) - TOINT(shellchange[5]) //Should be the feet 
 	
-	_f = FENUM(SHIORI3FW.ShellPath) //This block of text checks for a file called DressupRules.dic, and if it exists, writes everything in it into its own file and reloads the shiori! That means you can add custom dressup rules to the random dressup generator!!
-	_files = SPLIT(_f,",")
-	if ASEARCH("DressupRules.dic",_files) != -1
-	{
-		_pathR = "%(SHIORI3FW.ShellPath)DressupRules.dic"
-		_pathW = "hy_dressuprules.dic"
-		_oR = FOPEN(_pathR,"r")
-		_oW = FOPEN(_pathW,"w")
-		--
-		for buff = ""; _buff != -1; _buff = FREAD(_pathR)
-		{
-			_f = FWRITE(_pathW,_buff)
-		}
-		--
-		_f = FCLOSE(_pathR)
-		_f = FCLOSE(_pathW)
-		--
-		"\![reload,shiori]"
-	}
-	else
-	{
-		_pathW = "hy_dressuprules.dic"
-		_oW = FOPEN(_pathW,"w")
-		_f = FWRITE(_pathW,"//No dressup rules to copy")
-		_f = FCLOSE(_pathW)
-		--
-		"\![reload,shiori]"
-	}
-	--
 	_last = nowshell
 	nowshell = shellchange[7]
 	
