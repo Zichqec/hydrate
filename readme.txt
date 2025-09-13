@@ -1,6 +1,6 @@
 This is a simple ghost made by Zdzisiu and Zichqec to remind you to hydrate!
 
-You can find more shells here: https://zichqec.github.io/s-the-skeleton/hydrate.html
+You can find more shells here: https://ukagaka.zichqec.com/ghost/hydrate
 
 And if you'd like to make your own shells, or are interested in having your ghost receive stats from Hydrate, you can check in Hydrate's folder for documentation!
 
