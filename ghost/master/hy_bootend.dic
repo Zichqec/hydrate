@@ -24,6 +24,9 @@ OnFirstBoot //Dialogue when you first open the ghost
 	volume = 50
 	HourNotifs = "OFF"
 	
+	//TODO high score
+	//highestdrinkstreak = 0
+	
 	booting = 0 //This will be set to 0 after firstboot is complete
 	
 	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"

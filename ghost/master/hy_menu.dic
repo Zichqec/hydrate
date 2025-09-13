@@ -400,6 +400,10 @@ OnWaterStats
 	_s = ""; if currentdrinkstreak != 1; _s = "s"
 	"\![*]Currently on a streak of %(_h)%(currentdrinkstreak)%(_d) drink%(_s)!\n"
 	--
+	//TODO high score
+	// _s = ""; if highestdrinkstreak != 1; _s = "s"
+	// "\![*]Your highest drink streak is %(_h)%(highestdrinkstreak)%(_d) drink%(_s)!\n"
+	--
 	_s = ""; if extrasipstoday != 1; _s = "s"
 	"\![*]%(_h)%(extrasipstoday)%(_d) extra sip%(_s) taken today\n"
 	--
@@ -713,8 +717,17 @@ Select.drankwater : nonoverlap
 	todayswaters++
 	totalwaters++
 	currentdrinkstreak++
+	//TODO high score
+	// if !ISVAR("highestdrinkstreak"); highestdrinkstreak = 0
+	// _newhighscore = 0
+	// if currentdrinkstreak > highestdrinkstreak; {_newhighscore = 1; highestdrinkstreak = currentdrinkstreak}
 	
 	_talk = ""
+	// if _newhighscore
+	// {
+		// _talk = NewStreakHighScoreDrink
+	// }
+	// else //TODO the problem is that the above will activate if you're continuously pushing your streak higher... gotta decide how i wanna handle that -- update: a latch I guess?
 	if totalwaters % 100 == 0
 	{
 		_talk = MilestoneDrink
@@ -793,6 +806,13 @@ MilestoneDrink : nonoverlap
 	"(You've reached %(totalwaters) total timed drinks, fantastic!)"
 	"(You've reached %(totalwaters) total timed drinks, look at you go!)"
 }
+
+//TODO high score
+// NewStreakHighScoreDrink
+// {
+	// "(You've reached a new high score of %(highestdrinkstreak) drinks in a row! Way to go!)"
+	// "(New high score! %(highestdrinkstreak) drinks in a row! Incredible!)"
+// }
 
 OnHourTalk
 {
