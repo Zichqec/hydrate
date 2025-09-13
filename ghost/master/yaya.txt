@@ -6,9 +6,14 @@ charset.save, UTF-8
 charset.extension, UTF-8
 
 
-include, system_config.txt
+dic, yaya_base/config.dic, UTF-8
+dic, yaya_base/shiori3.dic, UTF-8
+dicif, yaya_base/optional.dic, UTF-8
+dicif, yaya_base/compatible.dic, UTF-8
+
 dic, hy_bootend.dic
 dic, hy_commu.dic
+dic, hy_dressuprules.dic
 dic, hy_etc.dic
 dic, hy_menu.dic
 dic, hy_string.dic
@@ -17,3 +22,6 @@ dic, hy_word.dic
 
 //log, ayame.log
 msglang,english
+
+ignoreiolog, ID: OnSecondChange //OnSecondChange無視
+ignoreiolog, ID: OnMouse        //OnMouse系無視
