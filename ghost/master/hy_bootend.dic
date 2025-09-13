@@ -449,32 +449,6 @@ OnUpdateVars
 	if !ISVAR("volume"); volume = 50
 	if !ISVAR("HourNotifs"); HourNotifs = "OFF"
 }
-/*
-OnNotifyDressupInfo
-{
-	availabledressups = IARRAY //This one is to display the dressup menu
-	currentdressups = IARRAY //This one is so we can display which dressups are currently in use
-	foreach reference; _dressup //if you just write reference, you get all the references, apparently? Which is super useful
-	{
-		//Ok, so here's the deal. When it lists the dressups, the amount of options that can be specified _varies._ It can be empty, 1, 2, or 3. To the best of my knowledge. SO. This inner loop starts at 3 (because elements 0 1 and 2 are static), checks to see if the next element has a keyword, and skips it if it does. Then when it finds the on/off indicator, it breaks the loop. IT DIDNT HAVE TO BE THIS WAY.
-		_onoff = 0
-		_must = 0
-		_mult = 0
-		for _i = 3; _i < ARRAYSIZE(_dressup); _i++
-		{
-			if _dressup[_i] == "default" || _dressup[_i] == ""; continue
-			elseif _dressup[_i] == "mustselect" {_must = 1; continue}
-			elseif _dressup[_i] == "multiple" {_mult = 1; continue}
-			else; _onoff = _dressup[_i]; break
-		}
-		_toadd = _dressup[1] + "|" + _dressup[2]
-		if _must == 1; _toadd += "|mustselect"
-		if _mult == 1; _toadd += "|multiple"
-		availabledressups ,= _toadd
-		if _onoff == 1; currentdressups ,= _dressup[1] + "|" + _dressup[2]
-	}
-}
-*/
 
 //Character ID, category name, part name, option, valid / invalid 0, thumbnail path
 OnNotifyDressupInfo
