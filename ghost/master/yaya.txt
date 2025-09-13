@@ -13,7 +13,6 @@ dicif, yaya_base/compatible.dic, UTF-8
 
 dic, hy_bootend.dic
 dic, hy_commu.dic
-dic, hy_dressuprules.dic
 dic, hy_etc.dic
 dic, hy_menu.dic
 dic, hy_string.dic
