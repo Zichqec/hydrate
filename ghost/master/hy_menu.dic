@@ -840,10 +840,15 @@ OnHourTalk
 		}
 	}
 	--
+	OnHydrateGhost.GetStats
+	--
+	//!!!!!!!!!!!!!!!!!!!! THIS VERSION IS DEPRECATED !!!!!!!!!!!!!!!!!!!!
+	//Please use OnHydrateGhost.GetStats, it can be found in commu.dic!
+	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	_send = "%(currentdressups)"
 	_send = REPLACE(_send,",","|-|")
-	--
-	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),%(nowshell),%(_send),%(nowscale)]"
+	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),""%(nowshell)"",""%(_send)"",%(nowscale)]"
+	
 }
 
 OnMinuteChange

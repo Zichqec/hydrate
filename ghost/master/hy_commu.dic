@@ -1,41 +1,39 @@
 OnCommunicate
 {
-	if reference0 == "user" || reference0 == "User"
- 	{
-		//Deprecated function I think? Either way, I'm not using ReplyToUser so I got rid of it
+	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
+	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
+	//This method was a mistake because I didn't know better at the time
+	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
+	
+	//Answering another ghost
+	_nocomma = REPLACE(reference0,",","")
+	_b = BalloonCheck
+	LOGGING("Saw ping from: %(_nocomma). Balloon is: %(_b). Response...")
+	//If the balloon is open AND this WAS NOT a message from the same ghost as last time
+	if _b == 1 && "[commu-%(_nocomma)]" !_in_ SHIORI3FW.LastTalk
+	{
+		LOGGING("Store ping for later")
+		waitingcommuS ,= reference0
+		waitingcommuM ,= reference1
 	}
+	//if the balloon is closed and this WAS NOT a message from the same ghost as last time
+	elseif "[commu-%(_nocomma)]" !_in_ SHIORI3FW.LastTalk
+	{
+		LOGGING("Reply")
+		if reference0 == "|-|waitingcommu|-|"
+		{
+			LOGGING("To the stored message specifically")
+			reference0 = waitingcommuS[0]; waitingcommuS[0] = IARRAY
+			reference1 = waitingcommuM[0]; waitingcommuM[0] = IARRAY
+		}
+		--
+		ReplyToGhost
+	}
+	//If it's the same ghost as last time
 	else
 	{
-		//Answering another ghost
-		_nocomma = REPLACE(reference0,",","")
-		_b = BalloonCheck
-		LOGGING("Saw ping from: %(_nocomma). Balloon is: %(_b). Response...")
-		//If the balloon is open AND this WAS NOT a message from the same ghost as last time
-		if _b == 1 && "[commu-%(_nocomma)]" !_in_ SHIORI3FW.LastTalk
-		{
-			LOGGING("Store ping for later")
-			waitingcommuS ,= reference0
-			waitingcommuM ,= reference1
-		}
-		//if the balloon is closed and this WAS NOT a message from the same ghost as last time
-		elseif "[commu-%(_nocomma)]" !_in_ SHIORI3FW.LastTalk
-		{
-			LOGGING("Reply")
-			if reference0 == "|-|waitingcommu|-|"
-			{
-				LOGGING("To the stored message specifically")
-				reference0 = waitingcommuS[0]; waitingcommuS[0] = IARRAY
-				reference1 = waitingcommuM[0]; waitingcommuM[0] = IARRAY
-			}
-			--
-			ReplyToGhost
-		}
-		//If it's the same ghost as last time
-		else
-		{
-			LOGGING("Skipped everything lol")
-		}
- 	}
+		LOGGING("Skipped everything lol")
+	}
 }
 
 ReplyToGhost
@@ -57,6 +55,11 @@ ReplyToGhost
 	_send = REPLACE(_send,",","|-|")
 	"\e [commu-%(_nocomma)] %(ConvoTag),%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),%(nowshell),%(_send),%(nowscale)"
 	/*
+	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
+	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
+	//This method was a mistake because I didn't know better at the time
+	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
+	
 	0 is the \e and the ConvoTag you sent to Hydrate, if any. You can use this if you need to to ping Hydrate and see where you were in conversation when it replies!
 	1 is the number of drinks the user has taken this session
 	2 is the number of drinks they've taken in a row without missing one or dismissing the box
@@ -66,6 +69,10 @@ ReplyToGhost
 	
 	Here's what I'm using with my ghosts if you just want to copy it:
 	
+	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
+	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
+	//This method was a mistake because I didn't know better at the time
+	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	ConvoTag = SPLIT(reference1,"\e")[1]
 	_replyto = ConvoTag[0]
 	_HYsession = TOINT(ConvoTag[1])
