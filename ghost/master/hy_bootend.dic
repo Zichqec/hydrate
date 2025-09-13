@@ -426,7 +426,7 @@ OnShellAuthor
 OnUpdateVars
 {
 	//——— 2.0.0 ———
-	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 1
+	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0
 	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
 	
 	//---1.1.0---
