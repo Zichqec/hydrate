@@ -4,15 +4,14 @@ name,Hydrate
 type,ghost
 
 sakura.name,Hydrate
-kero.name,You being healthier
+kero.name,-
 
-craftman,Zdzisiu and Zichqec
-craftmanw,Zdzisiu and Zichqec
-craftmanurl,https://zichqec.github.io/s-the-skeleton/index.html
+craftman,Zdzisiu & Zichqec
+craftmanw,Zdzisiu & Zichqec
+craftmanurl,https://ukagaka.zichqec.com/
 
 sstp.allowunspecifiedsend,0
 shiori,yaya.dll
 
 icon,hydrate.ico
-//http://www.convertico.com/ is handy for making .icos
 balloon,H2O
