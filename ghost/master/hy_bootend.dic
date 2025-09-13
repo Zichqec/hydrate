@@ -260,7 +260,7 @@ ShellChangeComments
 	}
 	elseif nowshell == "Coffee Cup"
 	{
-		"(Try the \_a[https://zichqec.github.io/s-the-skeleton/needle]Needle\_a sleeve! It's pointy!)"
+		"(Try the \_a[https://ukagaka.zichqec.com/ghost/needle]Needle\_a sleeve! It's pointy!)"
 		"(Not sponsored!)"
 		"(Try all the varieties, for free!)"
 	}
@@ -391,7 +391,7 @@ ShellChangeComments
 	}
 	elseif nowshell == "Syringe"
 	{
-		"(Also doubles as a shell for \_a[https://zichqec.github.io/s-the-skeleton/needle]Needle\_a!)"
+		"(Also doubles as a shell for \_a[https://ukagaka.zichqec.com/ghost/needle]Needle\_a!)"
 		"(Careful handling sharps!)"
 		"(Probably don't inject yourself with whatever's in there!)"
 	}

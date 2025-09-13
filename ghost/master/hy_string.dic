@@ -21,13 +21,13 @@ On_sakura.recommendsites
 	--
 	"%ASC(1)%(shellauthor[2])%ASC(2)"
 	--
-	"Zi's Ukagaka Hub"
+	"Zi's Ukagaka Space"
 	--
-	"%ASC(1)https://zichqec.github.io/s-the-skeleton/index.html%ASC(2)"
+	"%ASC(1)https://ukagaka.zichqec.com/%ASC(2)"
 	--
 	"Zdzisiu's website"
 	--
-	"%ASC(1)https://zdzisiu.github.io/Ukagaka/index.html%ASC(2)"
+	"%ASC(1)https://zdzisiu.github.io/Cemetery/index.html%ASC(2)"
 }
  
 On_portalrootbutton.caption
@@ -35,27 +35,19 @@ On_portalrootbutton.caption
 	"Reference sites"
 }
 
-On_sakura.portalsites //You can make these anything you like. I've set them to link to my template, Zarla's template, and anything else helpful for making ghosts.
+On_sakura.portalsites
 {
-	"Built on X. Template Beta"
-	--
-	"%ASC(1)https://zichqec.github.io/s-the-skeleton/index.html%ASC(2)"
-	--
-	"Zarla's Ghost Template Walkthrough"
-	--
-	"%ASC(1)http://www.ashido.com/ukagaka/walkthrough.html%ASC(2)"
-	--
 	"SSP"
 	--
 	"%ASC(1)http://ssp.shillest.net/%ASC(2)"
 	--
-	"SSP Wiki (Translated)"
+	"Ukadoc"
 	--
-	"%ASC(1)https://translate.google.com/translate?hl=&sl=ja&tl=en&u=http%3A%2F%2Fssp.shillest.net%2Fukadoc%2Fmanual%2Flist_sakura_script.html%ASC(2)"
+	"%ASC(1)https://ukagakadreamteam.github.io/ukadoc/manual/index.html%ASC(2)"
 	--
-	"YAYA Wiki (Translated)"
+	"AYAYA"
 	--
-	"%ASC(1)https://translate.google.com/translate?hl=&sl=ja&tl=en&u=http%3A%2F%2Femily.shillest.net%2Fayaya%2F%3FFrontPage%ASC(2)"
+	"%ASC(1)https://ukagakadreamteam.github.io/ayaya/index%ASC(2)"
 	--
 	"Crow + SSP Reference (J)"
 	--
@@ -64,22 +56,6 @@ On_sakura.portalsites //You can make these anything you like. I've set them to l
 	"Ghost Documentation (J)"
 	--
 	"%ASC(1)http://usada.sakura.vg/contents/specification.html%ASC(2)"
-}
- 
-On_kero.recommendbuttoncaption
-{
-	"More websites"
-}
-
-On_kero.recommendsites
-{
-	"Github Pages"
-	--
-	"%ASC(1)https://pages.github.com/%ASC(2)"
-	--
-	"w3 schools"
-	--
-	"%ASC(1)https://www.w3schools.com/%ASC(2)"
 }
 
 On_updatebutton.caption
