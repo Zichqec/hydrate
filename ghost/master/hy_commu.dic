@@ -1,3 +1,59 @@
+//Hydrate stat share event
+//Called when Hydrate boots, when another ghost boots, every hour, and when requested by a ghost
+//It is usually returned as [NOTIFY], however it can be requested as [GET] by a ghost. If a ghost provides a name to return the event to, the event will be sent *exclusively* to that ghost as [GET]. This is ideal if you want to do something like run a check for the current shell immediately before making a comment. (However, it's recommended to only do this as needed, since Hydrate will ignore these requests while a drink reminder is waiting.)
+//Otherwise, it is sent as notify so that ghosts may passively track Hydrate's stats while it is open.
+
+/*
+	
+	reference0: Name of the ghost that sent this request (empty if this was not requested by a specific ghost)
+	reference1: The same information that was sent by the requesting ghost as reference1 (empty if this was not requested by a specific ghost or no information was sent). This is to make it easier to implement checking stats immediately before commenting.
+	reference2: Name of the current shell
+	reference3: Currently blank, reserved for future use
+	reference4: The current shell scaling (X only)
+	reference5: Currently blank, reserved for future use
+	reference6: Number of drinks today
+	reference7: Number of drinks total
+	reference8: Current drink streak (number of drinks in a row) (can span multiple sessions)
+	reference9: Currently blank, reserved for future use
+	reference10: Number of extra sips today
+	reference11: Number of extra sips total
+*/
+
+OnHydrateGhost.GetStats : all
+{
+	_type = "notify"
+	if reference0 != ""; _type = "raise"
+	//if you request it by 1 specific ghost i should make it target that ghost...... that way you can do immediate ping responses
+	//should i allow you to pass an arbitrary argument......? hm
+	
+	//ErrorLog("Sent stats with type '%(_type)'","info")
+	
+	_send = "%(currentdressups)" //DONT FORGET TO ESCAPE THIS -- currently not sending dressups as I'm undecided on what is a good delimiter and it's almost bedtime!
+	_send = REPLACE(_send,",","|-|")
+	
+	if _type == "notify" //send to all if it's notify, always
+	{
+		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
+	}
+	else //if it's raise, just send to the ghost that requested it
+	{
+		"\![raiseother,%(reference0),OnHydrateGhost.GetStats,""%(reference0)"",""%(reference1)"","
+	}
+	"""%(nowshell)"",,%(nowscale),%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 OnCommunicate
 {
 	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
@@ -124,5 +180,4 @@ WaitingCommu
 BalloonCheck
 {
 	"balloon" _in_ status
-}
 }
