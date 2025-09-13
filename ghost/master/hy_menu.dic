@@ -736,6 +736,11 @@ Select.drankwater : nonoverlap
 	
 	if nowshell == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
 	_talk = "\0\s[0]" + _talk
+	
+	_amt = currentdrinkstreak * 100
+	if _amt > 10000; _amt = 10000 //100 max - lets not do a hyponatremia
+	if _amt == 800; _amt = 820
+	_talk += "\![raiseplugin,c58b6320-caf8-11ed-a901-0800200c9a66,OnWalletOfUnyu,set,%(_amt),Thanks for hydrating!]"
 	_talk += "\e"
 	_talk
 }
