@@ -781,8 +781,6 @@ StreakStartDrink : nonoverlap
 
 GeneralDrink : nonoverlap
 {
-	
-	
 	"(Good job!)"
 	"(Well done!)"
 	"(Keep it up!)"
@@ -933,8 +931,6 @@ OnSecondChange
 		ErrorsToPush.level = IARRAY
 		ErrorsToPush.description = IARRAY
 	}
-	
-	mikireflag = reference1
 }
 
 MikireTalk
