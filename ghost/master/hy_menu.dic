@@ -1,8 +1,7 @@
 OnMouseDoubleClick
 {
-	if reference5 == 0 && booting != 1 //reference5 is which mouse button is being clicked, in this case 0 is a left click
+	if reference5 == 0 //Left click
 	{
-		booting = 0
 		if AutoUpdates[3] == 1 || AutoUpdates[4] == 1 || AutoUpdates[5] == 1  //If an update is available, the user will be notified when they try to open the menu
 		{
 			"(Updates are available for:)\n\n"
@@ -16,23 +15,6 @@ OnMouseDoubleClick
 			"\_q\n\![*]\q[Download updates now,OnStartUpdate]\n/
 			\![*]\q[Maybe later,UpdateLater]\n\n/
 			\![*]\q[Turn off auto updates,UpdateOff]\e"
-			
-			// if AutoUpdates[2] == "ghost"
-			// {
-				// "\0\s[0](A Hydrate update is available!\w8 Do you want to download it?)"
-			// }
-			// elseif AutoUpdates[2] == "shell"
-			// {
-				// "\0\s[0](An update is available for the %(nowshell) shell!\w8 Do you want to download it?)"
-			// }
-			// elseif AutoUpdates[2] == "balloon"
-			// {
-				// "\0\s[0](An update is available for the %(SHIORI3FW.BalloonName) balloon!\w8 Do you want to download it?)"
-			// }
-			// --
-			// "\_q\n\n\![*]\q[Download it now,OnStartUpdate,%(AutoUpdates[1])]\n/
-			// \![*]\q[Maybe later,UpdateLater]\n\n/
-			// \![*]\q[Turn off auto updates,UpdateOff]\e"
 		}
 		else
 		{

@@ -27,8 +27,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	highestdrinkstreak = 0
 	newhighscorelatch = 0
 	
-	booting = 0 //This will be set to 0 after firstboot is complete
-	
 	Config.OffscreenDialogue = 0
 	Config.RemindWhenMinimized = 0
 	
@@ -49,7 +47,6 @@ OnBoot //Normal booting
 	todayswaters = 0
 	//currentdrinkstreak = 0
 	extrasipstoday = 0
-	booting = 0
 	AutoUpdates[1] = 0
 	
 	"\1\s[-1]\0\s[0]"
