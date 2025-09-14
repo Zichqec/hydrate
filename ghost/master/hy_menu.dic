@@ -876,6 +876,7 @@ OnMinuteChange
 
 OnSecondChange
 {
+	//TODO set up a proper runtime counter later...
 	if passsec >= 59
 	{
 		passsec = 0
