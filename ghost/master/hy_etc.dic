@@ -246,13 +246,6 @@ OnUpdateOtherFailure
 	"\0(%(reference3) update failed: '%(reference0)'.)"
 }
 
-OnDisplayChange
-{
-	displaybpp = reference0
- 	displaywidth = reference1
-	displayheight = reference2
-}
-
 OnShellScaling
 {
 	Scale.X = reference0

@@ -163,9 +163,9 @@ OnClose
 	"\w8\w8\-"
 }
 
-OnWindowStateRestore //When you bring the ghost back up after minimizing it
+OnWindowStateRestore
 {
-	"\0\s[0]"
+	OnSurfaceRestore
 }
 
 OnGhostChanging //Changing to another ghost
