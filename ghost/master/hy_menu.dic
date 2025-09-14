@@ -1,20 +1,18 @@
-OnMouseDoubleClick
+OnMouseDoubleClick : all
 {
 	if reference5 == 0 //Left click
 	{
 		if AutoUpdates[3] == 1 || AutoUpdates[4] == 1 || AutoUpdates[5] == 1  //If an update is available, the user will be notified when they try to open the menu
 		{
 			"(Updates are available for:)\n\n"
-			--
+			
 			if AutoUpdates[3] == 1; "(Hydrate)\n"
-			--
 			if AutoUpdates[4] == 1; "('%(nowshell)' shell)\n"
-			--
 			if AutoUpdates[5] == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
-			--
-			"\_q\n\![*]\q[Download updates now,OnStartUpdate]\n/
-			\![*]\q[Maybe later,UpdateLater]\n\n/
-			\![*]\q[Turn off auto updates,UpdateOff]"
+			
+			"\_q\n\![*]\q[Download updates now,OnStartUpdate]\n"
+			"\![*]\q[Maybe later,UpdateLater]\n\n"
+			"\![*]\q[Turn off auto updates,UpdateOff]"
 		}
 		else
 		{
@@ -144,8 +142,8 @@ OnShellMenu
 	--
 	"\f[align,center]— Shells —\n\f[align,left]"
 	--
-	if ARRAYSIZE(ShellList) > 16; "%(b4)\n[half]\![*]\q[Back,OnMenuRun]\n"
-	elseif ARRAYSIZE(ShellList) > 11; "%(b4)"
+	if ARRAYSIZE(ShellList) > 16; "\b[4]\n[half]\![*]\q[Back,OnMenuRun]\n"
+	elseif ARRAYSIZE(ShellList) > 11; "\b[4]"
 	else; "\b2"
 	--
 	"\![*]\q[Random shell,OnRandomShell]\n"
@@ -208,16 +206,16 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		if ARRAYSIZE(_currentcategories) > 18; "%(b4)\n[half]\![*]\q[Back,OnMenuRun]\n"
-		elseif ARRAYSIZE(_currentcategories) > 11; "%(b4)"
+		if ARRAYSIZE(_currentcategories) > 18; "\b[4]\n[half]\![*]\q[Back,OnMenuRun]\n"
+		elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
 		else; "\b2"
 		--
 		"\![*]\q[Randomize all categories,OnRandomDressup]"
 	}
 	elseif reference0 != ""
 	{
-		if _items > 18; "%(b4)\n\n[half]\![*]\q[Back,OnDressupMenu]\n"
-		elseif _items > 11; "%(b4)"
+		if _items > 18; "\b[4]\n\n[half]\![*]\q[Back,OnDressupMenu]\n"
+		elseif _items > 11; "\b[4]"
 		else; "\b2"
 		--
 		"\![*]\q[Random,OnRandomDressup,%(reference0)]"
@@ -361,7 +359,7 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	if volume == ""; volume = 50
 	if HourNotifs == ""; HourNotifs = "OFF"
 	
-	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q%(b4)\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
+	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
 	"\f[align,center]— Config —\n\n\f[align,default]"
 	

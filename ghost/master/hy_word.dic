@@ -28,15 +28,11 @@ notification_sound : all
 	}
 }
 
-b4
-{
-	if SHIORI3FW.BalloonName == "H2O"; "\b4"
-	else; "\b2"
-}
-
 OnTranslate
 {
 	_talk = reference0
+	
+	_talk = REPLACE(_talk,"\b[4]","\b[4,--fallback=2]")
 	
 	if reference1 == "" && reference2 == ""
 	{ //send input box : no event (ref2) , no special flag (ref1)
