@@ -837,9 +837,6 @@ OnSecondChange
 
 OnKeyPress
 {
-	case reference0
-	{
-		when "f1"; "\![open,readme]"
-		when "t"; if debug == 1; OnAITalk
-	}
+	if reference0 == "f1"; "\![open,readme]"
+	elseif reference0 == "t" && SHIORI3FW.DebugMode; OnAITalk
 }
