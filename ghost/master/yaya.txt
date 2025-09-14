@@ -5,12 +5,13 @@ charset.file, UTF-8
 charset.save, UTF-8
 charset.extension, UTF-8
 
-
+//TODO can't get dicdir working???
 dic, yaya_base/config.dic, UTF-8
 dic, yaya_base/shiori3.dic, UTF-8
 dicif, yaya_base/optional.dic, UTF-8
 dicif, yaya_base/compatible.dic, UTF-8
 
+dic, deprecated.dic
 dic, hy_bootend.dic
 dic, hy_commu.dic
 dic, hy_etc.dic
