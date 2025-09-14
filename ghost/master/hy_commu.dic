@@ -9,8 +9,8 @@
 	reference1: The same information that was sent by the requesting ghost as reference1 (empty if this was not requested by a specific ghost or no information was sent). This is to make it easier to implement checking stats immediately before commenting.
 	reference2: Name of the current shell
 	reference3: Currently blank, reserved for future use
-	reference4: The current shell scaling (X only)
-	reference5: Currently blank, reserved for future use
+	reference4: The current shell scaling (horizontal)
+	reference5: The current shell scaling (vertical)
 	reference6: Number of drinks today
 	reference7: Number of drinks total
 	reference8: Current drink streak (number of drinks in a row) (can span multiple sessions)
@@ -47,7 +47,7 @@ OnHydrateGhost.GetStats : all
 	{
 		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
 	}
-	"""%(nowshell)"",,%(nowscale),,%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
+	"""%(nowshell)"",,%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
 }
 
 

@@ -428,6 +428,16 @@ OnUpdateVars
 {
 	//——— 2.0.1 ———
 	if !ISVAR("Config.RemindWhenMinimized"); Config.RemindWhenMinimized = 0
+	if !ISVAR("Scale.X")
+	{
+		Scale.X = nowscale
+		if Scale.X == ""; Scale.X = 100
+	}
+	if !ISVAR("Scale.Y")
+	{
+		Scale.Y = nowscale
+		if Scale.Y == ""; Scale.Y = 100
+	}
 	
 	//——— 2.0.0 ———
 	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0

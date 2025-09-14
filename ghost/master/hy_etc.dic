@@ -349,11 +349,12 @@ OnDisplayChange
 	displayheight = reference2
 }
 
-OnShellScaling //reference0 is the new size, reference1 is the previous. Sadly, you can't check for the Y scale.
+OnShellScaling
 {
-	nowscale = reference0
+	Scale.X = reference0
+	Scale.Y = reference2
 	
-	"\0\s[0](%(reference0)% hydration.)\e"
+	"\0\s[0](%(reference0)% hydration.)"
 }
 
 OnSurfaceRestore
