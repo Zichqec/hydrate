@@ -105,6 +105,8 @@ OnBoot //Normal booting
 	
 	"\1\s[-1]\0\s[0]"
 	--
+	OnSendStats
+	--
 	"\0\s[0](Thank you for choosing to hydrate today.)\w8\n\n"
 	--
 	if talkrate != "off"
@@ -134,8 +136,6 @@ OnBoot //Normal booting
 	{
 		AutoUpdates[1] = 0 //Just in case
 	}
-	--
-	OnSendStats
 }
 
 OnOtherGhostBooted
@@ -150,6 +150,8 @@ OnGhostCallComplete
 
 OnClose
 {
+	OnSendStats //A bit superfluous perhaps...
+	--
 	if todayswaters > 0
 	{
 		_s = "s"; if todayswaters == 1; _s = ""
@@ -163,8 +165,15 @@ OnClose
 	"\w8\w8\-"
 }
 
+OnWindowStateMinimize
+{
+	OnHydrateGhost.GetStats //This is the ONE place so far that I have to call this directly... if I go to another event it does not work
+}
+
 OnWindowStateRestore
 {
+	OnSendStats
+	--
 	OnSurfaceRestore
 }
 
@@ -176,6 +185,8 @@ OnGhostChanging //Changing to another ghost
 	}
 	else
 	{
+		OnSendStats
+		--
 		if todayswaters > 0
 		{
 			"\0\s[0](You took %(todayswaters) sips of water today,\w4 well done!)"
@@ -184,20 +195,6 @@ OnGhostChanging //Changing to another ghost
 		{
 			"\0\s[0](Remind %(reference0) to hydrate too!)"
 		}
-	}
-}
-
-OnGhostChanged //After switching
-{
-	"\1\s[-1]\0\s[0]"
-	--
-	if reference0 == "Hydrate" //Finished reloading
-	{
-		"(Finished!)"
-	}
-	else
-	{
-		OnBoot
 	}
 }
 
@@ -231,6 +228,8 @@ OnGetCoords2
 	
 	AutoUpdates[4] = 0
 	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]\0\![move,--X=%(shellchange[0]),--Y=%(TOINT(shellchange[6])),--base=primaryscreen]\1\s[-1]\0\s[0]" //Default surfaces, and moves the ghost to where it was before changing shells
+	--
+	OnSendStats
 	--
 	if nowshell == _last //If the shell they changed to is the same as the last one
 	{
@@ -283,4 +282,11 @@ OnNotifyDressupInfo
 		if _dressup[3] != ""; _toadd += C_BYTE1 + _dressup[3]
 		availabledressups ,= _toadd
 	}
+}
+
+OnDressupChanged
+{
+	//Because this runs BEFORE the notify event above, add a delay so that the changes are processed before sending stats...
+	if reference4 == "script"; "\C\![timerraise,100,1,OnSendStats,dressupmenu]"
+	else; "\![timerraise,100,1,OnSendStats]"
 }

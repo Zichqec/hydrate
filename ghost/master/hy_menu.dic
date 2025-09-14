@@ -66,7 +66,8 @@ OnExtraSip
 {
 	extrasipstoday++
 	extrasipstotal++
-	
+	OnSendStats
+	--
 	"\0(That's awesome,\w4 good job!)"
 	"\0(Good going,\w4 well done!)"
 	"\0(Noted,\w4 keep up the good work!)"
@@ -594,6 +595,7 @@ OnChoiceTimeout
 	{
 		currentdrinkstreak = 0
 		newhighscorelatch = 0
+		OnSendStats
 	}
 }
 
@@ -669,7 +671,7 @@ Select.drankwater : nonoverlap
 	}
 	
 	if nowshell == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
-	_talk = "\0\s[0]" + _talk
+	_talk = "\0\s[0]" + OnSendStats + _talk
 	
 	_amt = currentdrinkstreak * 100
 	if _amt > 10000; _amt = 10000 //100 max - lets not do a hyponatremia
@@ -682,6 +684,7 @@ Select.dismisswater
 {
 	currentdrinkstreak = 0
 	newhighscorelatch = 0
+	OnSendStats
 }
 
 StreakStartDrink : nonoverlap

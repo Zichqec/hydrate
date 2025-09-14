@@ -1,22 +1,19 @@
 //Hydrate stat share event
-//Called when Hydrate boots, when another ghost boots, every hour, and when requested by a ghost
-//It is usually returned as [NOTIFY], however it can be requested as [GET] by a ghost. If a ghost provides a name to return the event to as reference0, the event will be sent *exclusively* to that ghost as [GET]. This is ideal if you want to do something like run a check for the current shell immediately before making a comment. (However, it's recommended to only do this as needed, since Hydrate will ignore these requests while a drink reminder is waiting.)
-//Otherwise, it is sent as notify so that ghosts may passively track Hydrate's stats while it is open.
+//Called when Hydrate boots or closes, when another ghost boots, every hour, when the shell changes, when the dressups change, when the scaling changes, when a drink is taken (timed drink or extra sip), when a timed drink is missed (breaks the current streak), or when it's minimized/unminimized
+//It is sent as NOTIFY to all ghosts. Please save any data you wish to use on your ghost's side, and use it at your leisure.
 
 /*
-	
-	reference0: Name of the ghost that sent this request (empty if this was not requested by a specific ghost)
-	reference1: The same information that was sent by the requesting ghost as reference1 (empty if this was not requested by a specific ghost or no information was sent). This is to make it easier to implement checking stats immediately before commenting.
-	reference2: Name of the current shell
-	reference3: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0xFDEF, and within each dressup the category name and part name are delimited by the unicode noncharacter 0x01.
-	reference4: The current shell scaling (horizontal)
-	reference5: The current shell scaling (vertical)
-	reference6: Number of drinks today
-	reference7: Number of drinks total
-	reference8: Current drink streak (number of drinks in a row) (can span multiple sessions)
-	reference9: Highest drink streak (number of drinks in a row high score, only kicks in at 3 drinks or more)
-	reference10: Number of extra sips today
-	reference11: Number of extra sips total
+	reference0: Name of the current shell
+	reference1: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0xFDEF, and within each dressup the category name and part name are delimited by the unicode noncharacter 0x01.
+	reference2: The current shell scaling (horizontal)
+	reference3: The current shell scaling (vertical)
+	reference4: Number of drinks today
+	reference5: Number of drinks total
+	reference6: Current drink streak (number of drinks in a row) (can span multiple sessions)
+	reference7: Highest drink streak (number of drinks in a row high score, only kicks in at 3 drinks or more)
+	reference8: Number of extra sips today
+	reference9: Number of extra sips total
+	reference10: 1 if Hydrate is minimized, 0 otherwise (Note that the drink count will not go up while minimized, nor will the streak reset)
 */
 
 /*
@@ -34,32 +31,23 @@ I'm not sure how they will handle this! If for some reason your chosen SHIORI ca
 //This intermediary step is because otherwise the boot events pass along their own references...
 OnSendStats
 {
+	if reference0 == "dressupmenu"; "\C"
+	--
 	"\![embed,OnHydrateGhost.GetStats]"
 }
 
 OnHydrateGhost.GetStats : all
 {
-	_type = "notify"
-	if reference0 != ""; _type = "raise"
-	
 	//0xFDEF used to delimit the big chunks, C_BYTE1 used to delimit the category and part name. This way around because otherwise it's a damn pain to process on the receiving end later!? Also, surely all SHIORI must support C_BYTE1, or else they can't process all events... so, that's the safer bet to be at the more granular level, maybe??? hm
 	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
+	
 	_dressups = ""
 	foreach currentdressups; _dressup
 	{
 		if _dressups != ""; _dressups += CHR(0xFDEF)
 		_dressups += _dressup
 	}
-	
-	if _type == "raise" //if it's raise, just send to the ghost that requested it
-	{
-		"\![raiseother,%(reference0),OnHydrateGhost.GetStats,""%(reference0)"",""%(reference1)"","
-	}
-	else //send to all if it's notify, always
-	{
-		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
-	}
-	"""%(nowshell)"",""%(_dressups)"",%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal)]"
+	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,""%(nowshell)"",""%(_dressups)"",%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal),%(IsMinimized)]"
 }
 
 HydrateCommuResponse : nonoverlap_pool

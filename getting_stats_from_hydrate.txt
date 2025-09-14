@@ -1,49 +1,37 @@
-—— WIP ——
-————— Receiving the data —————
 Stats from Hydrate come from an event called OnHydrateGhost.GetStats
-This is usually sent as NOTIFY, and will automatically be sent in the following cases:
-- Hydrate opens
-- Another ghost opens
-- The hour rolls over
+This is sent as NOTIFY, and is broadcast to all open ghosts.
+It is sent in the following instances:
 
-You can simply add the event to your ghost in order to passively track Hydrate's stats and do with them what you like.
+- When Hydrate boots
+- When Hydrate closes
+- When another ghost boots
+- When the hour rolls over
+- When Hydrate's shell is changed
+- When Hydrate's dressups are changed
+- When Hydrate's shell scaling is changed
+- When the user takes a drink (timed drink or extra sip)
+- When the user skips a timed drink (which breaks their streak)
+- When Hydrate is minimized
 
-If you want to request the stats directly (for example, so that you can tell for certain that you have the most up-to-date information for something specific), you can do so by using raiseother.
+Information is passed along as references. Most of it is straightforward to understand.
 
-\![raiseother,Hydrate,OnHydrateGhost.GetStats] will cause Hydrate to send out the stats notification to all ghosts as NOTIFY.
+reference0: Name of the current shell.
+reference1: List of the current dressups. This is a two dimensional array. Each dressup is delimited by the unicode noncharacter 0xFDEF, and within each dressup the category name and part name are delimited by 0x01.
+reference2: The current shell scaling (horizontal).
+reference3: The current shell scaling (vertical).
+reference4: Number of drinks today.
+reference5: Number of drinks total.
+reference6: Current drink streak (number of drinks in a row, can span multiple sessions).
+reference7: Highest drink streak (high score for drinks in a row, only kicks in at 3 drinks or more).
+reference8: Number of extra sips today.
+reference9: Number of extra sips total.
+reference10: 1 if Hydrate is minimized, 0 otherwise (Note that the drink count will not go up while minimized, nor will the streak reset).
 
-If you want Hydrate to send the response as GET so that your ghost can run a script directly after, you must supply the sakura name of your ghost as reference0.
+Notes about reference1:
 
-\![raiseother,Hydrate,OnHydrateGhost.GetStats,Emily] will cause Hydrate to send out the stats notification **exclusively** to Emily/Phase4.5 (I'm not sure what happens if there are two ghosts with the same Sakura name), and it will be sent as GET. reference0 will contain "Emily", which can be used to determine that this was a specific request.
+reference1 uses some special characters to separate the dressups.
 
-Additionally, if you are requesting stats be sent directly to your ghost, you can pass along some arbitrary information in reference1. This may be useful if you want to get Hydrate's stats in multiple different instances, and need to determine what it is responding to. (Think of it as a tag on the information.)
-
-\![raiseother,Hydrate,OnHydrateGhost.GetStats,Emily,mainmenu] will do the same as the above, with the addition that the contents of reference1 will be "mainmenu" (perhaps this check was activated from the ghost's main menu? Etc.)
-
-
-————— Parsing the data —————
-Information is passed along as references. Most of it is straightforward to use.
-
-reference0: Name of the ghost that sent this request (empty if this was not requested by a specific ghost).
-reference1: Arbitrary data passed by the ghost that sent this request (empty if this was not requested by a specific ghost, or no data was passed).
-reference2: Name of the current shell.
-reference3: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0x01, and within each dressup the category name and part name are delimited by the unicode noncharacter 0xFDEF.
-reference4: The current shell scaling (horizontal).
-reference5: The current shell scaling (vertical).
-reference6: Number of drinks today.
-reference7: Number of drinks total.
-reference8: Current drink streak (number of drinks in a row) (can span multiple sessions).
-reference9: Highest drink streak (number of drinks in a row high score, only kicks in at 3 drinks or more).
-reference10: Number of extra sips today.
-reference11: Number of extra sips total.
-
-
-Notes:
-references 0 and 1 are only present if a ghost has specifically requested this data, and it is being sent as GET. This means you can check if reference0 is blank, and if so, you know that this is a notification that was sent to all ghosts.
-
-reference1's use is described as above, it is meant to help in cases where you might be requesting Hydrate's data from multiple parts of your ghost (for example, distinguishing between a check from the menu and a check from randomtalk).
-
-reference3 uses some special characters to separate the dressups. In YAYA, that data can be broken down like so:
+In YAYA, that data can be broken down like so:
 
 _dressups = IARRAY
 foreach SPLIT(reference3,CHR(0xFDEF)); _dressup
@@ -51,4 +39,21 @@ foreach SPLIT(reference3,CHR(0xFDEF)); _dressup
 	_dressups ,= _dressup
 }
 
-This will create a local array _dressups with the 2d array broken into an easier to work with form (one dimension handled as a general purpose array). From here, you can use C_BYTE1 to distinguish between the category name and part name. ... This is easier if you understand how to work with 2d arrays. TODO maybe I should reconsider this section
+This will create a local array _dressups with the 2d array turned into a general purpose array, which is a bit easier to work with. Note that you should *not* convert the 0x01 characters to another delimiter such as commas, as dressup names may contain these characters.
+
+Here's an example of how you can break them down:
+
+_dressup = SPLIT(_dressups[0],C_BYTE1) //Pick a dressup from the array, in this case I picked the first one. After splitting, element 0 will be the name of the category, and element 1 will be the name of the dressup piece.
+
+You can also do it like this:
+
+_dressup = _dressups[0] //Pick a dressup from the array, in this case I picked the first one.
+_dressup[0,C_BYTE1] //The name of the dressup's category.
+_dressup[1,C_BYTE1] //The name of the dressup piece.
+
+Once you have that data, you can perform whatever checks/logic you need to, of course.
+
+If you want to learn more about working with multidimensional arrays in YAYA, please consult my guide here: https://zichqec.github.io/YAYA_Fundamentals/module_02_arrays/03_multidimensional_arrays.html
+
+
+If you're using a SHIORI other than YAYA and find that your SHIORI cannot parse this array, please let me know! I may consider adding another event for compatibility.
