@@ -144,7 +144,7 @@ OnShellMenu
 	--
 	"\f[align,center]— Shells —\n\f[align,left]"
 	--
-	if ARRAYSIZE(ShellList) > 16; "%(b4)\n[half]\![*]\q[Back to menu,OnMenuRun]\n"
+	if ARRAYSIZE(ShellList) > 16; "%(b4)\n[half]\![*]\q[Back,OnMenuRun]\n"
 	elseif ARRAYSIZE(ShellList) > 11; "%(b4)"
 	else; "\b2"
 	--
@@ -152,7 +152,7 @@ OnShellMenu
 	--
 	"\![*]\q[Download more shells,OnShellUrl]"
 	--
-	"\n\n[half]%(_display)\n\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
+	"\n\n[half]%(_display)\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
 }
 
 OnRandomShell
@@ -190,7 +190,7 @@ OnGetShells
 		--
 		"\0\*\_q"
 		--
-		if ARRAYSIZE(shelllist) > 16; "\b4\n\n[half]\![*]\q[Back to menu,OnMenuRun]"
+		if ARRAYSIZE(shelllist) > 16; "\b4\n\n[half]\![*]\q[Back,OnMenuRun]"
 		elseif ARRAYSIZE(shelllist) > 11; "\b4"
 		else; "\b2"
 		--
@@ -198,7 +198,7 @@ OnGetShells
 		--
 		"\n\n[half]\![*]\q[Download more shells,OnShellUrl]"
 		--
-		"\n\n[half]%(_display)\n\n[half]\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
+		"\n\n[half]%(_display)\n\n[half]\![*]\q[Back,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
 		shelllist = IARRAY //erase the list since we don't need it anymore
 	}
 }*/
@@ -217,7 +217,7 @@ OnSwitchShell
 {
 	"\_q\_l[53]---Shells---\n\n/
 	\![*]\q[Clear,script:\![get,property,OnGetCoords,currentghost.scope(0).rect\]\![change,shell,Clear\]]\n\n/
-	\![*]\q[Back to the menu,OnMenuRun]"
+	\![*]\q[Back,OnMenuRun]"
 	
 }*/
 
@@ -259,7 +259,7 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		if ARRAYSIZE(_currentcategories) > 18; "%(b4)\n[half]\![*]\q[Back to menu,OnMenuRun]\n"
+		if ARRAYSIZE(_currentcategories) > 18; "%(b4)\n[half]\![*]\q[Back,OnMenuRun]\n"
 		elseif ARRAYSIZE(_currentcategories) > 11; "%(b4)"
 		else; "\b2"
 		--
@@ -278,7 +278,7 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		"\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
+		"\![*]\q[Back,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
 	}
 	else
 	{
@@ -359,7 +359,7 @@ OnRandomDressup
 	}
 	_command
 	--
-	"\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]"
+	"\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]" //TODO that is definitely not necessary... I think
 }
 
 OnWaterStats : all
