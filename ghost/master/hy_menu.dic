@@ -835,15 +835,6 @@ OnSecondChange
 	}
 }
 
-//Doesn't notify every minute anymore but I think that's for the best
-OnOffscreen
-{
-	if Config.OffscreenDialogue && "0" _in_ reference.raw[0]
-	{
-		"\0\s[0](To continue hydrating, press Ctrl Shift F12.)"
-	}
-}
-
 OnKeyPress
 {
 	case reference0
