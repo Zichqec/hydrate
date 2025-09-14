@@ -789,6 +789,8 @@ OnSecondChange
 		//Based on the aitalkinterval stuff in the shiori3.dic file...
 		if aitalkinterval > 0
 		{
+			_sec = GETSECCOUNT
+			_diff = _sec - SHIORI3FW.LastAITalkTime
 			if _diff >= aitalkinterval
 			{
 				if (_sec - SHIORI3FW.LastTalkTime) >= 6
