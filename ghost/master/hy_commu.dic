@@ -8,7 +8,7 @@
 	reference0: Name of the ghost that sent this request (empty if this was not requested by a specific ghost)
 	reference1: The same information that was sent by the requesting ghost as reference1 (empty if this was not requested by a specific ghost or no information was sent). This is to make it easier to implement checking stats immediately before commenting.
 	reference2: Name of the current shell
-	reference3: Currently blank, reserved for future use
+	reference3: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0x01, and within each dressup the category name and part name are delimited by the unicode noncharacter 0xFDEF.
 	reference4: The current shell scaling (horizontal)
 	reference5: The current shell scaling (vertical)
 	reference6: Number of drinks today
@@ -19,7 +19,19 @@
 	reference11: Number of extra sips total
 */
 
-//This intermediary step is because otherwise the boot events passed along their own references...
+/*
+
+NOTE ABOUT 0x01 AND 0xFDEF:
+
+For YAYA users:
+These can be easily handled with the function CHR! CHR(1) gets you 0x01, and CHR(0xFDEF) gets you 0xFDEF. There is also a handy shortcut for 0x01, which is C_BYTE1.
+
+For other SHIORI:
+I'm not sure how they will handle this! If for some reason your chosen SHIORI cannot handle 0xFDEF, please let me know and I will consider adding an event for compatibility.
+
+*/
+
+//This intermediary step is because otherwise the boot events pass along their own references...
 OnSendStats
 {
 	"\![embed,OnHydrateGhost.GetStats]"
@@ -36,8 +48,18 @@ OnHydrateGhost.GetStats : all
 	
 	_send = "%(currentdressups)" //DONT FORGET TO ESCAPE THIS -- currently not sending dressups as I'm undecided on what is a good delimiter and it's almost bedtime!
 	_send = REPLACE(_send,",","|-|")
-	//_delim = CHR(0xFDD0)
+	//_delim = CHR(0xFDEF)
 	//Maybe if I flip it around so that C_BYTE1 delimits the big chunks, that's better, since more SHIORI are likely to be able to easily parse that...? hmmm...
+	
+	//C_BYTE1 used to delimit the big chunks, 0xFDEF used to delimit the category and part name. I think this will be easier to handle in case a SHIORI does not support the latter...?
+	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
+	_dressups = ""
+	foreach currentdressups; _dressup
+	{
+		if _dressups != ""; _dressups += C_BYTE1
+		_dressup = REPLACE(_dressup,C_BYTE1,CHR(0xFDEF))
+		_dressups += _dressup
+	}
 	
 	if _type == "raise" //if it's raise, just send to the ghost that requested it
 	{
@@ -47,7 +69,7 @@ OnHydrateGhost.GetStats : all
 	{
 		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
 	}
-	"""%(nowshell)"",,%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal)]"
+	"""%(nowshell)"",""%(_dressups)"",%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal)]"
 }
 
 
