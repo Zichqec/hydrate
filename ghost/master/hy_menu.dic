@@ -382,40 +382,42 @@ OnRandomDressup
 	"\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]"
 }
 
-OnWaterStats
+OnWaterStats : all
 {
 	_h = "\f[color,default.anchor]"
 	_d = "\f[color,default]"
 	
 	"\0\*\b[4]\_q"
-	--
+	
 	"\f[align,center]— Stats —\n\n\f[align,default]"
-	--
+	
 	_s = ""; if todayswaters != 1; _s = "s"
 	"\![*]%(_h)%(todayswaters)%(_d) drink%(_s) taken this session\n"
-	--
+	
 	_s = ""; if totalwaters != 1; _s = "s"
 	"\![*]%(_h)%(totalwaters)%(_d) drink%(_s) taken in total\n"
-	--
+	"\n"
 	_s = ""; if currentdrinkstreak != 1; _s = "s"
 	"\![*]Currently on a streak of %(_h)%(currentdrinkstreak)%(_d) drink%(_s)!\n"
-	--
+	
 	_s = ""; if highestdrinkstreak != 1; _s = "s"
 	"\![*]Your highest drink streak is %(_h)%(highestdrinkstreak)%(_d) drink%(_s)!\n"
-	--
+	"\n"
 	_s = ""; if extrasipstoday != 1; _s = "s"
 	"\![*]%(_h)%(extrasipstoday)%(_d) extra sip%(_s) taken today\n"
-	--
+	
 	_s = ""; if extrasipstotal != 1; _s = "s"
 	"\![*]%(_h)%(extrasipstotal)%(_d) extra sip%(_s) taken in total\n\n"
-	--
+	
+	nonoverlap : {
 	"(You're doing awesome, keep it up!)"
 	"(Good job, keep going!)"
 	"(You've got this!)"
 	"(Heck yeah!)"
 	"(Look at you go!)"
-	--
-	"\n\n\![*]\q[Back to menu,OnMenuRun]\e"
+	}
+	
+	"\n\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
 }
 
 
