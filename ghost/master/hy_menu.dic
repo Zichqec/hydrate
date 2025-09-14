@@ -839,22 +839,7 @@ OnKeyPress
 {
 	case reference0
 	{
-		when "f1"
-		{
-			"\![open,readme]"
-		}
-		when "v"
-		{
-			if debug == 1; OnTestVar
-		}
-		when "t"
-		{
-			if debug == 1; OnAITalk
-		}
+		when "f1"; "\![open,readme]"
+		when "t"; if debug == 1; OnAITalk
 	}
-}
-
-OnTestVar
-{
-	//"\_q\![set,autoscroll,disable]Current: %(currentdressups)\n\nAvailable: %(availabledressups)\x"
 }
