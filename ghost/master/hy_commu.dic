@@ -75,7 +75,7 @@ OnHydrateGhost.GetStats : all
 HydrateCommuResponse : nonoverlap_pool
 {
 	_ghost = _argv[0]
-	"(Stay hydrated,\w4 %(reference0)!)"
-	"(Make sure to stay hydrated,\w4 %(reference0)!)"
-	"(Make sure you get a drink of water if you're thirsty,\w4 %(reference0)!)"
+	"\0(Stay hydrated,\w4 %(reference0)!)"
+	"\0(Make sure to stay hydrated,\w4 %(reference0)!)"
+	"\0(Make sure you get a drink of water if you're thirsty,\w4 %(reference0)!)"
 }

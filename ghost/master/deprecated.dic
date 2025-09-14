@@ -23,8 +23,6 @@ OnCommunicate
 	
 	if "HydrateStatsSilent" !_in_ reference1
 	{
-		"\0"
-		--
 		HydrateCommuResponse(reference0)	
 	}
 	--

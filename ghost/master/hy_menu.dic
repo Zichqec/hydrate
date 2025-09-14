@@ -160,49 +160,6 @@ OnRandomShell
 	"\![get,property,OnGetCoords,currentghost.scope(0).rect]\![change,shell,random]"
 }
 
-/*OnShellMenu
-{
-	shelllist = IARRAY
-	"\![get,property,OnShellCount,currentghost.shelllist.count]" //Gets the count of shells (Starts from 1)
-}
-
-OnShellCount
-{
-	shelllist[0] = TOINT(reference0) //Make it an integer, store it as the first element of the array
-	"\![get,property,OnGetShells,currentghost.shelllist.index(%(ARRAYSIZE(shelllist) - 1)).name]" //Get the name of the first one
-}
-
-OnGetShells
-{
-	shelllist ,= reference0
-	if ARRAYSIZE(shelllist) < (shelllist[0] + 1) //If there are still shells to gather, keep gathering more
-	{
-		"\![get,property,OnGetShells,currentghost.shelllist.index(%(ARRAYSIZE(shelllist) - 1)).name]"
-	}
-	else //If all the shells have been gathered, display them
-	{
-		_display = ""
-		for _i = 1; _i < ARRAYSIZE(shelllist); _i++
-		{
-			if shelllist[_i] == nowshell; _display += "\![*]"
-			_display += "\q[%(shelllist[_i]),OnSwitchShell,%(shelllist[_i])]\n"
-		}
-		--
-		"\0\*\_q"
-		--
-		if ARRAYSIZE(shelllist) > 16; "\b4\n\n[half]\![*]\q[Back,OnMenuRun]"
-		elseif ARRAYSIZE(shelllist) > 11; "\b4"
-		else; "\b2"
-		--
-		"\![set,autoscroll,0]\_l[53]---Shells---"
-		--
-		"\n\n[half]\![*]\q[Download more shells,OnShellUrl]"
-		--
-		"\n\n[half]%(_display)\n\n[half]\![*]\q[Back,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
-		shelllist = IARRAY //erase the list since we don't need it anymore
-	}
-}*/
-
 OnShellUrl
 {
 	"\C\j[https://ukagaka.zichqec.com/ghost/hydrate]"
@@ -212,14 +169,6 @@ OnSwitchShell
 {
 	"\![get,property,OnGetCoords,currentghost.scope(0).rect]\![change,shell,%(reference0)]"
 }
-
-/*OnShellMenu
-{
-	"\_q\_l[53]---Shells---\n\n/
-	\![*]\q[Clear,script:\![get,property,OnGetCoords,currentghost.scope(0).rect\]\![change,shell,Clear\]]\n\n/
-	\![*]\q[Back,OnMenuRun]"
-	
-}*/
 
 OnDressupMenu
 {
