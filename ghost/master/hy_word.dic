@@ -45,6 +45,11 @@ newline
 	"\n \n[-100]"
 }
 
+BalloonIsOpen
+{
+	"balloon" _in_ status
+}
+
 
 //-----Menu stuff-----
 displaymin

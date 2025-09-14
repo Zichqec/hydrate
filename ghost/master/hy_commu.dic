@@ -92,7 +92,7 @@ OnCommunicate
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	
 	//If a drink notif is open, ignore all communications
-	if "drinknotif" _in_ SHIORI3FW.LastTalk; return
+	if BalloonIsOpen && "drinknotif" _in_ SHIORI3FW.LastTalk; return
 	
 	res_reference = reference0
 	ConvoTag = SPLIT(reference1,"\e")[1]
