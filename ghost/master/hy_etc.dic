@@ -183,44 +183,6 @@ OnChangeLog : all
 	"\j[https://ukagaka.zichqec.com/ghost/hydrate#version_history]"
 }
 
-OnUpdate.OnDownloadBegin //Taken from the GT template because I see no reason to redo this and probably break it
-{
-	"\_q(Ghost update: downloading %(reference0)...)\n\n"
-	--
-	_Update_Process = TOINT(reference1) + 1
-	_Update_Total = TOINT(reference2) + 1
-	_Update_Remaining = _Update_Total - _Update_Process
-
-	//defining starting points
-	_PointA = 1
-	_PointB = 1
-
-	//defining text buffers beforehand, otherwise they don't display right
-	_txt = ""
-
-	//loop calculates how many check boxes to display based on the variables above
-
-	while _PointA <= _Update_Process
-	{
-		_txt += "O"
-		_PointA++
-	}
-	//see above except for blank boxes
-	while _PointB <= _Update_Remaining
-	{
-		_txt += "o"
-		_PointB++
-	}
-	--
-	//using the text buffers to display the correct number of boxes
-	"%(_txt)\n\n(%(_Update_Process) of %(_Update_Total))"
-}
-
-OnUpdate.OnMD5CompareFailure
-{
-	"\0\s[0]\n\n(The MD5 values don't match.)\w8\w8"
-}
-
 OnUpdateFailure //If the update fails
 {
 	if reference0 == "timeout" //If it timed out
@@ -277,39 +239,6 @@ OnUpdateOtherComplete
 		"\0\s[0](Update complete!)"
 	}
 	
-}
-
-OnUpdateOther.OnDownloadBegin
-{
-	"\_q(%(reference3) update: downloading %(reference0)...)\n\n"
-	--
-	_Update_Process = TOINT(reference1) + 1
-	_Update_Total = TOINT(reference2) + 1
-	_Update_Remaining = _Update_Total - _Update_Process
-
-	//defining starting points
-	_PointA = 1
-	_PointB = 1
-
-	//defining text buffers beforehand, otherwise they don't display right
-	_txt = ""
-
-	//loop calculates how many check boxes to display based on the variables above
-
-	while _PointA <= _Update_Process
-	{
-		_txt += "O"
-		_PointA++
-	}
-	//see above except for blank boxes
-	while _PointB <= _Update_Remaining
-	{
-		_txt += "o"
-		_PointB++
-	}
-	--
-	//using the text buffers to display the correct number of boxes
-	"%(_txt)\n\n(%(_Update_Process) of %(_Update_Total))"
 }
 
 OnUpdateOtherFailure
