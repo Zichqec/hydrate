@@ -104,29 +104,29 @@ OnClose
 		"\0\s[0](Take care!)"
 	}
 	--
-	"\w8\w8\-\e"
+	"\w8\w8\-"
 }
 
 OnWindowStateRestore //When you bring the ghost back up after minimizing it
 {
-	"\0\s[0]\e"
+	"\0\s[0]"
 }
 
 OnGhostChanging //Changing to another ghost
 {
 	if reference0 == "Hydrate" //If reloading
 	{
-		"\0\s[0](Reloading!)\e"
+		"\0\s[0](Reloading!)"
 	}
 	else
 	{
 		if todayswaters > 0
 		{
-			"\0\s[0](You took %(todayswaters) sips of water today,\w4 well done!)\e"
+			"\0\s[0](You took %(todayswaters) sips of water today,\w4 well done!)"
 		}
 		else
 		{
-			"\0\s[0](Remind %(reference0) to hydrate too!)\e"
+			"\0\s[0](Remind %(reference0) to hydrate too!)"
 		}
 	}
 }
@@ -137,7 +137,7 @@ OnGhostChanged //After switching
 	--
 	if reference0 == "Hydrate" //Finished reloading
 	{
-		"(Finished!)\e"
+		"(Finished!)"
 	}
 	else
 	{
@@ -147,13 +147,13 @@ OnGhostChanged //After switching
 
 OnShellChanging //Starting to change the shell
 {
-	"\![get,property,OnGetCoords,currentghost.scope(0).rect]\e" //This gets the current ghost coordinates so that they don't jump around the screen when they change shells - Oof, doesn't work with the shell change menu
+	"\![get,property,OnGetCoords,currentghost.scope(0).rect]" //This gets the current ghost coordinates so that they don't jump around the screen when they change shells - Oof, doesn't work with the shell change menu TODO
 }
 
 OnShellChanged //After the shell has changed
 {
 	shellchange[7] = reference0
-	"\s[-1]\![get,property,OnGetCoords2,currentghost.scope(0).rect]\e"
+	"\s[-1]\![get,property,OnGetCoords2,currentghost.scope(0).rect]"
 }
 
 OnGetCoords //This gets the x coordinate

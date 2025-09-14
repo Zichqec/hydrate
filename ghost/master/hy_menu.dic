@@ -14,7 +14,7 @@ OnMouseDoubleClick
 			--
 			"\_q\n\![*]\q[Download updates now,OnStartUpdate]\n/
 			\![*]\q[Maybe later,UpdateLater]\n\n/
-			\![*]\q[Turn off auto updates,UpdateOff]\e"
+			\![*]\q[Turn off auto updates,UpdateOff]"
 		}
 		else
 		{
@@ -30,7 +30,7 @@ Select.UpdateLater //If the user decides to update later
 	AutoUpdates[4] = 0
 	AutoUpdates[5] = 0
 	
-	"\0\s[0](Alright, you will be reminded once a day.)\e"
+	"\0\s[0](Alright, you will be reminded once a day.)"
 }
 
 Select.UpdateOff //If the user no longer wants to be notified about updates
@@ -41,7 +41,7 @@ Select.UpdateOff //If the user no longer wants to be notified about updates
 	AutoUpdates[4] = 0
 	AutoUpdates[5] = 0
 	
-	"\0\s[0](Auto Update checks turned off, you can turn them on again in the Config menu.)\e"
+	"\0\s[0](Auto Update checks turned off, you can turn them on again in the Config menu.)"
 }
 
 OnMenuRun : all
@@ -63,7 +63,7 @@ OnMenuRun : all
 	
 	if currentdrinkstreak > 3; "\n%(currentdrinkstreak) drinks in a row!"
 	
-	"\n\f[height,-2]Runtime: %(passhour):%(displaymin)\nVersion %(ghostver)\e"
+	"\n\f[height,-2]Runtime: %(passhour):%(displaymin)\nVersion %(ghostver)"
 }
 
 OnExtraSip
@@ -77,8 +77,6 @@ OnExtraSip
 	"(Good going,\w4 well done!)"
 	"(Noted,\w4 keep up the good work!)"
 	"(Great!\w4 1 extra sip added to your total!)"
-	--
-	"\e"
 }
 
 OnPause : all
@@ -154,7 +152,7 @@ OnShellMenu
 	--
 	"\![*]\q[Download more shells,OnShellUrl]"
 	--
-	"\n\n[half]%(_display)\n\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]\e"
+	"\n\n[half]%(_display)\n\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
 }
 
 OnRandomShell
@@ -200,7 +198,7 @@ OnGetShells
 		--
 		"\n\n[half]\![*]\q[Download more shells,OnShellUrl]"
 		--
-		"\n\n[half]%(_display)\n\n[half]\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]\e"
+		"\n\n[half]%(_display)\n\n[half]\![*]\q[Back to menu,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
 		shelllist = IARRAY //erase the list since we don't need it anymore
 	}
 }*/
@@ -219,7 +217,7 @@ OnSwitchShell
 {
 	"\_q\_l[53]---Shells---\n\n/
 	\![*]\q[Clear,script:\![get,property,OnGetCoords,currentghost.scope(0).rect\]\![change,shell,Clear\]]\n\n/
-	\![*]\q[Back to the menu,OnMenuRun]\e"
+	\![*]\q[Back to the menu,OnMenuRun]"
 	
 }*/
 
@@ -441,7 +439,7 @@ OnChangeTalk : all
 	"\0\_q\s[0]\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
 	"(How many minutes would you like between reminders? Right now it's %(talkrate).)"
 	"\n\n"
-	"\![*]\q[Nevermind,OnConfigMenu]\e"
+	"\![*]\q[Nevermind,OnConfigMenu]"
 }
 
 OnDrinkTime
@@ -608,18 +606,9 @@ OnToggleIncludeCustom
 
 OnUpdateCheck
 {
-	if reference0 == "ghost"
-	{
-		"\![updatebymyself]\e"
-	}
-	elseif reference0 == "balloon"
-	{
-		"\![update,balloon]\e"
-	}
-	else //shell
-	{
-		"\![update,shell]\e"
-	}
+	if reference0 == "ghost"; "\![updatebymyself]"
+	elseif reference0 == "balloon"; "\![update,balloon]"
+	else; "\![update,shell]"
 }
 
 OnToggleAutoUpdates
@@ -687,8 +676,6 @@ OnChoiceTimeout
 		currentdrinkstreak = 0
 		newhighscorelatch = 0
 	}
-	--
-	"\e"
 }
 
 //---Stuff from Aitalk---
@@ -769,7 +756,6 @@ Select.drankwater : nonoverlap
 	if _amt > 10000; _amt = 10000 //100 max - lets not do a hyponatremia
 	if _amt == 800; _amt = 820
 	_talk += "\![raiseplugin,c58b6320-caf8-11ed-a901-0800200c9a66,OnWalletOfUnyu,set,%(_amt),Thanks for hydrating!]"
-	_talk += "\e"
 	_talk
 }
 

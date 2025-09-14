@@ -2,7 +2,7 @@
 
 OnInstallBegin
 {
-	"\0\s[0](Installing...)\e"
+	"\0\s[0](Installing...)"
 }
 
 OnInstallComplete //Installing something ghost related
@@ -13,11 +13,11 @@ OnInstallComplete //Installing something ghost related
 		--
 		"\q[Change to %(reference1),ChangeToGhost]\n/
 		\q[Call %(reference1),CallGhost]\n/
-		\q[No thanks,cancelnodialogue]\e"
+		\q[No thanks,cancelnodialogue]"
 	}
 	else
 	{
-		"\0\s[0](Installed %(reference1).)\e"
+		"\0\s[0](Installed %(reference1).)"
 	}
 }
 
@@ -44,44 +44,44 @@ OnInstallFailure //If the install fails
 		"It couldn't be extracted."
 	}
 	--
-	")\e"
+	")"
 }
 
 OnInstallRefuse
 {
-	"\0\s[0](Cannot install, this is meant for %(reference0).)\e"
+	"\0\s[0](Cannot install, this is meant for %(reference0).)"
 }
 
 OnUpdatedataCreating //Creating an updates2.dau
 {
-	"\0\s[0](Creating an updates2.dau file.)\e"
+	"\0\s[0](Creating an updates2.dau file.)"
 }
 
 OnUpdatedataCreated //Finished creating
 {
-	"\0\s[0](Finished making the updates2.dau.)\e"
+	"\0\s[0](Finished making the updates2.dau.)"
 }
 
 OnNarCreating //Creating a .nar
 {
-	"\0\s[0](Creating a .nar file.)\w8\e"
+	"\0\s[0](Creating a .nar file.)\w8"
 }
 
 OnNarCreated //Finished creating
 {
-	"\0\s[0](Finished making the .nar file.)\e"
+	"\0\s[0](Finished making the .nar file.)"
 }
 
 //----Uninstalling----
 
 OnVanishSelecting //Bringing up the uninstall option
 {
-	"\0\s[0](Do you want to uninstall?)\e"
+	"\0\s[0](Do you want to uninstall?)"
 }
 
 OnVanishSelected //Deciding to uninstall
 {
-	"\0\s[0](Take care of yourself, user!)\w8\w8\e"
+	"\0\s[0](Take care of yourself, user!)\w8\w8"
 }
 
 OnVanishCancel //Changing your mind
@@ -91,7 +91,7 @@ OnVanishCancel //Changing your mind
 
 OnVanished //When another ghost has been uninstalled and it switches to this ghost
 {
-	"\0\s[0](%(reference0) wasn't hydrated enough.)\e"
+	"\0\s[0](%(reference0) wasn't hydrated enough.)"
 }
 
 //----Network update---
@@ -100,7 +100,7 @@ OnUpdateCheckComplete //When the ghost finishes checking for updates
 {
 	if reference0 == "none" //If there are no new files
 	{
-		if AutoUpdates[1] != 1; "\0\s[0](There are no new files.)\e" //This if stops the dialogue from displaying if this check was performed automatically.
+		if AutoUpdates[1] != 1; "\0\s[0](There are no new files.)" //This if stops the dialogue from displaying if this check was performed automatically.
 	}
 	else
 	{
@@ -131,7 +131,7 @@ OnUpdateCheckComplete //When the ghost finishes checking for updates
 		if reference3 == "shell"; "for the %(nowshell) shell"
 		elseif reference3 == "balloon"; "for the %(SHIORI3FW.BalloonName) balloon"
 		--
-		". Do you want to update now?)\n\n\![*]\q[Update now,OnStartUpdate,%(reference3)]\n\![*]\q[No thanks,cancelnodialogue]\e"
+		". Do you want to update now?)\n\n\![*]\q[Update now,OnStartUpdate,%(reference3)]\n\![*]\q[No thanks,cancelnodialogue]"
 		*/
 	}
 }
@@ -155,14 +155,14 @@ OnStartUpdate
 
 OnUpdateBegin //Starting to actually update
 {
-	"\0\s[0](Beginning update.)\w8\w8\e"
+	"\0\s[0](Beginning update.)\w8\w8"
 }
 
 OnUpdateReady
 {
 	reference0++ //Number of files starts from 0, so this displays the correct amount
 	
-	"\0\s[0](There are %(reference0) new files.)\w8\w8\e"
+	"\0\s[0](There are %(reference0) new files.)\w8\w8"
 }
 
 //When the update finishes. Don't forget to initialize any new variables you set, I'd recommend making a variable for each version you release, check if that variable is blank, and if it is then initialize variables for that update. That way no matter what version people update from, they get all the necessary variables.
@@ -172,13 +172,13 @@ OnUpdateComplete
 	AutoUpdates[1] = 0
 	if reference0 == "none"
 	{
-		"\0\s[0](There are no new files.)\e"
+		"\0\s[0](There are no new files.)"
 	}
 	else
 	{
 		"\0\s[0](Update complete.)"
 		--
-		"\n\n\![*]\q[Show changelog,OnChangeLog]\n\![*]\q[Ok,NoChangelog]\e"
+		"\n\n\![*]\q[Show changelog,OnChangeLog]\n\![*]\q[Ok,NoChangelog]"
 	}
 }
 
@@ -223,32 +223,30 @@ OnUpdate.OnDownloadBegin //Taken from the GT template because I see no reason to
 	--
 	//using the text buffers to display the correct number of boxes
 	"%(_txt)\n\n(%(_Update_Process) of %(_Update_Total))"
-	--
-	"\e"
 }
 
 OnUpdate.OnMD5CompareFailure
 {
-	"\0\s[0]\n\n(The MD5 values don't match.)\w8\w8\e"
+	"\0\s[0]\n\n(The MD5 values don't match.)\w8\w8"
 }
 
 OnUpdateFailure //If the update fails
 {
 	if reference0 == "timeout" //If it timed out
 	{
-		"\0\s[0](The connection timed out.)\e"
+		"\0\s[0](The connection timed out.)"
 	}
 	elseif reference0 == "md5 miss" //If the update files have not been uploaded correctly and don't match the updates2.dau
 	{
-		"(The MD5 values don't match.\w8\w8 You should contact Zichqec and let her know.)\e"
+		"(The MD5 values don't match.\w8\w8 You should contact Zichqec and let her know.)"
 	}
 	elseif reference0 == "artificial" //If the user cancels the update by double clicking the balloon
 	{
-		"\0\s[0](Cancelled update.)\e"
+		"\0\s[0](Cancelled update.)"
 	}
 	else
 	{
-		"\0\s[0](Error: '%(reference0)'.)\e"
+		"\0\s[0](Error: '%(reference0)'.)"
 	}
 }
 
@@ -256,11 +254,11 @@ OnUpdateFailure //If the update fails
 {
 	if reference0 == "timeout" //If it timed out
 	{
-		"\0\s[0](The connection timed out.)\e"
+		"\0\s[0](The connection timed out.)"
 	}
 	else
 	{
-		"\0\s[0](Error:\w4 '%(reference0)'.)\e"
+		"\0\s[0](Error:\w4 '%(reference0)'.)"
 	}
 }*/
 
@@ -279,13 +277,13 @@ OnUpdateOtherBegin
 		"(Beginning %(reference3) update.)"
 	}
 	--
-	"\w8\e"
+	"\w8"
 }
 
 OnUpdateOtherReady
 {
 	reference0++
-	"\0\s[0](There are %(reference0) new files.)\w8\w8\e"
+	"\0\s[0](There are %(reference0) new files.)\w8\w8"
 }
 
 OnUpdateOtherComplete
@@ -293,11 +291,11 @@ OnUpdateOtherComplete
 	AutoUpdates[1] = 0
 	if reference0 == "none"
 	{
-		"\0\s[0](No new files for the current %(reference3) to update with.)\e"
+		"\0\s[0](No new files for the current %(reference3) to update with.)"
 	}
 	else
 	{
-		"\0\s[0](Update complete!)\e"
+		"\0\s[0](Update complete!)"
 	}
 	
 }
@@ -333,13 +331,11 @@ OnUpdateOther.OnDownloadBegin
 	--
 	//using the text buffers to display the correct number of boxes
 	"%(_txt)\n\n(%(_Update_Process) of %(_Update_Total))"
-	--
-	"\e"
 }
 
 OnUpdateOtherFailure
 {
-	"\0(%(reference3) update failed: '%(reference0)'.)\e"
+	"\0(%(reference3) update failed: '%(reference0)'.)"
 }
 
 OnDisplayChange
