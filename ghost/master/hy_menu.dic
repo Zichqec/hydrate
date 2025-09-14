@@ -51,8 +51,8 @@ OnMenuRun : all
 
 	"\n\n[half]"
 	"\![*]\q[Stats,OnWaterStats]\n"
-	"\![*]\q[Config,OnConfigMenu]"
-	"\n\n\![*]\q[Nevermind,Cancel]"
+	"\![*]\q[Config,OnConfigMenu]\n\n"
+	"\![*]\q[Done,OnBlank]"
 	
 	_s = ""; if todayswaters != 1; _s = "s"
 	"\n\n\n\n[half]%(todayswaters) drink%(_s) taken this session!"
@@ -145,7 +145,7 @@ OnShellMenu : all
 	"\![*]\q[Random shell,OnRandomShell]\n"
 	"\![*]\q[Download more shells,OnShellUrl]"
 	"\n\n[half]"
-	"%(_display)\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
+	"%(_display)\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
 }
 
 OnRandomShell
@@ -220,11 +220,11 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		"\![*]\q[Back,OnMenuRun]\n\![*]\q[Nevermind,Cancel]"
+		"\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
 	}
 	else
 	{
-		"\![*]\q[Back,OnDressupMenu]\n\![*]\q[Nevermind,Cancel]"
+		"\![*]\q[Back,OnDressupMenu]\n\![*]\q[Done,OnBlank]"
 	}
 	--
 	"\![unlock,balloonrepaint]"
@@ -382,7 +382,7 @@ OnChangeTalk : all
 	"\0\_q\s[0]\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
 	"(How many minutes would you like between reminders? Right now it's %(talkrate).)"
 	"\n\n"
-	"\![*]\q[Nevermind,OnConfigMenu]"
+	"\![*]\q[Cancel,OnConfigMenu]"
 }
 
 OnDrinkTime
@@ -448,7 +448,7 @@ OnDrinkTime
 		--
 		"\n\n"
 		--
-		"\![*]\q[Nevermind,OnConfigMenu]\![unlock,balloonrepaint]"
+		"\![*]\q[Cancel,OnConfigMenu]\![unlock,balloonrepaint]"
 	}
 }
 
