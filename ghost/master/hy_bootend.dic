@@ -24,8 +24,8 @@ OnFirstBoot //Dialogue when you first open the ghost
 	volume = 50
 	HourNotifs = "OFF"
 	
-	//TODO high score
-	//highestdrinkstreak = 0
+	highestdrinkstreak = 0
+	newhighscorelatch = 0
 	
 	booting = 0 //This will be set to 0 after firstboot is complete
 	
@@ -438,6 +438,8 @@ OnUpdateVars
 		Scale.Y = nowscale
 		if Scale.Y == ""; Scale.Y = 100
 	}
+	if !ISVAR("highestdrinkstreak"); highestdrinkstreak = 0
+	if !ISVAR("newhighscorelatch"); newhighscorelatch = 0
 	
 	//——— 2.0.0 ———
 	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0

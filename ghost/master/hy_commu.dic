@@ -14,7 +14,7 @@
 	reference6: Number of drinks today
 	reference7: Number of drinks total
 	reference8: Current drink streak (number of drinks in a row) (can span multiple sessions)
-	reference9: Currently blank, reserved for future use
+	reference9: Highest drink streak (number of drinks in a row high score, only kicks in at 3 drinks or more)
 	reference10: Number of extra sips today
 	reference11: Number of extra sips total
 */
@@ -47,7 +47,7 @@ OnHydrateGhost.GetStats : all
 	{
 		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
 	}
-	"""%(nowshell)"",,%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
+	"""%(nowshell)"",,%(Scale.X),%(Scale.Y),%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal)]"
 }
 
 
