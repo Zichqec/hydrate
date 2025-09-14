@@ -1,6 +1,6 @@
 //Hydrate stat share event
 //Called when Hydrate boots, when another ghost boots, every hour, and when requested by a ghost
-//It is usually returned as [NOTIFY], however it can be requested as [GET] by a ghost. If a ghost provides a name to return the event to, the event will be sent *exclusively* to that ghost as [GET]. This is ideal if you want to do something like run a check for the current shell immediately before making a comment. (However, it's recommended to only do this as needed, since Hydrate will ignore these requests while a drink reminder is waiting.)
+//It is usually returned as [NOTIFY], however it can be requested as [GET] by a ghost. If a ghost provides a name to return the event to as reference0, the event will be sent *exclusively* to that ghost as [GET]. This is ideal if you want to do something like run a check for the current shell immediately before making a comment. (However, it's recommended to only do this as needed, since Hydrate will ignore these requests while a drink reminder is waiting.)
 //Otherwise, it is sent as notify so that ghosts may passively track Hydrate's stats while it is open.
 
 /*
