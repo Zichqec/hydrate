@@ -8,9 +8,7 @@ BalloonIsOpen
 	"balloon" _in_ status
 }
 
-newline
 {
-	"\n \n[-100]" //TODO find where this is used and replace with \n[0] if i can
 }
 
 br
