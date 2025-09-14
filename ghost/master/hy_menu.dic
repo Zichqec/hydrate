@@ -862,10 +862,6 @@ OnMinuteChange
 		}
 		OnHourTalk
 	}
-	elseif mikireflag == 1
- 	{
- 		MikireTalk
-	}
 	--
 	if AutoUpdates[0] == "ON" && AutoUpdates[1] == 0 //Once a day the ghost will check for updates if the user has auto updates on
 	{
@@ -894,21 +890,6 @@ OnSecondChange
 		passsec++
 	}
 	
-	if mikireflag == 1 && reference1 == 0
-	{
-		EndMikireTalk
-	}
-	elseif ARRAYSIZE(waitingcommuS) > 0 && second % 5 == 0
-	{
-		_b = BalloonCheck
-		if _b == 0; WaitingCommu
-	}
-	
-	LOGGING("====================================================================")
-	mikireflag = reference1
-	LOGGING("mikireflag: %(mikireflag)")
-	LOGGING("reference: %(reference)")
-	
 	//Create arrays if none exist
 	if !ISVAR("ErrorsToPush.level"); ErrorsToPush.level = IARRAY
 	if !ISVAR("ErrorsToPush.description"); ErrorsToPush.description = IARRAY
@@ -931,13 +912,18 @@ OnSecondChange
 		ErrorsToPush.level = IARRAY
 		ErrorsToPush.description = IARRAY
 	}
+	
+	if ARRAYSIZE(waitingcommuS) > 0 && second % 5 == 0
+	{
+		_b = BalloonCheck
+		if _b == 0; WaitingCommu
+	}
 }
 
-MikireTalk
+//Doesn't notify every minute anymore but I think that's for the best
+OnOffscreen
 {
-	//TODO maybe fuss more with this later to try and make it behave better when it's on? need to experiment
-	//TODO not working on my computer but my SSP might be bugged???
-	if Config.OffscreenDialogue
+	if Config.OffscreenDialogue && "0" _in_ reference.raw[0]
 	{
 		"\0\s[0](To continue hydrating, press Ctrl Shift F12.)"
 	}
