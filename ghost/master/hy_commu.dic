@@ -41,15 +41,6 @@ OnHydrateGhost.GetStats : all
 {
 	_type = "notify"
 	if reference0 != ""; _type = "raise"
-	//if you request it by 1 specific ghost i should make it target that ghost...... that way you can do immediate ping responses
-	//should i allow you to pass an arbitrary argument......? hm
-	
-	//ErrorLog("Sent stats with type '%(_type)'","info")
-	
-	_send = "%(currentdressups)" //DONT FORGET TO ESCAPE THIS -- currently not sending dressups as I'm undecided on what is a good delimiter and it's almost bedtime!
-	_send = REPLACE(_send,",","|-|")
-	//_delim = CHR(0xFDEF)
-	//Maybe if I flip it around so that C_BYTE1 delimits the big chunks, that's better, since more SHIORI are likely to be able to easily parse that...? hmmm...
 	
 	//C_BYTE1 used to delimit the big chunks, 0xFDEF used to delimit the category and part name. I think this will be easier to handle in case a SHIORI does not support the latter...?
 	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
@@ -75,6 +66,7 @@ OnHydrateGhost.GetStats : all
 HydrateCommuResponse : nonoverlap_pool
 {
 	_ghost = _argv[0]
+	
 	"\0(Stay hydrated,\w4 %(reference0)!)"
 	"\0(Make sure to stay hydrated,\w4 %(reference0)!)"
 	"\0(Make sure you get a drink of water if you're thirsty,\w4 %(reference0)!)"
