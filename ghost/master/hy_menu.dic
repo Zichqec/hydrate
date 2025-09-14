@@ -140,11 +140,11 @@ OnShellMenu
 	--
 	"\0\*\_q\![set,autoscroll,0]"
 	--
-	"\f[align,center]— Shells —\n\f[align,left]"
+	"\f[align,center]%(emdash) Shells %(emdash)\n\f[align,left]"
 	--
 	if ARRAYSIZE(ShellList) > 16; "\b[4]\n[half]\![*]\q[Back,OnMenuRun]\n"
 	elseif ARRAYSIZE(ShellList) > 11; "\b[4]"
-	else; "\b2"
+	else; "\b[2]"
 	--
 	"\![*]\q[Random shell,OnRandomShell]\n"
 	--
@@ -197,11 +197,11 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		"\f[align,center]— Designs —\n\f[align,left]"
+		"\f[align,center]%(emdash) Designs %(emdash)\n\f[align,left]"
 	}
 	else
 	{
-		"\f[align,center]— %(reference0) —\n\f[align,left]"
+		"\f[align,center]%(emdash) %(reference0) %(emdash)\n\f[align,left]"
 	}
 	--
 	if reference0 == ""
@@ -316,7 +316,7 @@ OnWaterStats : all
 	
 	"\0\*\b[4]\_q"
 	
-	"\f[align,center]— Stats —\n\n\f[align,default]"
+	"\f[align,center]%(emdash) Stats %(emdash)\n\n\f[align,default]"
 	
 	_s = ""; if todayswaters != 1; _s = "s"
 	"\![*]%(_h)%(todayswaters)%(_d) drink%(_s) taken this session\n"
@@ -361,7 +361,7 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	
 	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
-	"\f[align,center]— Config —\n\n\f[align,default]"
+	"\f[align,center]%(emdash) Config %(emdash)\n\n\f[align,default]"
 	
 	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(talkrate)\_a\n"
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
@@ -472,7 +472,7 @@ OnChangeNotif : all
 	if volume <= 0; _vol_down = "%(_g)▼%(_d)"
 	
 	"\C\![lock,balloonrepaint]\c\0\b2\_q\![set,autoscroll,disable]\*"
-	"\f[align,center]— Reminder Sound —\n\n[half]\f[align,left]"
+	"\f[align,center]%(emdash) Reminder Sound %(emdash)\n\n[half]\f[align,left]"
 	
 	"Volume: %(_vol_up)%(_vol_down) %(volume)\n\n[half]"
 	

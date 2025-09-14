@@ -8,7 +8,9 @@ BalloonIsOpen
 	"balloon" _in_ status
 }
 
+emdash
 {
+	"\f[name,calibri]—\f[name,default]"
 }
 
 br
