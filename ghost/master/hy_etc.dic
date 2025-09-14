@@ -124,15 +124,6 @@ OnUpdateCheckComplete //When the ghost finishes checking for updates
 			elseif reference3 == "shell"; "\![update,balloon,checkonly]"
 			else; "\e Update Check Complete"
 		}
-		/*
-		--
-		"\0\s[0](An update is available"
-		--
-		if reference3 == "shell"; "for the %(nowshell) shell"
-		elseif reference3 == "balloon"; "for the %(SHIORI3FW.BalloonName) balloon"
-		--
-		". Do you want to update now?)\n\n\![*]\q[Update now,OnStartUpdate,%(reference3)]\n\![*]\q[No thanks,cancelnodialogue]"
-		*/
 	}
 }
 
@@ -249,18 +240,6 @@ OnUpdateFailure //If the update fails
 		"\0\s[0](Error: '%(reference0)'.)"
 	}
 }
-
-/*OnUpdateCheckFailure //Similar to above, but for if the ghost was just checking and not updating
-{
-	if reference0 == "timeout" //If it timed out
-	{
-		"\0\s[0](The connection timed out.)"
-	}
-	else
-	{
-		"\0\s[0](Error:\w4 '%(reference0)'.)"
-	}
-}*/
 
 OnUpdateOtherBegin
 {
