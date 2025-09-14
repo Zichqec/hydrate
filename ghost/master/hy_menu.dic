@@ -732,29 +732,6 @@ NewStreakHighScoreDrink
 	"(New high score! %(highestdrinkstreak) drinks in a row! Incredible!)"
 }
 
-OnHourTalk
-{
-	if HourNotifs == "ON"
-	{
-		if hour == 0
-		{
-			"\0\s[0](It's midnight.)"
-		}
-		elseif hour == 12
-		{
-			"\0\s[0](It's noon. If you haven't eaten yet,\w4 you should sip some water first.)"
-		}
-		else
-		{
-			"\0\s[0](It's %(hour12).)"
-		}
-	}
-	--
-	OnHydrateGhost.GetStats
-	--
-	SendOldStats //Deprecated version
-}
-
 OnMinuteChange
 {
 	if minute == 0
@@ -777,6 +754,15 @@ OnMinuteChange
 		AutoUpdates[5] = 0
 		"\![update,ghost,checkonly]"
 	}
+}
+
+OnHourTalk
+{
+	if HourNotifs == "ON"; HourNotification
+	--
+	OnHydrateGhost.GetStats
+	--
+	SendOldStats //Deprecated version
 }
 
 OnSecondChange

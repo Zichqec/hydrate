@@ -211,3 +211,19 @@ ShellChangeComments
 		"(Refill them often!)"
 	}
 }
+
+HourNotification
+{
+	if hour == 0
+	{
+		"\0\s[0](It's midnight.)"
+	}
+	elseif hour == 12
+	{
+		"\0\s[0](It's noon. If you haven't eaten yet,\w4 you should sip some water first.)"
+	}
+	else
+	{
+		"\0\s[0](It's %(hour12).)"
+	}
+}
