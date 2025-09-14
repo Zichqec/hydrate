@@ -680,7 +680,7 @@ OnChoiceTimeout
 
 //---Stuff from Aitalk---
 
-OnAiTalk
+OnAITalk
 {
 	_talk = ReminderTalk
 	if nowshell == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
@@ -953,7 +953,7 @@ OnKeyPress
 		}
 		when "t"
 		{
-			if debug == 1; OnAiTalk
+			if debug == 1; OnAITalk
 		}
 	}
 }
