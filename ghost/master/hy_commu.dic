@@ -44,6 +44,7 @@ OnHydrateGhost.GetStats : all
 	
 	//C_BYTE1 used to delimit the big chunks, 0xFDEF used to delimit the category and part name. I think this will be easier to handle in case a SHIORI does not support the latter...?
 	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
+	//TODO SWAP C_BYTE1 AND 0xFDEF!!!!
 	_dressups = ""
 	foreach currentdressups; _dressup
 	{

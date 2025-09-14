@@ -1,4 +1,54 @@
-!!!!! DEPRECATED !!!!!
-The old methods that used to be detailed in this file are deprecated!
+—— WIP ——
+————— Receiving the data —————
+Stats from Hydrate come from an event called OnHydrateGhost.GetStats
+This is usually sent as NOTIFY, and will automatically be sent in the following cases:
+- Hydrate opens
+- Another ghost opens
+- The hour rolls over
 
-I will get the new stuff written up properly soon, I hope.
+You can simply add the event to your ghost in order to passively track Hydrate's stats and do with them what you like.
+
+If you want to request the stats directly (for example, so that you can tell for certain that you have the most up-to-date information for something specific), you can do so by using raiseother.
+
+\![raiseother,Hydrate,OnHydrateGhost.GetStats] will cause Hydrate to send out the stats notification to all ghosts as NOTIFY.
+
+If you want Hydrate to send the response as GET so that your ghost can run a script directly after, you must supply the sakura name of your ghost as reference0.
+
+\![raiseother,Hydrate,OnHydrateGhost.GetStats,Emily] will cause Hydrate to send out the stats notification **exclusively** to Emily/Phase4.5 (I'm not sure what happens if there are two ghosts with the same Sakura name), and it will be sent as GET. reference0 will contain "Emily", which can be used to determine that this was a specific request.
+
+Additionally, if you are requesting stats be sent directly to your ghost, you can pass along some arbitrary information in reference1. This may be useful if you want to get Hydrate's stats in multiple different instances, and need to determine what it is responding to. (Think of it as a tag on the information.)
+
+\![raiseother,Hydrate,OnHydrateGhost.GetStats,Emily,mainmenu] will do the same as the above, with the addition that the contents of reference1 will be "mainmenu" (perhaps this check was activated from the ghost's main menu? Etc.)
+
+
+————— Parsing the data —————
+Information is passed along as references. Most of it is straightforward to use.
+
+reference0: Name of the ghost that sent this request (empty if this was not requested by a specific ghost).
+reference1: Arbitrary data passed by the ghost that sent this request (empty if this was not requested by a specific ghost, or no data was passed).
+reference2: Name of the current shell.
+reference3: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0x01, and within each dressup the category name and part name are delimited by the unicode noncharacter 0xFDEF.
+reference4: The current shell scaling (horizontal).
+reference5: The current shell scaling (vertical).
+reference6: Number of drinks today.
+reference7: Number of drinks total.
+reference8: Current drink streak (number of drinks in a row) (can span multiple sessions).
+reference9: Highest drink streak (number of drinks in a row high score, only kicks in at 3 drinks or more).
+reference10: Number of extra sips today.
+reference11: Number of extra sips total.
+
+
+Notes:
+references 0 and 1 are only present if a ghost has specifically requested this data, and it is being sent as GET. This means you can check if reference0 is blank, and if so, you know that this is a notification that was sent to all ghosts.
+
+reference1's use is described as above, it is meant to help in cases where you might be requesting Hydrate's data from multiple parts of your ghost (for example, distinguishing between a check from the menu and a check from randomtalk).
+
+reference3 uses some special characters to separate the dressups. In YAYA, that data can be broken down like so:
+
+_dressups = IARRAY
+foreach SPLIT(reference3,CHR(0xFDEF)); _dressup
+{
+	_dressups ,= _dressup
+}
+
+This will create a local array _dressups with the 2d array broken into an easier to work with form (one dimension handled as a general purpose array). From here, you can use C_BYTE1 to distinguish between the category name and part name. ... This is easier if you understand how to work with 2d arrays. TODO maybe I should reconsider this section
