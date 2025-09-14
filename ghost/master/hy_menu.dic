@@ -802,7 +802,7 @@ OnSecondChange
 							//Send a notif banner with the appropriate text...
 							//Adjusting the last talk time here because that way it doesn't screw with the timing of your reminders
 							_dialogue = ReminderTalk
-							_command = "\![set,trayballoon,--text=""%(_dialogue)"",--title=Hydration reminder,--icon=info]"
+							_command = "\![set,trayballoon,--text=""%(_dialogue)"",--title=Hydrate reminder,--icon=info]"
 							
 							SHIORI3FW.PushAdditionalReturn('ValueNotify',_command)
 							SHIORI3FW.ResetAITalkInterval(0)
