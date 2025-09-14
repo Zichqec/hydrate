@@ -549,16 +549,12 @@ OnChangeNotif : all
 //Up/Down volume buttons
 OnQuickVolume
 {
-	if reference0 == "Up"
-	{
-		volume += 5
-		if volume > 100; volume = 100
-	}
-	else //Down
-	{
-		volume -= 5
-		if volume < 0; volume = 0
-	}
+	if reference0 == "Up"; volume += 5
+	else; volume -= 5
+	
+	if volume > 100; volume = 100
+	if volume < 0; volume = 0
+	
 	OnChangeNotif
 }
 
@@ -613,14 +609,8 @@ OnUpdateCheck
 
 OnToggleAutoUpdates
 {
-	if AutoUpdates[0] != "ON"
-	{
-		AutoUpdates[0] = "ON"
-	}
-	else
-	{
-		AutoUpdates[0] = "OFF"
-	}
+	if AutoUpdates[0] != "ON"; AutoUpdates[0] = "ON"
+	else; AutoUpdates[0] = "OFF"
 	
 	OnConfigMenu
 }
@@ -634,14 +624,8 @@ OnToggleRemindWhenMinimized
 
 OnToggleHourNotifs
 {
-	if HourNotifs != "ON"
-	{
-		HourNotifs = "ON"
-	}
-	else
-	{
-		HourNotifs = "OFF"
-	}
+	if HourNotifs != "ON"; HourNotifs = "ON"
+	else; HourNotifs = "OFF"
 	
 	OnConfigMenu
 }
@@ -655,14 +639,8 @@ OnToggleOffscreenTalk
 
 OnToggleUninstall
 {
-	if deleteshitai != "ON"
-	{
-		deleteshitai = "ON"
-	}
-	else
-	{
-		deleteshitai = "OFF"
-	}
+	if deleteshitai != "ON"; deleteshitai = "ON"
+	else; deleteshitai = "OFF"
 	
 	OnConfigMenu
 }
