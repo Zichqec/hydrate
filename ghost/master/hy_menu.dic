@@ -429,7 +429,8 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(HourNotifs)\_a\n"
 	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
 	"Enable Uninstall? \![*]\_a[OnToggleUninstall]%(deleteshitai)\_a\n\n"
-	"\![*]\q[Back to the menu,OnMenuRun]"
+	"\![*]\q[Back,OnMenuRun]\n"
+	"\![*]\q[Done,OnBlank]"
 	"\![unlock,balloonrepaint]"
 }
 
