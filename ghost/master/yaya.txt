@@ -12,6 +12,7 @@ dicif, yaya_base/optional.dic, UTF-8
 dicif, yaya_base/compatible.dic, UTF-8
 
 dic, deprecated.dic
+dic, utility.dic
 dic, hy_bootend.dic
 dic, hy_commu.dic
 dic, hy_etc.dic

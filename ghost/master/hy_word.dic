@@ -28,34 +28,10 @@ notification_sound : all
 	}
 }
 
-br
-{
-	if SHIORI3FW.BalloonName == "H2O"; "\n"
-	else; " "
-}
-
 b4
 {
 	if SHIORI3FW.BalloonName == "H2O"; "\b4"
 	else; "\b2"
-}
-
-newline
-{
-	"\n \n[-100]"
-}
-
-BalloonIsOpen
-{
-	"balloon" _in_ status
-}
-
-
-//-----Menu stuff-----
-displaymin
-{
-	if passmin <= 9; "0%(passmin)"
-	else; "%(passmin)"
 }
 
 OnTranslate
@@ -121,21 +97,6 @@ Wobble
 		_word += "\_l[@%(_X),%(_Y)]\f[height,%(_Sz)]" + _let //Add to the display
 	}
 	_word
-}
-
-ASUB //ASEARCH but for substrings
-{
-	_array = _argv //Takes in all the elements of the array
-	_array[0] = IARRAY //erases _argv[0] since that's the string we're searching for
-	for _i = 0; _i < ARRAYSIZE(_array); _i++
-	{
-		if _argv[0] _in_ _array[_i]
-		{
-			_i
-			return
-		}
-	}
-	-1
 }
 
 //This bit of code is what makes menu options that don't start with On direct to Select.options instead. Remove or comment it if you prefer!

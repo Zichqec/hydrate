@@ -890,10 +890,3 @@ OnTestVar
 {
 	//"\_q\![set,autoscroll,disable]Current: %(currentdressups)\n\nAvailable: %(availabledressups)\x"
 }
-
-
-
-IsMinimized
-{
-	"minimizing" _in_ status
-}
