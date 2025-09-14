@@ -467,6 +467,7 @@ OnChangeNotif : all
 	if volume <= 0; _vol_down = "%(_g)▼%(_d)"
 	
 	"\C\![lock,balloonrepaint]\c\0\b2\_q\![set,autoscroll,disable]\*"
+	"\![close,dialog,OnPickCustomNotif]"
 	"\f[align,center]%(emdash) Reminder Sound %(emdash)\n\n[half]\f[align,left]"
 	
 	"Volume: %(_vol_up)%(_vol_down) %(volume)\n\n[half]"
@@ -512,7 +513,7 @@ OnCustomNotif : all
 	_h = "\f[color,default.anchor]"
 	_d = "\f[color,default]"
 	
-	"\0\_q\b2\![set,autoscroll,disable]\![open,dialog,open]\*"
+	"\0\_q\b2\![set,autoscroll,disable]\![open,dialog,open,--id=OnPickCustomNotif]\*"
 	
 	"(Choose a sound file. Supported types are %(_h).mp3%(_d), %(_h).wav%(_d), %(_h).wma%(_d), and %(_h).mid%(_d).)\n\n"
 	
@@ -521,19 +522,16 @@ OnCustomNotif : all
 	"\![*]\q[Cancel,OnChangeNotif]"
 }
 
-OnSystemDialog
+OnPickCustomNotif
 {
-	if reference0 == "open"
-	{
-		notif = "Custom"
-		custom_sound_path = reference2
-		"\C\![sound,stop]%(notification_sound)\![raise,OnChangeNotif]"
-	}
+	notif = "Custom"
+	custom_sound_path = reference2
+	"\C\![sound,stop]%(notification_sound)\![raise,OnChangeNotif]"
 }
 
 OnSystemDialogCancel
 {
-	if reference0 == "open"; "\C\![sound,stop]\![raise,OnChangeNotif]"
+	if reference1 == "OnPickCustomNotif"; "\C\![sound,stop]\![raise,OnChangeNotif]"
 }
 
 OnToggleIncludeCustom
