@@ -36,14 +36,16 @@ OnHydrateGhost.GetStats : all
 	
 	_send = "%(currentdressups)" //DONT FORGET TO ESCAPE THIS -- currently not sending dressups as I'm undecided on what is a good delimiter and it's almost bedtime!
 	_send = REPLACE(_send,",","|-|")
+	//_delim = CHR(0xFDD0)
+	//Maybe if I flip it around so that C_BYTE1 delimits the big chunks, that's better, since more SHIORI are likely to be able to easily parse that...? hmmm...
 	
-	if _type == "notify" //send to all if it's notify, always
-	{
-		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
-	}
-	else //if it's raise, just send to the ghost that requested it
+	if _type == "raise" //if it's raise, just send to the ghost that requested it
 	{
 		"\![raiseother,%(reference0),OnHydrateGhost.GetStats,""%(reference0)"",""%(reference1)"","
+	}
+	else //send to all if it's notify, always
+	{
+		"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,,,"
 	}
 	"""%(nowshell)"",,%(nowscale),,%(todayswaters),%(totalwaters),%(currentdrinkstreak),,%(extrasipstoday),%(extrasipstotal)]"
 }
