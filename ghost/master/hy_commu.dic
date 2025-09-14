@@ -8,7 +8,7 @@
 	reference0: Name of the ghost that sent this request (empty if this was not requested by a specific ghost)
 	reference1: The same information that was sent by the requesting ghost as reference1 (empty if this was not requested by a specific ghost or no information was sent). This is to make it easier to implement checking stats immediately before commenting.
 	reference2: Name of the current shell
-	reference3: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0x01, and within each dressup the category name and part name are delimited by the unicode noncharacter 0xFDEF.
+	reference3: List of current dressups. This is a two dimensional array. Each dressup is delimited by 0xFDEF, and within each dressup the category name and part name are delimited by the unicode noncharacter 0x01.
 	reference4: The current shell scaling (horizontal)
 	reference5: The current shell scaling (vertical)
 	reference6: Number of drinks today
@@ -21,10 +21,10 @@
 
 /*
 
-NOTE ABOUT 0x01 AND 0xFDEF:
+NOTE ABOUT 0xFDEF AND 0x01:
 
 For YAYA users:
-These can be easily handled with the function CHR! CHR(1) gets you 0x01, and CHR(0xFDEF) gets you 0xFDEF. There is also a handy shortcut for 0x01, which is C_BYTE1.
+These can be easily handled with the function CHR! CHR(0xFDEF) gets you 0xFDEF and CHR(1) gets you 0x01. There is also a handy shortcut for 0x01, which is C_BYTE1.
 
 For other SHIORI:
 I'm not sure how they will handle this! If for some reason your chosen SHIORI cannot handle 0xFDEF, please let me know and I will consider adding an event for compatibility.
@@ -42,14 +42,12 @@ OnHydrateGhost.GetStats : all
 	_type = "notify"
 	if reference0 != ""; _type = "raise"
 	
-	//C_BYTE1 used to delimit the big chunks, 0xFDEF used to delimit the category and part name. I think this will be easier to handle in case a SHIORI does not support the latter...?
+	//0xFDEF used to delimit the big chunks, C_BYTE1 used to delimit the category and part name. This way around because otherwise it's a damn pain to process on the receiving end later!? Also, surely all SHIORI must support C_BYTE1, or else they can't process all events... so, that's the safer bet to be at the more granular level, maybe??? hm
 	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
-	//TODO SWAP C_BYTE1 AND 0xFDEF!!!!
 	_dressups = ""
 	foreach currentdressups; _dressup
 	{
-		if _dressups != ""; _dressups += C_BYTE1
-		_dressup = REPLACE(_dressup,C_BYTE1,CHR(0xFDEF))
+		if _dressups != ""; _dressups += CHR(0xFDEF)
 		_dressups += _dressup
 	}
 	
