@@ -91,39 +91,9 @@ OnCommunicate
 	//This method was a mistake because I didn't know better at the time
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	
-	//Answering another ghost
-	_nocomma = REPLACE(reference0,",","")
-	_b = BalloonCheck
-	LOGGING("Saw ping from: %(_nocomma). Balloon is: %(_b). Response...")
-	//If the balloon is open AND this WAS NOT a message from the same ghost as last time
-	if _b == 1 && "[commu-%(_nocomma)]" !_in_ SHIORI3FW.LastTalk
-	{
-		LOGGING("Store ping for later")
-		waitingcommuS ,= reference0
-		waitingcommuM ,= reference1
-	}
-	//if the balloon is closed and this WAS NOT a message from the same ghost as last time
-	elseif "[commu-%(_nocomma)]" !_in_ SHIORI3FW.LastTalk
-	{
-		LOGGING("Reply")
-		if reference0 == "|-|waitingcommu|-|"
-		{
-			LOGGING("To the stored message specifically")
-			reference0 = waitingcommuS[0]; waitingcommuS[0] = IARRAY
-			reference1 = waitingcommuM[0]; waitingcommuM[0] = IARRAY
-		}
-		--
-		ReplyToGhost
-	}
-	//If it's the same ghost as last time
-	else
-	{
-		LOGGING("Skipped everything lol")
-	}
-}
-
-ReplyToGhost
-{
+	//If a drink notif is open, ignore all communications
+	if "drinknotif" _in_ SHIORI3FW.LastTalk; return
+	
 	res_reference = reference0
 	ConvoTag = SPLIT(reference1,"\e")[1]
 	_nocomma = REPLACE(reference0,",","")
@@ -182,32 +152,4 @@ ReplyToGhost
 	_HYdressups = REPLACE(reference7,"|-|",",")
 	_HYscale = TOINT(reference8)
 	*/
-}
-
-/*OnBalloonClose
-{
-	if waitingcommu[0] != ""; WaitingCommu
-}
-
-OnBalloonBreak
-{
-	if waitingcommu[0] != ""; WaitingCommu
-}
-
-OnBalloonTimeout
-{
-	if waitingcommu[0] != ""; WaitingCommu
-}*/
-
-WaitingCommu
-{
-	"\![raise,OnCommunicate,|-|waitingcommu|-|]"
-}
-
-//As the name implies, this checks if the balloon is currently open or not.
-//To use it I would do this, so you don't have to copy this whole chunk of code:
-//if BalloonCheck
-BalloonCheck
-{
-	"balloon" _in_ status
 }

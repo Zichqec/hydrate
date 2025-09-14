@@ -15,8 +15,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	extrasipstoday = 0
 	extrasipstotal = 0
 	timeouttime = 3000 //5 minutes
-	waitingcommuS = IARRAY
-	waitingcommuM = IARRAY
 	AutoUpdates = ("ON",0)
 	nowscale = 100
 	
@@ -449,8 +447,6 @@ OnUpdateVars
 	extrasipstoday = 0
 	extrasipstotal = 0
 	timeouttime = 3000 //5 minutes
-	waitingcommuS = IARRAY
-	waitingcommuM = IARRAY
 	AutoUpdates = ("On",0)
 	nowscale = 100
 	*/
@@ -471,8 +467,6 @@ OnUpdateVars
 		}
 		timeouttime *= 1000
 	}
-	if ISVAR('waitingcommuS') == 0; waitingcommuS = IARRAY
-	if ISVAR('waitingcommuM') == 0; waitingcommuM = IARRAY
 	if ISVAR('AutoUpdates') == 0; AutoUpdates = ("ON",0,,0,0,0)
 	if ISVAR('nowscale') == 0; nowscale = 100
 	

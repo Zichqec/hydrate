@@ -947,12 +947,6 @@ OnSecondChange
 		ErrorsToPush.level = IARRAY
 		ErrorsToPush.description = IARRAY
 	}
-	
-	if ARRAYSIZE(waitingcommuS) > 0 && second % 5 == 0
-	{
-		_b = BalloonCheck
-		if _b == 0; WaitingCommu
-	}
 }
 
 //Doesn't notify every minute anymore but I think that's for the best
