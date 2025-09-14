@@ -54,14 +54,8 @@ BalloonIsOpen
 //-----Menu stuff-----
 displaymin
 {
-	if passmin <= 9
-	{
-		"0%(passmin)"
-	}
-	else
-	{
-		"%(passmin)"
-	}
+	if passmin <= 9; "0%(passmin)"
+	else; "%(passmin)"
 }
 
 OnTranslate
