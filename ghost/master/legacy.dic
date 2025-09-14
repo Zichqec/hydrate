@@ -1,0 +1,213 @@
+//Legacy content that won't be updated but is preserved for historical reasons. If creating translations of Hydrate, this file will not be included.
+
+//Optional comments for individual shells
+ShellChangeComments
+{
+	if nowshell == "A bottle of souls"
+	{
+		"(A delicious treat!)"
+		"(Screams of the damned!)"
+		"(Set them free!)\n\n\f[height,-2](*Hydrate is not liable for any damages caused as a result of setting the souls free.)"
+	}
+	elseif nowshell == "Alkohol"
+	{
+		"(Don't get all your hydration through alcohol!)"
+	}
+	elseif nowshell == "Ballpoint Pen"
+	{
+		"(Cheap but effective!)\n\n(For writing, probably not for drinking!)"
+		"(Always getting clogged!)"
+		"(Easy to lose!)"
+		"(Best used on dark backgrounds!)"
+	}
+	elseif nowshell == "Bishoujo Hydrate"
+	{
+		"(uwu~!)"
+		"(✨>wo)"
+	}
+	elseif nowshell == "Bleach"
+	{
+		"(Not for drinking!)"
+		"(Not safe for consumption!)"
+		"(Probably doesn't taste good,\w4 but don't test that!)"
+		"(Don't try this at home!)"
+		"(Be careful what you mix it with!)"
+	}
+	elseif nowshell == "Bowie Bottle"
+	{
+		"(Pair it with Bowie!)"
+		"(Part of a complete ghost set!)"
+	}
+	elseif nowshell == "Can"
+	{
+		"(Soda!)"
+		"(Pop!)"
+		"(Soda pop!)"
+	}
+	elseif nowshell == "Canned Food"
+	{
+		"(Beans!)"
+	}
+	elseif nowshell == "Coffee Cup"
+	{
+		"(Try the \_a[https://ukagaka.zichqec.com/ghost/needle]Needle\_a sleeve! It's pointy!)"
+		"(Not sponsored!)"
+		"(Try all the varieties, for free!)"
+	}
+	elseif nowshell == "Fishbowl"
+	{
+		"(Surely the occupant won't mind a few straws!)"
+		"(Fish friend!)"
+	}
+	elseif nowshell == "Geoffrey"
+	{
+		"(It's Geoffrey!)"
+		"(It's Geoffrey.)"
+		"(Hypnotizing!)"
+	}
+	elseif nowshell == "Hydrate Shell Nim"
+	{
+		"(Pure H2O!)"
+		"(New look, same great taste!)"
+	}
+	elseif nowshell == "Hydrate Shell Template"
+	{
+		"(Make something neat!)"
+		"(Zi spent hours perfecting this amazing lineart!)"
+	}
+	elseif nowshell == "Ink"
+	{
+		"(Don't drink ink!)"
+		"(Refreshing!)\n\n(If you're a pen!)"
+	}
+	elseif nowshell == "Jam"
+	{
+		"(Jam time!)"
+		"(Get ready to jam!)"
+	}
+	elseif nowshell == "Kid's birthday cup"
+	{
+		"(Happy birthday!)"
+		"(\f[height,+20]\f[name,arial]🎉🎉🎉\f[default])"
+	}
+	elseif nowshell == "Lava in a Cup"
+	{
+		"(Delicious for volcanoes!)"
+		"(Volcano extract!)"
+	}
+	elseif nowshell == "LOL Mug"
+	{
+		"(LOL!)"
+		"(Lots Of Love!)"
+		"(Laughing Out Loud!)"
+	}
+	elseif nowshell == "Martini Gore"
+	{
+		"(Don't ask where the eye came from!)"
+		"(Where did the eye come from!)"
+		"(Perfect for all the vampires in your life!)"
+	}
+	elseif nowshell == "Mate Cup"
+	{
+		"(Full of interesting info in the shell readme!)"
+		"(Read all about it in the shell readme!)"
+	}
+	elseif nowshell == "Metal Bottle"
+	{
+		"(Comes in a variety of designs!)"
+		"(Keeps your water cold!)"
+		"(Make sure to keep it clean!)"
+		"(Reusable is cheaper!)"
+		"(Makes a squeaky noise when you take the cap off!)"
+		"(Clean it with vinegar if it starts smelling funky!)"
+		"(Might not be dishwasher safe!)"
+		"(Carry it with you everywhere!)"
+		"(Keeps your water hot, if you want!)"
+		"(Fits into cupholders!)"
+		"(Cats love to lick them!)"
+		"(Cool to the touch!)"
+	}
+	elseif nowshell == "Milk"
+	{
+		"(Cow juice!)"
+		"(Cereal water!)"
+		"(Try the space milk, it's out of this world!)"
+	}
+	elseif nowshell == "Molotov Cocktail"
+	{
+		"(Don't try this at home!)"
+		"(Watch out for glass shards!)"
+		"(Fwoosh!)"
+	}
+	elseif nowshell == "Not Haunted Water-Based Vegetarian Shoe"
+	{
+		"(Mildewy!)"
+		"(Not haunted! Not at all!)"
+	}
+	elseif nowshell == "Paint tube"
+	{
+		"(Better used on a canvas!)"
+		"(Put the cap back on when you're done!)"
+	}
+	elseif nowshell == "Poison"
+	{
+		"(You should probably drink water instead!)"
+		"(Water is definitely healthier!)"
+		"(Don't drink poison!)"
+		"(Not a good choice for hydration, but it sure is pretty!)"
+		"(Hydration for your worst enemies!*)\n\n\f[height,-2](*Murder is bad and illegal.)"
+	}
+	elseif nowshell == "Potion"
+	{
+		"(Magical effects!*)\n\n\f[height,-2](*Magical effects not guaranteed.)"
+		"(Mysterious and strange!)"
+		"(Good for regenerating stats, but too precious for general hydration!)"
+		"(Pretty colors!)"
+	}
+	elseif nowshell == "Ramune"
+	{
+		"(Try all the flavors!)"
+		"(Marble not for consumption!)"
+	}
+	elseif nowshell == "Rilakkuma"
+	{
+		"(It's bear-y important to be hydrated!)"
+	}
+	elseif nowshell == "Slimedration"
+	{
+		"(Squoosh squorsh!)"
+		"(Use a firm straw!)"
+		"(If you blow bubbles it may scream to let the air out!)\w8\w8\n\n(This is a natural reaction and most definitely not a pain response!)"
+	}
+	elseif nowshell == "Syringe"
+	{
+		"(Also doubles as a shell for \_a[https://ukagaka.zichqec.com/ghost/needle]Needle\_a!)"
+		"(Careful handling sharps!)"
+		"(Probably don't inject yourself with whatever's in there!)"
+	}
+	elseif nowshell == "Teacup"
+	{
+		"(Make sure to drink water, too!)"
+		"(Possibly full of caffiene!)"
+		"(Hot leaf water!)"
+		"(Drink it before it gets too cold!)\n\n(Unless that's your thing.)"
+	}
+	elseif nowshell == "Test Tubes"
+	{
+		"(Yum, lab equipment!)"
+		"(Don't drink things that come out of test tubes!)"
+		"(Someone fit the whole sky in a few little tubes!)"
+	}
+	elseif nowshell == "TV Aquarium"
+	{
+		"(Don't touch that dial!)"
+		"(High definition fish!)"
+	}
+	elseif nowshell == "Water Dishes"
+	{
+		"(Dog water!)"
+		"(Cat water!)"
+		"(Yum!)"
+		"(Refill them often!)"
+	}
+}
