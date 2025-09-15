@@ -5,7 +5,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	passsec = 0
 	passmin = 0
 	passhour = 0
-	nowshell = "Clear"
 	talkrate = "every hour"
 	aitalkinterval = 3600
 	deleteshitai = "OFF"
@@ -206,8 +205,7 @@ OnShellChanging
 
 OnShellChanged
 {
-	ShellChange.NewShellName = reference0
-	"\s[-1]\![get,property,OnGetCoordsAfter,currentghost.scope(0).rect,currentghost.scope(0).y]"
+	"\0\s[-1]\![get,property,OnGetCoordsAfter,currentghost.scope(0).rect,currentghost.scope(0).y]"
 }
 
 OnGetCoordsBefore //This gets the x coordinate
@@ -222,27 +220,23 @@ OnGetCoordsAfter
 	ShellChange.FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(ShellChange.AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
 	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	
-	
-	_last = nowshell
-	nowshell = ShellChange.NewShellName
-	
 	AutoUpdates[4] = 0
 	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(ShellChange.FinalY)),--base=primaryscreen]\1\s[-1]\0\s[0]" //Default surfaces, and moves the ghost to where it was before changing shells
 	ERASEVAR("ShellChange.BeforeX","ShellChange.BeforeFeet","ShellChange.AfterHeight","ShellChange.FinalY","ShellChange.NewShellName")
 	--
 	OnSendStats
 	--
-	if nowshell == _last //If the shell they changed to is the same as the last one
+	if SHIORI3FW.ShellName == SHIORI3FW.ShellNameOld //If the shell they changed to is the same as the last one
 	{
 		"(Reloaded %(SHIORI3FW.ShellName)!)"
 	}
-	elseif nowshell == "Clear" //If they've switched back to the default
+	elseif SHIORI3FW.ShellName == "Clear" //If they've switched back to the default
 	{
 		"(Default water.)"
 	}
 	else
 	{
-		"(Now using %(nowshell).)\w8\w8\n\n" //If they're using anything other than the default
+		"(Now using %(SHIORI3FW.ShellName).)\w8\w8\n\n" //If they're using anything other than the default
 		--
 		ShellChangeComments
 	}

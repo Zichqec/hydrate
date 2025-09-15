@@ -7,7 +7,7 @@ OnMouseDoubleClick : all
 			"(Updates are available for:)\n\n"
 			
 			if AutoUpdates[3] == 1; "(Hydrate)\n"
-			if AutoUpdates[4] == 1; "('%(nowshell)' shell)\n"
+			if AutoUpdates[4] == 1; "('%(SHIORI3FW.ShellName)' shell)\n"
 			if AutoUpdates[5] == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
 			
 			"\_q\n"
@@ -131,7 +131,7 @@ OnShellMenu : all
 	_display = ""
 	for _i = 0; _i < ARRAYSIZE(ShellList); _i++
 	{
-		if ShellList[_i] == nowshell; _display += "\![*]"
+		if ShellList[_i] == SHIORI3FW.ShellName; _display += "\![*]"
 		_display += "\q[%(ShellList[_i]),OnSwitchShell,%(ShellList[_i])]\n"
 	}
 	
@@ -604,7 +604,7 @@ OnChoiceTimeout
 OnAITalk
 {
 	_talk = ReminderTalk
-	if nowshell == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
+	if SHIORI3FW.ShellName == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
 	_talk = "\0\s[0]%(notification_sound)" + _talk
 	_talk += "\![set,choicetimeout,%(timeouttime)]\n\n\![*]\q[Done,drankwater]\n\n[half]\![*]\q[Dismiss,dismisswater]\e drinknotif"
 	_talk
@@ -670,7 +670,7 @@ Select.drankwater : nonoverlap
 		_talk = GeneralDrink
 	}
 	
-	if nowshell == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
+	if SHIORI3FW.ShellName == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
 	_talk = "\0\s[0]" + OnSendStats + _talk
 	
 	_amt = currentdrinkstreak * 100

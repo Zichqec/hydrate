@@ -28,7 +28,7 @@ OnCommunicate
 	--
 	_send = "%(currentdressups)"
 	_send = REPLACE(_send,",","|-|")
-	"\e [commu-%(_nocomma)] %(ConvoTag),%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),%(nowshell),%(_send),%(nowscale)"
+	"\e [commu-%(_nocomma)] %(ConvoTag),%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),%(SHIORI3FW.ShellName),%(_send),%(nowscale)"
 	/*
 	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
 	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
@@ -82,5 +82,5 @@ SendOldStats
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	_send = "%(currentdressups)"
 	_send = REPLACE(_send,",","|-|")
-	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),""%(nowshell)"",""%(_send)"",%(nowscale)]"
+	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),""%(SHIORI3FW.ShellName)"",""%(_send)"",%(nowscale)]"
 }

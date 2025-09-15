@@ -211,7 +211,7 @@ OnUpdateOtherBegin
 	}
 	elseif reference3 == "shell"
 	{
-		"(Checking for updates to the current shell, %(nowshell).)"
+		"(Checking for updates to the current shell, %(SHIORI3FW.ShellName).)"
 	}
 	else
 	{

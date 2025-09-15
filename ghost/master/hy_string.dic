@@ -17,7 +17,7 @@ On_recommendrootbutton.caption //Change to your username
 
 On_sakura.recommendsites
 {
-	"'%(nowshell)' shell by %(shellauthor[0])"
+	"'%(SHIORI3FW.ShellName)' shell by %(shellauthor[0])"
 	--
 	"%ASC(1)%(shellauthor[2])%ASC(2)"
 	--
