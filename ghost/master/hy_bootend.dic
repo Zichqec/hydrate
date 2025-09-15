@@ -94,7 +94,6 @@ OnUpdateVars
 		timeouttime *= 1000
 	}
 	if ISVAR('AutoUpdates') == 0; AutoUpdates = ("ON",0,,0,0,0)
-	if ISVAR('nowscale') == 0; nowscale = 100
 	
 	if !ISVAR("notif"); notif = "None"
 	if !ISVAR("volume"); volume = 50
