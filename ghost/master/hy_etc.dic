@@ -84,11 +84,6 @@ OnVanishSelected //Deciding to uninstall
 	"\0\s[0](Take care of yourself, user!)\w8\w8"
 }
 
-OnVanishCancel //Changing your mind
-{
-	
-}
-
 OnVanished //When another ghost has been uninstalled and it switches to this ghost
 {
 	"\0\s[0](%(reference0) wasn't hydrated enough.)"
@@ -156,7 +151,6 @@ OnUpdateReady
 	"\0\s[0](There are %(reference0) new files.)\w8\w8"
 }
 
-//When the update finishes. Don't forget to initialize any new variables you set, I'd recommend making a variable for each version you release, check if that variable is blank, and if it is then initialize variables for that update. That way no matter what version people update from, they get all the necessary variables.
 OnUpdateComplete
 {
 	OnUpdateVars
@@ -191,11 +185,11 @@ OnUpdateFailure //If the update fails
 	}
 	elseif reference0 == "md5 miss" //If the update files have not been uploaded correctly and don't match the updates2.dau
 	{
-		"(The MD5 values don't match.\w8\w8 You should contact Zichqec and let her know.)"
+		"(The MD5 values don't match.\w8\w8 Please let \_a[https://ukagaka.zichqec.com/]Zichqec\_a know!)"
 	}
-	elseif reference0 == "artificial" //If the user cancels the update by double clicking the balloon
+	elseif reference0 == "artificial"
 	{
-		"\0\s[0](Cancelled update.)"
+		"\0\s[0](Canceled update.)"
 	}
 	else
 	{
