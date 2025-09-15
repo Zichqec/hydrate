@@ -771,7 +771,7 @@ OnHourTalk
 {
 	if HourNotifs == "ON"; HourNotification
 	--
-	OnHydrateGhost.GetStats
+	OnSendStats
 	--
 	SendOldStats //Deprecated version
 }
