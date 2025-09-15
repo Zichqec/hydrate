@@ -85,7 +85,6 @@ OnUpdateVars
 	currentdrinkstreak = 0
 	extrasipstoday = 0
 	extrasipstotal = 0
-	nowscale = 100
 	*/
 	if ISVAR('totalwaters') == 0; totalwaters = 0
 	if ISVAR('currentdrinkstreak') == 0; currentdrinkstreak = 0
