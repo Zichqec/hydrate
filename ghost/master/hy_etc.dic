@@ -123,24 +123,24 @@ OnUpdateCheckComplete
 {
 	if reference0 == "none" //If there are no new files
 	{
-		if AutoUpdates[1] != 1; "\0\s[0](There are no new files.)" //This if stops the dialogue from displaying if this check was performed automatically.
+		if AutoUpdates.CheckedToday != 1; "\0\s[0](There are no new files.)" //This if stops the dialogue from displaying if this check was performed automatically.
 	}
 	else
 	{
-		if AutoUpdates[1] == 1 //If this was an automatic check (always true but shrug)
+		if AutoUpdates.CheckedToday == 1 //If this was an automatic check (always true but shrug)
 		{
-			AutoUpdates[1] = 1 //Sets it so it won't check again until at least midnight
+			AutoUpdates.CheckedToday = 1 //Sets it so it won't check again until at least midnight
 			if reference0 == "none" //If there are no new files
 			{
-				if reference3 == "ghost"; AutoUpdates[3] = 0
-				elseif reference3 == "shell"; AutoUpdates[4] = 0
-				elseif reference3 == "balloon"; AutoUpdates[5] = 0
+				if reference3 == "ghost"; AutoUpdates.GhostReady = 0
+				elseif reference3 == "shell"; AutoUpdates.ShellReady = 0
+				elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 0
 			}
 			else
 			{
-				if reference3 == "ghost"; AutoUpdates[3] = 1
-				elseif reference3 == "shell"; AutoUpdates[4] = 1
-				elseif reference3 == "balloon"; AutoUpdates[5] = 1
+				if reference3 == "ghost"; AutoUpdates.GhostReady = 1
+				elseif reference3 == "shell"; AutoUpdates.ShellReady = 1
+				elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 1
 			}
 			--
 			if reference3 == "ghost"; "\![update,shell,checkonly]"
@@ -159,9 +159,9 @@ OnStartUpdate
 	else
 	{
 		_cmd = ""
-		if AutoUpdates[3] == 1; _cmd += "ghost+"
-		if AutoUpdates[4] == 1; _cmd += "shell+"
-		if AutoUpdates[5] == 1; _cmd += "balloon+"
+		if AutoUpdates.GhostReady == 1; _cmd += "ghost+"
+		if AutoUpdates.ShellReady == 1; _cmd += "shell+"
+		if AutoUpdates.BalloonReady == 1; _cmd += "balloon+"
 		_cmd = ERASE(_cmd,(STRLEN(_cmd) - 1),1)
 		"\![update,%(_cmd)]"
 	}
@@ -186,7 +186,7 @@ OnUpdateReady
 OnUpdateComplete
 {
 	OnUpdateVars
-	AutoUpdates[1] = 0
+	AutoUpdates.CheckedToday = 0
 	if reference0 == "none"
 	{
 		"\0\s[0](There are no new files.)"
@@ -260,7 +260,7 @@ OnUpdateOtherReady
 
 OnUpdateOtherComplete
 {
-	AutoUpdates[1] = 0
+	AutoUpdates.CheckedToday = 0
 	if reference0 == "none"
 	{
 		"\0\s[0](No new files for the current %(reference3) to update with.)"

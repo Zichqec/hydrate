@@ -2,13 +2,13 @@ OnMouseDoubleClick : all
 {
 	if reference5 == 0 //Left click
 	{
-		if AutoUpdates[3] == 1 || AutoUpdates[4] == 1 || AutoUpdates[5] == 1  //If an update is available, the user will be notified when they try to open the menu
+		if AutoUpdates.GhostReady == 1 || AutoUpdates.ShellReady == 1 || AutoUpdates.BalloonReady == 1  //If an update is available, the user will be notified when they try to open the menu
 		{
 			"(Updates are available for:)\n\n"
 			
-			if AutoUpdates[3] == 1; "(Hydrate)\n"
-			if AutoUpdates[4] == 1; "('%(SHIORI3FW.ShellName)' shell)\n"
-			if AutoUpdates[5] == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
+			if AutoUpdates.GhostReady == 1; "(Hydrate)\n"
+			if AutoUpdates.ShellReady == 1; "('%(SHIORI3FW.ShellName)' shell)\n"
+			if AutoUpdates.BalloonReady == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
 			
 			"\_q\n"
 			"\![*]\q[Download updates now,OnStartUpdate]\n"
@@ -21,21 +21,21 @@ OnMouseDoubleClick : all
 
 Select.UpdateLater //If the user decides to update later
 {
-	AutoUpdates[1] = 1
-	AutoUpdates[3] = 0
-	AutoUpdates[4] = 0
-	AutoUpdates[5] = 0
+	AutoUpdates.CheckedToday = 1
+	AutoUpdates.GhostReady = 0
+	AutoUpdates.ShellReady = 0
+	AutoUpdates.BalloonReady = 0
 	
 	"\0\s[0](Alright, you will be reminded once a day.)"
 }
 
 Select.UpdateOff //If the user no longer wants to be notified about updates
 {
-	AutoUpdates[0] = "OFF"
-	AutoUpdates[1] = 1
-	AutoUpdates[3] = 0
-	AutoUpdates[4] = 0
-	AutoUpdates[5] = 0
+	Config.AutoUpdates = 0
+	AutoUpdates.CheckedToday = 1
+	AutoUpdates.GhostReady = 0
+	AutoUpdates.ShellReady = 0
+	AutoUpdates.BalloonReady = 0
 	
 	"\0\s[0](Auto Update checks turned off, you can turn them on again in the Config menu.)"
 }
@@ -350,7 +350,6 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	//This is here in case the variables get erased. The uninstall will automatically be set to OFF so the user has something to click.
 	if deleteshitai == ""; deleteshitai = "OFF"
 	if talkrate == ""; {talkrate = "every hour"; aitalkinterval = 3600}
-	if AutoUpdates[0] == ""; AutoUpdates[0] = "ON"
 	if notif == ""; notif = "None"
 	if volume == ""; volume = 50
 	if HourNotifs == ""; HourNotifs = "OFF"
@@ -362,7 +361,7 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(talkrate)\_a\n"
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
 	
-	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(AutoUpdates[0])\_a\n"
+	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('OFF','ON')[Config.AutoUpdates])\_a\n"
 	"Check for updates to...\n"
 	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n\n"
 	
@@ -552,8 +551,8 @@ OnUpdateCheck
 
 OnToggleAutoUpdates
 {
-	if AutoUpdates[0] != "ON"; AutoUpdates[0] = "ON"
-	else; AutoUpdates[0] = "OFF"
+	if Config.AutoUpdates != 1; Config.AutoUpdates = 1
+	else; Config.AutoUpdates = 0
 	
 	OnConfigMenu
 }
@@ -749,20 +748,20 @@ OnMinuteChange
 	{
 		if hour == 0
 		{
-			AutoUpdates[1] = 0
-			AutoUpdates[3] = 0
-			AutoUpdates[4] = 0
-			AutoUpdates[5] = 0
+			AutoUpdates.CheckedToday = 0
+			AutoUpdates.GhostReady = 0
+			AutoUpdates.ShellReady = 0
+			AutoUpdates.BalloonReady = 0
 		}
 		OnHourTalk
 	}
 	--
-	if AutoUpdates[0] == "ON" && AutoUpdates[1] == 0 //Once a day the ghost will check for updates if the user has auto updates on
+	if Config.AutoUpdates && AutoUpdates.CheckedToday == 0 //Once a day the ghost will check for updates if the user has auto updates on
 	{
-		AutoUpdates[1] = 1
-		AutoUpdates[3] = 0
-		AutoUpdates[4] = 0
-		AutoUpdates[5] = 0
+		AutoUpdates.CheckedToday = 1
+		AutoUpdates.GhostReady = 0
+		AutoUpdates.ShellReady = 0
+		AutoUpdates.BalloonReady = 0
 		"\![update,ghost,checkonly]"
 	}
 }

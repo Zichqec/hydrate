@@ -14,7 +14,11 @@ OnFirstBoot //Dialogue when you first open the ghost
 	extrasipstoday = 0
 	extrasipstotal = 0
 	timeouttime = 3000 //5 minutes
-	AutoUpdates = ("ON",0)
+	Config.AutoUpdates = 0
+	AutoUpdates.CheckedToday = 0
+	AutoUpdates.GhostReady = 0
+	AutoUpdates.ShellReady = 0
+	AutoUpdates.BalloonReady = 0
 	
 	notif = "None"
 	volume = 50
@@ -44,6 +48,19 @@ OnUpdateVars
 {
 	//——— 2.0.2 ———
 	if !ISVAR("Config.MatchShellPosition"); Config.MatchShellPosition = 1
+	if !ISVAR("Config.AutoUpdates")
+	{
+		if ISVAR('AutoUpdates')
+		{
+			Config.AutoUpdates = AutoUpdates[0]
+		}
+		else; Config.AutoUpdates = 0
+	}
+	ERASEVAR("AutoUpdates")
+	if !ISVAR("AutoUpdates.CheckedToday"); AutoUpdates.CheckedToday = 0
+	if !ISVAR("AutoUpdates.GhostReady"); AutoUpdates.GhostReady = 0
+	if !ISVAR("AutoUpdates.ShellReady"); AutoUpdates.ShellReady = 0
+	if !ISVAR("AutoUpdates.BalloonReady"); AutoUpdates.BalloonReady = 0
 	
 	
 	//——— 2.0.1 ———
@@ -93,7 +110,6 @@ OnUpdateVars
 		}
 		timeouttime *= 1000
 	}
-	if ISVAR('AutoUpdates') == 0; AutoUpdates = ("ON",0,,0,0,0)
 	
 	if !ISVAR("notif"); notif = "None"
 	if !ISVAR("volume"); volume = 50
@@ -109,7 +125,7 @@ OnBoot //Normal booting
 	todayswaters = 0
 	//currentdrinkstreak = 0
 	extrasipstoday = 0
-	AutoUpdates[1] = 0
+	AutoUpdates.CheckedToday = 0
 	
 	"\1\s[-1]\0\s[0]"
 	--
@@ -135,14 +151,14 @@ OnBoot //Normal booting
 	"(Be good to you!)"
 	"(It's ok to miss one,\w4 but try not to miss two in a row!)"
 	--
-	if AutoUpdates[0] == "ON"
+	if Config.AutoUpdates
 	{
-		AutoUpdates[1] = 1
+		AutoUpdates.CheckedToday = 1
 		"\![updatebymyself,checkonly]"
 	}
 	else
 	{
-		AutoUpdates[1] = 0 //Just in case
+		AutoUpdates.CheckedToday = 0 //Just in case
 	}
 }
 
@@ -236,7 +252,7 @@ OnGetCoordsAfter : all
 	_FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(_AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
 	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	
-	AutoUpdates[4] = 0
+	AutoUpdates.ShellReady = 0
 	
 	"\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(_FinalY)),--base=primaryscreen]"
 	
@@ -268,9 +284,9 @@ ShellChangedEnd
 		ShellChangeComments
 	}
 	--
-	if AutoUpdates[0] == "ON"
+	if Config.AutoUpdates
 	{
-		AutoUpdates[1] = 1
+		AutoUpdates.CheckedToday = 1
 		"\![update,shell,checkonly]"
 	}
 }
