@@ -40,3 +40,42 @@ displaymin
 	if passmin <= 9; "0%(passmin)"
 	else; "%(passmin)"
 }
+
+TalkRateLabel
+{
+	_num = TOINT(_argv[0])
+	if _num <= 0; {"Off"; return}
+	
+	//Singular form, plural form, number of seconds
+	_units = ( /
+	"hour,hours,3600",/
+	"minute,minutes,60",/
+	"second,seconds,1"/
+	)
+	
+	_output = ""
+	foreach _units; _unit
+	{
+		_duration = TOINT(_unit[2])
+		_amt = _num / _duration
+		_num = _num % _duration
+		
+		if _amt > 0
+		{
+			if _output != ""
+			{
+				if _num == 0
+				{
+					if "," _in_ _output; _output += ","
+					_output += " and "
+				}
+				else; _output += ", "
+			}
+			
+			//The second function call here handles whether the unit name should be displayed as plural or not, depending on if the amount of that unit is greater than 1
+			_output += "%(_amt) %(_unit[_amt > 1])"
+		}
+		if _num <= 0; break
+	}
+	_output
+}

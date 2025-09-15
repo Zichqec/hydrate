@@ -4,7 +4,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	passsec = 0
 	passmin = 0
 	passhour = 0
-	talkrate = "every hour"
 	aitalkinterval = 3600
 	deleteshitai = "OFF"
 	todayswaters = 0
@@ -57,6 +56,8 @@ OnUpdateVars
 	if !ISVAR("AutoUpdates.GhostReady"); AutoUpdates.GhostReady = 0
 	if !ISVAR("AutoUpdates.ShellReady"); AutoUpdates.ShellReady = 0
 	if !ISVAR("AutoUpdates.BalloonReady"); AutoUpdates.BalloonReady = 0
+	
+	ERASEVAR("talkrate")
 	
 	
 	//——— 2.0.1 ———
@@ -129,17 +130,18 @@ OnBoot //Normal booting
 	--
 	"\0\s[0](Thank you for choosing to hydrate today.)\w8\n\n"
 	--
-	if talkrate != "off"
+	if aitalkinterval == 0
 	{
-		"(Reminders are set to be issued %(talkrate).)\w8\n\n"
-		"(Reminders are set for %(talkrate).)\w8\n\n"
-		"(Reminders are set to %(talkrate).)\w8\n\n"
-		"(You will be given reminders %(talkrate).)\w8\n\n"
-		"(You will be given a reminder %(talkrate).)\w8\n\n"
+		"(Reminders are currently off.)\w8\n\n"
 	}
 	else
 	{
-		"(Reminders are currently off.)\w8\n\n"
+		_rate = TalkRateLabel(aitalkinterval)
+		"(Reminders are set to be issued every %(_rate).)\w8\n\n"
+		"(Reminders are set for every %(_rate).)\w8\n\n"
+		"(Reminders are set to every %(_rate).)\w8\n\n"
+		"(You will be given reminders every %(_rate).)\w8\n\n"
+		"(You will be given a reminder every %(_rate).)\w8\n\n"
 	}
 	--
 	"(You've got this!)"

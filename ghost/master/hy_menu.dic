@@ -342,7 +342,6 @@ OnConfigMenu : all
 {
 	//This is here in case the variables get erased. The uninstall will automatically be set to OFF so the user has something to click.
 	if deleteshitai == ""; deleteshitai = "OFF"
-	if talkrate == ""; {talkrate = "every hour"; aitalkinterval = 3600}
 	if notif == ""; notif = "None"
 	if volume == ""; volume = 50
 	if HourNotifs == ""; HourNotifs = "OFF"
@@ -351,7 +350,7 @@ OnConfigMenu : all
 	
 	"\f[align,center]%(emdash) Config %(emdash)\n\n\f[align,default]"
 	
-	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(talkrate)\_a\n"
+	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]Every %(TalkRateLabel(aitalkinterval))\_a\n"
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
 	
 	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('OFF','ON')[Config.AutoUpdates])\_a\n"
@@ -373,7 +372,7 @@ OnConfigMenu : all
 OnChangeTalk : all
 {
 	"\0\_q\s[0]\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
-	"(How many minutes would you like between reminders? Right now it's %(talkrate).)"
+	"(How many minutes would you like between reminders? Right now it's every %(TalkRateLabel(aitalkinterval)).)"
 	"\n\n"
 	"\![*]\q[Cancel,OnConfigMenu]"
 }
@@ -396,31 +395,6 @@ OnDrinkTime
 		}
 		timeouttime *= 1000
 		
-		if reference0 == 0
-		{
-			talkrate = "off"
-		}
-		elseif reference0 == 60
-		{
-			talkrate = "every hour"
-		}
-		elseif reference0 % 60 == 0
-		{
-			talkrate = "every %(reference0 / 60) hours"
-		}
-		elseif (reference0 / 60) >= 1
-		{
-			_s = ""; if reference0 / 60 != 1; _s = "s"
-			_s2 = ""; if reference0 % 60 != 1; _s2 = "s"
-			
-			talkrate = "every %(reference0 / 60) hour%(_s) and %(reference0 % 60) minute%(_s2)"
-		}
-		else
-		{
-			_s = ""; if reference0 != 1; _s = "s"
-			
-			talkrate = "every %(reference0) minute%(_s)"
-		}
 		--
 		"\![unlock,balloonrepaint]"
 		--
@@ -430,7 +404,7 @@ OnDrinkTime
 		}
 		else
 		{
-			"\0\s[0](You will be reminded %(talkrate).)"
+			"\0\s[0](You will be reminded every %(TalkRateLabel(aitalkinterval)).)"
 		}
 	}
 	else
