@@ -7,28 +7,41 @@ OnInstallBegin
 
 OnInstallComplete //Installing something ghost related
 {
-	if reference0 == "ghost"
+	"\0\s[0](Installed %(reference1) (%(reference0)))."
+	--
+	//A little menu to open or change to the ghost that was installed immediately
+	if "ghost" _in_ reference0
 	{
-		"\0\s[0](Installed %(reference1).\w8\w8 Do you want to bring them here?)\n\n"
+		"\n\n\_q"
 		--
-		"\q[Change to %(reference1),ChangeToGhost]\n/
-		\q[Call %(reference1),CallGhost]\n/
-		\q[No thanks,cancelnodialogue]"
+		"\![*]\__q[OnInstallComplete.Action,call]Call %(reference0)\__q  \![*]\__q[OnInstallComplete.Action,change]Change to %(reference0)\__q\n\n"
+		--
+		"\![*]\q[Done,OnBlank]"
 	}
-	else
+	elseif "shell" _in_ reference0
 	{
-		"\0\s[0](Installed %(reference1).)"
+		"\n\n\_q"
+		--
+		"\![*]\__q[OnInstallComplete.Action,changeshell]Change to %(reference0)\__q\n\n"
+		--
+		"\![*]\q[Done,OnBlank]"
 	}
 }
 
-Select.ChangeToGhost
+OnInstallComplete.Action
 {
-	"\![change,ghost,lastinstalled]"
-}
-
-Select.CallGhost
-{
-	"\![call,ghost,lastinstalled]"
+	if reference0 == "changeshell"
+	{
+		"\![change,shell,lastinstalled,--option=raise-event]"
+	}
+	elseif reference0 == "change"
+	{
+		"\![change,ghost,lastinstalled]"
+	}
+	else //call
+	{
+		"\![call,ghost,lastinstalled]"
+	}
 }
 
 OnInstallFailure //If the install fails
