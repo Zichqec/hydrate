@@ -1,10 +1,3 @@
-//Original string.dic written by umeici
-
-On_username
-{
-	username
-}
-
 On_homeurl
 {
 	"https://raw.githubusercontent.com/Zichqec/hydrate/refs/heads/main/"
@@ -75,10 +68,6 @@ On_biffbutton.caption
 	"(Treat yourself like you would a friend!)"
 }
 
-
-//-----Don't touch these-----
-
-//---- 소멸 지시 버튼 표시 교체 -------------------------------------------------------
 On_vanishbutton.visible
  {
  	if deleteshitai == "ON"
@@ -89,89 +78,4 @@ On_vanishbutton.visible
 	{
 		"0"
 	}
-}
-
-//---- 딳벍뭷궻뫜궻긕?긚긣뼹롦벦 -------------------------------------------------------
-On_otherghostname
-{
-	ghostexlist = ""
-	_i = 0
-	while _i >= 0 {
-		_ghostname = NAMETOVALUE("reference%_i")
-		if _ghostname != "" {
-			if _i > 0; ghostexlist += ","
-			ghostexlist += _ghostname[0]
-			_i++
-		}
-		else; _i = -1
-	}
-	ghostexcount = ARRAYSIZE(ghostexlist)
-}
-
-OnCheckInstalledGhosts
-{
-	installedlist = ""
-	_i = 0
-	while _i >= 0 {
-		_ghostname = NAMETOVALUE("reference%_i")
-		if _ghostname != "" {
-			if _i > 0; installedlist += ","
-			installedlist += _ghostname[0]
-			_i++
-		}
-		else; _i = -1
-	}
-	installedcount = ARRAYSIZE(installedlist)
-}
-
-On_installedballoonname
-{
-	balloonlist = ""
-	_i = 0
-	while _i >= 0 {
-		_ghostname = NAMETOVALUE("reference%_i")
-		if _ghostname != "" {
-			if _i > 0; balloonlist += ","
-			balloonlist += _ghostname[0]
-			_i++
-		}
-		else; _i = -1
-	}
-	ballooncount = ARRAYSIZE(balloonlist)
-}
-
-//---- SHIORI 듫쁀륃뺪 ------------------------------------------------------------------
-On_version
-{
-	GETSETTING(AYAINFO_VERSION)
-}
-
-On_craftman
-{
-	"umeici"
-}
-
-On_craftmanw
-{
-	"?럖"
-}
-
-On_name
-{
-	"AYA"
-}
-
-//---- Owned SSTP 뾭 uniqueid 롦벦 ------------------------------------------------------
-On_uniqueid
-{
-	uniqueid = reference0
-}
-
-//---- hwnd 롦벦 ------------------------------------------------------------------------
-On_hwnd
-{
-	sakurahwnd    = reference0[0]
-	kerohwnd      = reference0[1]
-	sakurablnhwnd = reference1[0]
-	keroblnhwnd   = reference1[1]
 }
