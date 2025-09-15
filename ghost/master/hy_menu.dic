@@ -699,7 +699,7 @@ OnMinuteChange
 		AutoUpdates.GhostReady = 0
 		AutoUpdates.ShellReady = 0
 		AutoUpdates.BalloonReady = 0
-		"\![update,ghost,checkonly]"
+		"\![update,ghost+shell+balloon,checkonly]"
 	}
 }
 

@@ -109,6 +109,11 @@ OnBoot //Normal booting
 	
 	"\1\s[-1]\0\s[0]"
 	--
+	if Config.AutoUpdates
+	{
+		"\![update,ghost+shell+balloon,checkonly]"
+	}
+	--
 	OnSendStats
 	--
 	"\0\s[0](Thank you for choosing to hydrate today.)\w8\n\n"
@@ -131,11 +136,6 @@ OnBoot //Normal booting
 	"(Take care of yourself!)"
 	"(Be good to you!)"
 	"(It's ok to miss one,\w4 but try not to miss two in a row!)"
-	--
-	if Config.AutoUpdates
-	{
-		"\![updatebymyself,checkonly]"
-	}
 }
 
 OnOtherGhostBooted

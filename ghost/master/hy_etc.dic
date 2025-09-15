@@ -110,24 +110,23 @@ OnVanished
 //----Network update---
 
 //When the ghost finishes checking for updates - this currently only occurs in Hydrate when it's an auto check
-OnUpdateCheckComplete
+OnUpdateCheckResult
 {
 	AutoUpdates.CheckedToday = 1 //Sets it so it won't check again until at least midnight
-	if reference0 == "none" //If there are no new files
+	AutoUpdates.GhostReady = 0
+	AutoUpdates.ShellReady = 0
+	AutoUpdates.BalloonReady = 0
+	
+	_types = IARRAY
+	foreach reference; _ref
 	{
-		if reference3 == "ghost"; AutoUpdates.GhostReady = 0
-		elseif reference3 == "shell"; AutoUpdates.ShellReady = 0
-		elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 0
+		_ref = SPLIT(_ref,C_BYTE1)
+		if _ref[1] == "OK" && _ref[2] > 0; _types ,= _ref[0]
 	}
-	else
-	{
-		if reference3 == "ghost"; AutoUpdates.GhostReady = 1
-		elseif reference3 == "shell"; AutoUpdates.ShellReady = 1
-		elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 1
-	}
-	--
-	if reference3 == "ghost"; "\![update,shell,checkonly]"
-	elseif reference3 == "shell"; "\![update,balloon,checkonly]"
+	
+	if ASEARCH("ghost",_types) != -1; AutoUpdates.GhostReady = 1
+	if ASEARCH("shell",_types) != -1; AutoUpdates.ShellReady = 1
+	if ASEARCH("balloon",_types) != -1; AutoUpdates.BalloonReady = 1
 }
 
 OnStartUpdate
@@ -141,7 +140,7 @@ OnStartUpdate
 		_cmd = ""
 		if AutoUpdates.GhostReady == 1; _cmd += "ghost+"
 		if AutoUpdates.ShellReady == 1; _cmd += "shell+"
-		if AutoUpdates.BalloonReady == 1; _cmd += "balloon+"
+		if AutoUpdates.BalloonReady == 1; _cmd += "balloon"
 		_cmd = ERASE(_cmd,(STRLEN(_cmd) - 1),1)
 		"\![update,%(_cmd)]"
 	}
