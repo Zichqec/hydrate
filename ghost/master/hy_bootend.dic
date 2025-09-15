@@ -50,11 +50,8 @@ OnUpdateVars
 	if !ISVAR("Config.MatchShellPosition"); Config.MatchShellPosition = 1
 	if !ISVAR("Config.AutoUpdates")
 	{
-		if ISVAR('AutoUpdates')
-		{
-			Config.AutoUpdates = AutoUpdates[0]
-		}
-		else; Config.AutoUpdates = 0
+		if ISVAR('AutoUpdates') && AutoUpdates[0] == "OFF"; Config.AutoUpdates = 0
+		else; Config.AutoUpdates = 1
 	}
 	ERASEVAR("AutoUpdates")
 	if !ISVAR("AutoUpdates.CheckedToday"); AutoUpdates.CheckedToday = 0
