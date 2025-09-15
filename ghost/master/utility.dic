@@ -79,3 +79,15 @@ TalkRateLabel
 	}
 	_output
 }
+
+//This is in MILLISECONDS
+TimeoutInterval
+{
+	_num = 300 //5 minute timeout default
+	if aitalkinterval <= 300 //drink reminders at 5 minutes or less
+	{
+		_num = aitalkinterval - 60 //1 minute less than drink reminder time
+		if _num < 60; _num = 30 //if drink reminders are every minute, time out every half a minute
+	}
+	_num * 1000
+}

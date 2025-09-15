@@ -384,18 +384,7 @@ OnDrinkTime
 	if reference0 >= 0 && GETTYPE(reference0) == 1
 	{
 		aitalkinterval = (reference0 * 60)
-		if aitalkinterval <= 300 //if it's less than 5 minutes; the default
-		{
-			timeouttime = aitalkinterval - 60 //make it 1 minute less than what the user set it to
-			if timeouttime <= 60; timeouttime = 30 //If it's less than a minute, make it at least 30 seconds
-		}
-		else
-		{
-			timeouttime = 300 //set it to 5 minutes, the default
-		}
-		timeouttime *= 1000
 		
-		--
 		"\![unlock,balloonrepaint]"
 		--
 		if reference0 == 0
@@ -579,7 +568,7 @@ OnAITalk
 	_talk = ReminderTalk
 	if SHIORI3FW.ShellName == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
 	_talk = "\0\s[0]%(notification_sound)" + _talk
-	_talk += "\![set,choicetimeout,%(timeouttime)]\n\n\![*]\q[Done,OnDrankWater]\n\n[half]\![*]\q[Dismiss,OnDismissWater]\e drinknotif"
+	_talk += "\![set,choicetimeout,%(TimeoutInterval)]\n\n\![*]\q[Done,OnDrankWater]\n\n[half]\![*]\q[Dismiss,OnDismissWater]\e drinknotif"
 	_talk
 }
 

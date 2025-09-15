@@ -10,7 +10,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	currentdrinkstreak = 0
 	extrasipstoday = 0
 	extrasipstotal = 0
-	timeouttime = 3000 //5 minutes
 	Config.AutoUpdates = 0
 	AutoUpdates.CheckedToday = 0
 	AutoUpdates.GhostReady = 0
@@ -57,6 +56,7 @@ OnUpdateVars
 	if !ISVAR("AutoUpdates.BalloonReady"); AutoUpdates.BalloonReady = 0
 	
 	ERASEVAR("talkrate")
+	ERASEVAR("timeouttime")
 	
 	
 	//——— 2.0.1 ———
@@ -85,27 +85,12 @@ OnUpdateVars
 	currentdrinkstreak = 0
 	extrasipstoday = 0
 	extrasipstotal = 0
-	timeouttime = 3000 //5 minutes
-	AutoUpdates = ("On",0)
 	nowscale = 100
 	*/
 	if ISVAR('totalwaters') == 0; totalwaters = 0
 	if ISVAR('currentdrinkstreak') == 0; currentdrinkstreak = 0
 	if ISVAR('extrasipstoday') == 0; extrasipstoday = 0
 	if ISVAR('extrasipstotal') == 0; extrasipstotal = 0
-	if ISVAR('timeouttime') == 0
-	{
-		if aitalkinterval <= 300 //if it's less than 5 minutes; the default
-		{
-			timeouttime = aitalkinterval - 60 //make it 1 minute less than what the user set it to
-			if timeouttime <= 60; timeouttime = 30 //If it's less than a minute, make it at least 30 seconds
-		}
-		else
-		{
-			timeouttime = 300 //set it to 5 minutes, the default
-		}
-		timeouttime *= 1000
-	}
 	
 	if !ISVAR("notif"); notif = "None"
 	if !ISVAR("volume"); volume = 50
