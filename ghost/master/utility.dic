@@ -15,7 +15,8 @@ emdash
 
 br
 {
-	if SHIORI3FW.BalloonName == "H2O"; "\n" //Hydrate does not use autopause, no need for the new form. At least, not currently
+	//Hydrate does not use autopause, no need for the new form. At least, not currently
+	if SHIORI3FW.BalloonName == "H2O"; "\n"
 	else; " "
 }
 

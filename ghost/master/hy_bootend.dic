@@ -1,6 +1,5 @@
 OnFirstBoot //Dialogue when you first open the ghost
 {
-	//Initialize all your variables here!
 	lastTalk = ""
 	passsec = 0
 	passmin = 0

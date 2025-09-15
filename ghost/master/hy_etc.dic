@@ -30,18 +30,9 @@ OnInstallComplete //Installing something ghost related
 
 OnInstallComplete.Action
 {
-	if reference0 == "changeshell"
-	{
-		"\![change,shell,lastinstalled,--option=raise-event]"
-	}
-	elseif reference0 == "change"
-	{
-		"\![change,ghost,lastinstalled]"
-	}
-	else //call
-	{
-		"\![call,ghost,lastinstalled]"
-	}
+	if reference0 == "changeshell"; "\![change,shell,lastinstalled,--option=raise-event]"
+	elseif reference0 == "change"; "\![change,ghost,lastinstalled]"
+	else; "\![call,ghost,lastinstalled]"
 }
 
 OnInstallFailure //If the install fails

@@ -106,13 +106,6 @@ OnPause : all
 	if _seconds < 10; "0"
 	"%(_seconds)"
 	
-	// for _i = 0; _i < 60; _i++
-	// {
-		// if _i < 10; "0"
-		// "%(_i)\_w[1000]"
-		// if _i < 59; "\c[char,2]"
-	// }
-	
 	"\![unlock,balloonrepaint]\![timerraise,1000,1,OnPause,%(_seconds + 1),%(_minutes),%(_hours)]"
 }
 
@@ -345,7 +338,7 @@ OnWaterStats : all
 
 
 //----------Config Menu----------
-OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, because they're info about the user
+OnConfigMenu : all
 {
 	//This is here in case the variables get erased. The uninstall will automatically be set to OFF so the user has something to click.
 	if deleteshitai == ""; deleteshitai = "OFF"
@@ -379,7 +372,6 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 
 OnChangeTalk : all
 {
-	//"\0\_q\s[0]\![open,sliderinput,OnDrinkTime,-1,,0,300]\![set,balloontimeout,-1]"
 	"\0\_q\s[0]\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
 	"(How many minutes would you like between reminders? Right now it's %(talkrate).)"
 	"\n\n"
@@ -654,28 +646,11 @@ Select.drankwater : nonoverlap
 	}
 	
 	_talk = ""
-	if currentdrinkstreak == 3
-	{
-		_talk = StreakStartDrink
-
-	}
-	elseif _newhighscorecomment
-	{
-		_talk = NewStreakHighScoreDrink
-	}
-	elseif totalwaters % 100 == 0
-	{
-		_talk = MilestoneDrink
-		
-	}
-	elseif currentdrinkstreak % 5 == 0 //TODO maybe add a further comment if you're on a high score streak...? hm
-	{
-		_talk = StreakDrink
-	}
-	else
-	{
-		_talk = GeneralDrink
-	}
+	if currentdrinkstreak == 3; _talk = StreakStartDrink
+	elseif _newhighscorecomment; _talk = NewStreakHighScoreDrink
+	elseif totalwaters % 100 == 0; _talk = MilestoneDrink
+	elseif currentdrinkstreak % 5 == 0; _talk = StreakDrink //TODO maybe add a further comment if you're on a high score streak...? hm
+	else; _talk = GeneralDrink
 	
 	if SHIORI3FW.ShellName == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
 	_talk = "\0\s[0]" + OnSendStats + _talk
