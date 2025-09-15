@@ -17,17 +17,14 @@ On_recommendrootbutton.caption //Change to your username
 
 On_sakura.recommendsites
 {
-	"'%(SHIORI3FW.ShellName)' shell by %(shellauthor[0])"
-	--
-	"%ASC(1)%(shellauthor[2])%ASC(2)"
-	--
-	"Zi's Ukagaka Space"
-	--
-	"%ASC(1)https://ukagaka.zichqec.com/%ASC(2)"
-	--
-	"Zdzisiu's website"
-	--
-	"%ASC(1)https://zdzisiu.github.io/Cemetery/index.html%ASC(2)"
+	FormatLinks(recommendsites)
+}
+
+recommendsites : array
+{
+	"'%(SHIORI3FW.ShellName)' shell by %(shellauthor[0])"; "%(shellauthor[2])"
+	"Zi's Ukagaka Space"; "https://ukagaka.zichqec.com/"
+	"Zdzisiu's website"; "https://zdzisiu.github.io/Cemetery/index.html"
 }
  
 On_portalrootbutton.caption
@@ -37,25 +34,23 @@ On_portalrootbutton.caption
 
 On_sakura.portalsites
 {
-	"SSP"
-	--
-	"%ASC(1)http://ssp.shillest.net/%ASC(2)"
-	--
-	"Ukadoc"
-	--
-	"%ASC(1)https://ukagakadreamteam.github.io/ukadoc/manual/index.html%ASC(2)"
-	--
-	"AYAYA"
-	--
-	"%ASC(1)https://ukagakadreamteam.github.io/ayaya/index%ASC(2)"
-	--
-	"Crow + SSP Reference (J)"
-	--
-	"%ASC(1)http://crow.aqrs.jp/reference/all/index.html%ASC(2)"
-	--
-	"Ghost Documentation (J)"
-	--
-	"%ASC(1)http://usada.sakura.vg/contents/specification.html%ASC(2)"
+	FormatLinks(portalsites)
+}
+
+portalsites : array
+{
+	"SSP"; "http://ssp.shillest.net/"
+	"Ukadoc"; "https://ukagakadreamteam.github.io/ukadoc/manual/index.html"
+	"AYAYA"; "https://ukagakadreamteam.github.io/ayaya/index"
+}
+
+FormatLinks : all
+{
+	//Loop jumps by 2 so that it works with pairs. Url can be grabbed by using _i + 1
+	for _i = 0; _i < ARRAYSIZE(_argv); _i += 2
+	{
+		"%(_argv[_i])%(CHR(1))%(_argv[_i + 1])%(CHR(2))"
+	}
 }
 
 On_headlinesenserootbutton.caption //Water facts
