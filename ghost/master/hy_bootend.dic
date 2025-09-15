@@ -198,36 +198,35 @@ OnGhostChanging //Changing to another ghost
 	}
 }
 
-OnShellChanging //Starting to change the shell
+OnShellChanging
 {
-	"\![get,property,OnGetCoords,currentghost.scope(0).rect]" //This gets the current ghost coordinates so that they don't jump around the screen when they change shells - Oof, doesn't work with the shell change menu TODO
+	//This gets the current ghost coordinates so that they don't jump around the screen when they change shells
+	"\![get,property,OnGetCoordsBefore,currentghost.scope(0).rect,currentghost.scope(0).y]"
 }
 
-OnShellChanged //After the shell has changed
+OnShellChanged
 {
-	shellchange[7] = reference0
-	"\s[-1]\![get,property,OnGetCoords2,currentghost.scope(0).rect]"
+	ShellChange.NewShellName = reference0
+	"\s[-1]\![get,property,OnGetCoordsAfter,currentghost.scope(0).rect,currentghost.scope(0).y]"
 }
 
-OnGetCoords //This gets the x coordinate
+OnGetCoordsBefore //This gets the x coordinate
 {
-	shellchange[0] = reference0[0] //Head height
-	shellchange[1] = reference0[3] //Feet height
-	shellchange[2] = TOINT(reference0[3]) - TOINT(reference0[1]) //Frame height
+	ShellChange.BeforeX = reference0[0] //Horizontal position
+	ShellChange.BeforeFeet = reference1 //Feet height
 }
 
-OnGetCoords2
+OnGetCoordsAfter
 {
-	shellchange[3] = reference0[0] //Head height
-	shellchange[4] = reference0[3] //Feet height
-	shellchange[5] = TOINT(reference0[3]) - TOINT(reference0[1]) //Frame height
-	shellchange[6] = TOINT(shellchange[1]) - TOINT(shellchange[5]) //Should be the feet 
+	ShellChange.AfterHeight = TOINT(reference1) - TOINT(reference0[1]) //Distance between feet and top
+	ShellChange.FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(ShellChange.AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
+	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	
 	_last = nowshell
-	nowshell = shellchange[7]
+	nowshell = ShellChange.NewShellName
 	
 	AutoUpdates[4] = 0
-	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]\0\![move,--X=%(shellchange[0]),--Y=%(TOINT(shellchange[6])),--base=primaryscreen]\1\s[-1]\0\s[0]" //Default surfaces, and moves the ghost to where it was before changing shells
+	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(ShellChange.FinalY)),--base=primaryscreen]\1\s[-1]\0\s[0]" //Default surfaces, and moves the ghost to where it was before changing shells
 	--
 	OnSendStats
 	--
