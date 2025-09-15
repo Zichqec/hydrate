@@ -15,7 +15,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	extrasipstotal = 0
 	timeouttime = 3000 //5 minutes
 	AutoUpdates = ("ON",0)
-	nowscale = 100
 	
 	notif = "None"
 	volume = 50
@@ -27,7 +26,11 @@ OnFirstBoot //Dialogue when you first open the ghost
 	Config.OffscreenDialogue = 0
 	Config.RemindWhenMinimized = 0
 	
+	Scale.X = 100
+	Scale.Y = 100
+	
 	Config.MatchShellPosition = 1
+	
 	
 	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
 }
