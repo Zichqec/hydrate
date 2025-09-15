@@ -10,7 +10,7 @@ OnFirstBoot //Dialogue when you first open the ghost
 	currentdrinkstreak = 0
 	extrasipstoday = 0
 	extrasipstotal = 0
-	Config.AutoUpdates = 0
+	Config.AutoUpdates = 1
 	AutoUpdates.CheckedToday = 0
 	AutoUpdates.GhostReady = 0
 	AutoUpdates.ShellReady = 0
