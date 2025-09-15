@@ -65,46 +65,53 @@ OnInstallRefuse
 	"\0\s[0](Cannot install, this is meant for %(reference0).)"
 }
 
-OnUpdatedataCreating //Creating an updates2.dau
+//Creating an updates2.dau
+OnUpdatedataCreating
 {
 	"\0\s[0](Creating an updates2.dau file.)"
 }
 
-OnUpdatedataCreated //Finished creating
+//Finished creating
+OnUpdatedataCreated
 {
 	"\0\s[0](Finished making the updates2.dau.)"
 }
 
-OnNarCreating //Creating a .nar
+//Creating a .nar
+OnNarCreating
 {
-	"\0\s[0](Creating a .nar file.)\w8"
+	"\0\s[0](Creating a .nar file.)"
 }
 
-OnNarCreated //Finished creating
+OnNarCreated
 {
 	"\0\s[0](Finished making the .nar file.)"
 }
 
 //----Uninstalling----
 
-OnVanishSelecting //Bringing up the uninstall option
+//Bringing up the uninstall option
+OnVanishSelecting
 {
 	"\0\s[0](Do you want to uninstall?)"
 }
 
-OnVanishSelected //Deciding to uninstall
+//Deciding to uninstall
+OnVanishSelected 
 {
 	"\0\s[0](Take care of yourself, user!)\w8\w8"
 }
 
-OnVanished //When another ghost has been uninstalled and it switches to this ghost
+//When another ghost has been uninstalled and it switches to this ghost
+OnVanished
 {
 	"\0\s[0](%(reference0) wasn't hydrated enough.)"
 }
 
 //----Network update---
 
-OnUpdateCheckComplete //When the ghost finishes checking for updates
+//When the ghost finishes checking for updates
+OnUpdateCheckComplete
 {
 	if reference0 == "none" //If there are no new files
 	{
@@ -161,7 +168,11 @@ OnUpdateReady
 {
 	reference0++ //Number of files starts from 0, so this displays the correct amount
 	
-	"\0\s[0](There are %(reference0) new files.)\w8\w8"
+	//plural checks, adds an s and changes is to are if there's more than 1 file
+	_s = ""; _are = "is"
+	if reference0 != 1; {_s = "s"; _are = "are"}
+	
+	"\0\s[0](There %(_are) %(reference0) new file%(_s).)\w8"
 }
 
 OnUpdateComplete
@@ -231,7 +242,12 @@ OnUpdateOtherBegin
 OnUpdateOtherReady
 {
 	reference0++
-	"\0\s[0](There are %(reference0) new files.)\w8\w8"
+	
+	//plural checks, adds an s and changes is to are if there's more than 1 file
+	_s = ""; _are = "is"
+	if reference0 != 1; {_s = "s"; _are = "are"}
+	
+	"\0\s[0](There %(_are) %(reference0) new file%(_s).)\w8"
 }
 
 OnUpdateOtherComplete
