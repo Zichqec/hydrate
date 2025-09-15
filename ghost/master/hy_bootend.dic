@@ -153,12 +153,7 @@ OnBoot //Normal booting
 	--
 	if Config.AutoUpdates
 	{
-		AutoUpdates.CheckedToday = 1
 		"\![updatebymyself,checkonly]"
-	}
-	else
-	{
-		AutoUpdates.CheckedToday = 0 //Just in case
 	}
 }
 
@@ -286,7 +281,6 @@ ShellChangedEnd
 	--
 	if Config.AutoUpdates
 	{
-		AutoUpdates.CheckedToday = 1
 		"\![update,shell,checkonly]"
 	}
 }

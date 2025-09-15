@@ -758,7 +758,6 @@ OnMinuteChange
 	--
 	if Config.AutoUpdates && AutoUpdates.CheckedToday == 0 //Once a day the ghost will check for updates if the user has auto updates on
 	{
-		AutoUpdates.CheckedToday = 1
 		AutoUpdates.GhostReady = 0
 		AutoUpdates.ShellReady = 0
 		AutoUpdates.BalloonReady = 0

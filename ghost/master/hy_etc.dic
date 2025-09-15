@@ -118,36 +118,25 @@ OnVanished
 
 //----Network update---
 
-//When the ghost finishes checking for updates
+//When the ghost finishes checking for updates - this currently only occurs in Hydrate when it's an auto check
 OnUpdateCheckComplete
 {
+	AutoUpdates.CheckedToday = 1 //Sets it so it won't check again until at least midnight
 	if reference0 == "none" //If there are no new files
 	{
-		if AutoUpdates.CheckedToday != 1; "\0\s[0](There are no new files.)" //This if stops the dialogue from displaying if this check was performed automatically.
+		if reference3 == "ghost"; AutoUpdates.GhostReady = 0
+		elseif reference3 == "shell"; AutoUpdates.ShellReady = 0
+		elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 0
 	}
 	else
 	{
-		if AutoUpdates.CheckedToday == 1 //If this was an automatic check (always true but shrug)
-		{
-			AutoUpdates.CheckedToday = 1 //Sets it so it won't check again until at least midnight
-			if reference0 == "none" //If there are no new files
-			{
-				if reference3 == "ghost"; AutoUpdates.GhostReady = 0
-				elseif reference3 == "shell"; AutoUpdates.ShellReady = 0
-				elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 0
-			}
-			else
-			{
-				if reference3 == "ghost"; AutoUpdates.GhostReady = 1
-				elseif reference3 == "shell"; AutoUpdates.ShellReady = 1
-				elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 1
-			}
-			--
-			if reference3 == "ghost"; "\![update,shell,checkonly]"
-			elseif reference3 == "shell"; "\![update,balloon,checkonly]"
-			else; "\e Update Check Complete"
-		}
+		if reference3 == "ghost"; AutoUpdates.GhostReady = 1
+		elseif reference3 == "shell"; AutoUpdates.ShellReady = 1
+		elseif reference3 == "balloon"; AutoUpdates.BalloonReady = 1
 	}
+	--
+	if reference3 == "ghost"; "\![update,shell,checkonly]"
+	elseif reference3 == "shell"; "\![update,balloon,checkonly]"
 }
 
 OnStartUpdate
@@ -186,13 +175,14 @@ OnUpdateReady
 OnUpdateComplete
 {
 	OnUpdateVars
-	AutoUpdates.CheckedToday = 0
+	
 	if reference0 == "none"
 	{
 		"\0\s[0](There are no new files.)"
 	}
 	else
 	{
+		AutoUpdates.CheckedToday = 0
 		"\0\s[0](Update complete.)"
 		--
 		"\n\n\![*]\q[Show changelog,OnChangeLog]\n\![*]\q[Ok,NoChangelog]"
@@ -260,13 +250,13 @@ OnUpdateOtherReady
 
 OnUpdateOtherComplete
 {
-	AutoUpdates.CheckedToday = 0
 	if reference0 == "none"
 	{
 		"\0\s[0](No new files for the current %(reference3) to update with.)"
 	}
 	else
 	{
+		AutoUpdates.CheckedToday = 0
 		"\0\s[0](Update complete!)"
 	}
 	
