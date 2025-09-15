@@ -58,11 +58,6 @@ On_sakura.portalsites
 	"%ASC(1)http://usada.sakura.vg/contents/specification.html%ASC(2)"
 }
 
-On_updatebutton.caption
-{
-	"Check for updates"
-}
-
 On_headlinesenserootbutton.caption //Water facts
 {
 	"(Being hydrated helps regulate your tempurature.)"
