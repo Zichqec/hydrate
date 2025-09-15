@@ -27,6 +27,8 @@ OnFirstBoot //Dialogue when you first open the ghost
 	Config.OffscreenDialogue = 0
 	Config.RemindWhenMinimized = 0
 	
+	Config.MatchShellPosition = 1
+	
 	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
 }
 
@@ -37,6 +39,10 @@ OnInitialize
 
 OnUpdateVars
 {
+	//——— 2.0.2 ———
+	if !ISVAR("Config.MatchShellPosition"); Config.MatchShellPosition = 1
+	
+	
 	//——— 2.0.1 ———
 	if !ISVAR("Config.RemindWhenMinimized"); Config.RemindWhenMinimized = 0
 	if !ISVAR("Scale.X")
@@ -55,6 +61,7 @@ OnUpdateVars
 	//——— 2.0.0 ———
 	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0
 	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
+	
 	
 	//---1.1.0---
 	/*
@@ -200,12 +207,19 @@ OnGhostChanging //Changing to another ghost
 OnShellChanging
 {
 	//This gets the current ghost coordinates so that they don't jump around the screen when they change shells
-	"\![get,property,OnGetCoordsBefore,currentghost.scope(0).rect,currentghost.scope(0).y]"
+	if Config.MatchShellPosition
+	{
+		"\![get,property,OnGetCoordsBefore,currentghost.scope(0).rect,currentghost.scope(0).y]"
+	}
 }
 
 OnShellChanged
 {
-	"\0\s[-1]\![get,property,OnGetCoordsAfter,currentghost.scope(0).rect,currentghost.scope(0).y]"
+	if Config.MatchShellPosition
+	{
+		"\0\s[-1]\![get,property,OnGetCoordsAfter,currentghost.scope(0).rect,currentghost.scope(0).y]"
+	}
+	else; ShellChangedEnd
 }
 
 OnGetCoordsBefore //This gets the x coordinate
@@ -214,15 +228,26 @@ OnGetCoordsBefore //This gets the x coordinate
 	ShellChange.BeforeFeet = reference1 //Feet height
 }
 
-OnGetCoordsAfter
+OnGetCoordsAfter : all
 {
-	ShellChange.AfterHeight = TOINT(reference1) - TOINT(reference0[1]) //Distance between feet and top
-	ShellChange.FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(ShellChange.AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
+	_AfterHeight = TOINT(reference1) - TOINT(reference0[1]) //Distance between feet and top
+	_FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(_AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
 	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	
 	AutoUpdates[4] = 0
-	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(ShellChange.FinalY)),--base=primaryscreen]\1\s[-1]\0\s[0]" //Default surfaces, and moves the ghost to where it was before changing shells
-	ERASEVAR("ShellChange.BeforeX","ShellChange.BeforeFeet","ShellChange.AfterHeight","ShellChange.FinalY","ShellChange.NewShellName")
+	
+	"\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(_FinalY)),--base=primaryscreen]"
+	
+	ERASEVAR("ShellChange.BeforeX","ShellChange.BeforeFeet")
+	
+	ShellChangedEnd
+}
+
+ShellChangedEnd
+{
+	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]" //Craftman info
+	--
+	"\1\s[-1]\0\s[0]"
 	--
 	OnSendStats
 	--

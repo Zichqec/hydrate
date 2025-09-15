@@ -368,6 +368,7 @@ OnConfigMenu : all //I moved changing name/pronouns/birthday over to Nameteach, 
 	
 	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
 	
+	"Match position when changing shells: \![*]\_a[OnToggleMatchShellPosition]%(('OFF','ON')[Config.MatchShellPosition])\_a\n"
 	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('OFF','ON')[Config.RemindWhenMinimized])\_a\n"
 	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(HourNotifs)\_a\n"
 	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
@@ -554,6 +555,13 @@ OnToggleAutoUpdates
 	if AutoUpdates[0] != "ON"; AutoUpdates[0] = "ON"
 	else; AutoUpdates[0] = "OFF"
 	
+	OnConfigMenu
+}
+
+OnToggleMatchShellPosition
+{
+	if Config.MatchShellPosition != 1; Config.MatchShellPosition = 1
+	else; Config.MatchShellPosition = 0
 	OnConfigMenu
 }
 
