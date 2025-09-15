@@ -354,7 +354,7 @@ OnConfigMenu : all
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
 	
 	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('OFF','ON')[Config.AutoUpdates])\_a\n"
-	"Check for updates to...\n"
+	"Update...\n"
 	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n\n"
 	
 	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
