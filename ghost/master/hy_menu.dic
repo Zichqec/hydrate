@@ -12,14 +12,14 @@ OnMouseDoubleClick : all
 			
 			"\_q\n"
 			"\![*]\q[Download updates now,OnStartUpdate]\n"
-			"\![*]\q[Maybe later,UpdateLater]\n\n"
-			"\![*]\q[Turn off auto updates,UpdateOff]"
+			"\![*]\q[Maybe later,OnUpdateLater]\n\n"
+			"\![*]\q[Turn off auto updates,OnUpdateOff]"
 		}
 		else; OnMenuRun
 	}
 }
 
-Select.UpdateLater //If the user decides to update later
+OnUpdateLater //If the user decides to update later
 {
 	AutoUpdates.CheckedToday = 1
 	AutoUpdates.GhostReady = 0
@@ -29,7 +29,7 @@ Select.UpdateLater //If the user decides to update later
 	"\0\s[0](Alright, you will be reminded once a day.)"
 }
 
-Select.UpdateOff //If the user no longer wants to be notified about updates
+OnUpdateOff //If the user no longer wants to be notified about updates
 {
 	Config.AutoUpdates = 0
 	AutoUpdates.CheckedToday = 1
@@ -579,7 +579,7 @@ OnAITalk
 	_talk = ReminderTalk
 	if SHIORI3FW.ShellName == "Alkohol"; _talk = Wobble(_talk,0,0,currentdrinkstreak)
 	_talk = "\0\s[0]%(notification_sound)" + _talk
-	_talk += "\![set,choicetimeout,%(timeouttime)]\n\n\![*]\q[Done,drankwater]\n\n[half]\![*]\q[Dismiss,dismisswater]\e drinknotif"
+	_talk += "\![set,choicetimeout,%(timeouttime)]\n\n\![*]\q[Done,OnDrankWater]\n\n[half]\![*]\q[Dismiss,OnDismissWater]\e drinknotif"
 	_talk
 }
 
@@ -593,7 +593,7 @@ ReminderTalk : nonoverlap
 	"(Get a drink and move around a little!)"
 }
 
-Select.drankwater : nonoverlap
+OnDrankWater : nonoverlap
 {
 	todayswaters++
 	totalwaters++
@@ -636,7 +636,7 @@ Select.drankwater : nonoverlap
 	_talk
 }
 
-Select.dismisswater
+OnDismissWater
 {
 	currentdrinkstreak = 0
 	newhighscorelatch = 0
