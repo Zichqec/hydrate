@@ -7,7 +7,7 @@ OnInstallBegin
 
 OnInstallComplete //Installing something ghost related
 {
-	"\0\s[0](Installed %(reference1) (%(reference0)))."
+	"\0\s[0](Installed %(reference0): %(reference1))."
 	--
 	//A little menu to open or change to the ghost that was installed immediately
 	if "ghost" _in_ reference0
