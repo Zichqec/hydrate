@@ -91,6 +91,11 @@ OnNarCreated
 	"\0\s[0](Successfully created %(_nar).)"
 }
 
+OnNarLocation
+{
+	"\![open,explorer,""%(reference0)""]"
+}
+
 //----Uninstalling----
 
 //Bringing up the uninstall option
