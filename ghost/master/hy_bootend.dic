@@ -4,7 +4,6 @@ OnFirstBoot //Dialogue when you first open the ghost
 	passsec = 0
 	passmin = 0
 	passhour = 0
-	aitalkinterval = 3600
 	deleteshitai = "OFF"
 	todayswaters = 0
 	totalwaters = 0

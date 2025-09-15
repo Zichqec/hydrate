@@ -12,7 +12,7 @@
 TALK_INTERVAL	AIトーク間隔の初期値[秒]
 COM_RATIO		AIトーク中に占めるコミュニケート開始の割合[%]
 */
-#globaldefine	TALK_INTERVAL	180
+#globaldefine	TALK_INTERVAL	3600
 #globaldefine	COM_RATIO		0
 
 
