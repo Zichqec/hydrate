@@ -69,13 +69,7 @@ On_biffbutton.caption
 }
 
 On_vanishbutton.visible
- {
- 	if deleteshitai == "ON"
- 	{
-		"1"
-	}
-	else
-	{
-		"0"
-	}
+{
+	if deleteshitai == "ON"; 1
+	else; 0
 }
