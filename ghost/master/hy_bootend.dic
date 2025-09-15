@@ -222,11 +222,13 @@ OnGetCoordsAfter
 	ShellChange.FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(ShellChange.AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
 	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	
+	
 	_last = nowshell
 	nowshell = ShellChange.NewShellName
 	
 	AutoUpdates[4] = 0
 	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(ShellChange.FinalY)),--base=primaryscreen]\1\s[-1]\0\s[0]" //Default surfaces, and moves the ghost to where it was before changing shells
+	ERASEVAR("ShellChange.BeforeX","ShellChange.BeforeFeet","ShellChange.AfterHeight","ShellChange.FinalY","ShellChange.NewShellName")
 	--
 	OnSendStats
 	--
