@@ -151,7 +151,7 @@ OnShellMenu : all
 
 OnRandomShell
 {
-	"\![get,property,OnGetCoords,currentghost.scope(0).rect]\![change,shell,random]"
+	"\![change,shell,random,--option=raise-event]"
 }
 
 OnShellUrl
@@ -161,7 +161,7 @@ OnShellUrl
 
 OnSwitchShell
 {
-	"\![get,property,OnGetCoords,currentghost.scope(0).rect]\![change,shell,%(reference0)]"
+	"\![change,shell,%(reference0),--option=raise-event]"
 }
 
 OnDressupMenu
