@@ -85,7 +85,10 @@ OnNarCreating
 
 OnNarCreated
 {
-	"\0\s[0](Finished making the .nar file.)"
+	//Makes a clickable link that'll open the location of the file they just made
+	_nar = "\_a[OnNarLocation,""%(reference1)""]%(reference0)\_a"
+	
+	"\0\s[0](Successfully created %(_nar).)"
 }
 
 //----Uninstalling----
