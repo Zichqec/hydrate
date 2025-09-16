@@ -358,7 +358,6 @@ OnWaterStats : all
 OnConfigMenu : all
 {
 	//This is here in case the variables get erased. The uninstall will automatically be set to OFF so the user has something to click.
-	if deleteshitai == ""; deleteshitai = "OFF"
 	if notif == ""; notif = "None"
 	if volume == ""; volume = 50
 	
@@ -379,7 +378,7 @@ OnConfigMenu : all
 	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('OFF','ON')[Config.RemindWhenMinimized])\_a\n"
 	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(('OFF','ON')[Config.HourNotifs])\_a\n"
 	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
-	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(deleteshitai)\_a\n"
+	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(('OFF','ON')[Config.EnableUninstall])\_a\n"
 	
 	"\n"
 	"\![*]\q[Back,OnMenuRun]\n"
@@ -566,9 +565,8 @@ OnToggleOffscreenTalk
 
 OnToggleUninstall
 {
-	if deleteshitai != "ON"; deleteshitai = "ON"
-	else; deleteshitai = "OFF"
-	
+	if Config.EnableUninstall != 1; Config.EnableUninstall = 1
+	else; Config.EnableUninstall = 0
 	OnConfigMenu
 }
 

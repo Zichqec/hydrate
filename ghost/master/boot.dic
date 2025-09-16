@@ -1,6 +1,5 @@
 OnFirstBoot
 {
-	deleteshitai = "OFF"
 	todayswaters = 0
 	totalwaters = 0
 	currentdrinkstreak = 0
@@ -26,6 +25,7 @@ OnFirstBoot
 	Scale.Y = 100
 	
 	Config.MatchShellPosition = 1
+	Config.EnableUninstall = 0
 	
 	OnSendStats
 	--
@@ -51,13 +51,18 @@ OnUpdateVars
 	//——— 2.0.3 ———
 	if !ISVAR("Config.HourNotifs")
 	{
-		if ISVAR("HourNotifs") && HourNotifs == "ON"
-		{
-			Config.HourNotifs = 1
-		}
-		Config.HourNotifs = 0
+		if ISVAR("HourNotifs") && HourNotifs == "ON"; Config.HourNotifs = 1
+		else; Config.HourNotifs = 0
 	}
 	ERASEVAR("HourNotifs")
+	
+	if !ISVAR("Config.EnableUninstall")
+	{
+		if ISVAR("deleteshitai") && deleteshitai == "ON"; Config.EnableUninstall = 1
+		else; Config.EnableUninstall = 0 //Can't decide if I want this as default or not...
+	}
+	ERASEVAR("deleteshitai")
+	
 	
 	//——— 2.0.2 ———
 	if !ISVAR("Config.MatchShellPosition"); Config.MatchShellPosition = 1

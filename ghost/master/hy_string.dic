@@ -23,6 +23,6 @@ On_biffbutton.caption
 
 On_vanishbutton.visible
 {
-	if deleteshitai == "ON"; 1
+	if Config.EnableUninstall; 1
 	else; 0
 }
