@@ -357,24 +357,31 @@ OnWaterStats : all
 //----------Config Menu----------
 OnConfigMenu : all
 {
+	_b = ""; _d = ""
+	if SHIORI3FW.BalloonName == "H2O"
+	{
+		_b = "\f[bold,1]"
+		_d = "\f[bold,default]"
+	}
 	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
 	"\f[align,center]%(emdash) Config %(emdash)\n\f[align,default]"
 	
-	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(TalkRateLabel(aitalkinterval))\_a\n"
-	"Reminder sound: \_a[OnChangeNotif]%(Config.NotificationSound)\_a\n\n"
+	"\![*]Reminder rate:%(br)%(_b)\_a[OnChangeTalk]%(TalkRateLabel(aitalkinterval))\_a%(_d)\n"
+	"\![*]Sound: %(_b)\_a[OnChangeNotif]%(Config.NotificationSound)\_a%(_d)\n"
+	"\n"
 	
-	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a\n"
+	"Auto update checks: \![*]%(_b)\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a%(_d)\n"
 	"Update...\n"
 	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n\n"
 	
 	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
 	
-	"Match position when changing shells: \![*]\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a\n"
-	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('Off','On')[Config.RemindWhenMinimized])\_a\n"
-	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a\n"
-	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a\n"
-	"Enable uninstall: \![*]\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a\n"
+	"\![*]Match position when changing shells: %(_b)\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a%(_d)\n"
+	"\![*]Reminders while minimized: %(_b)\_a[OnToggleRemindWhenMinimized]%(('Off','On')[Config.RemindWhenMinimized])\_a%(_d)\n"
+	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
+	"\![*]Offscreen notifs: %(_b)\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a%(_d)\n"
+	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n"
 	
 	"\n"
 	"\![*]\q[Back,OnMenuRun]\n"
@@ -434,6 +441,13 @@ OnChangeNotif : all
 	_g = "\f[color,disable]"
 	_d = "\f[color,default]"
 	
+	_b = ""; _bd = ""
+	if SHIORI3FW.BalloonName == "H2O"
+	{
+		_b = "\f[bold,1]"
+		_bd = "\f[bold,default]"
+	}
+	
 	_vol_up = "\q[▲,OnQuickVolume,Up]"
 	if Config.NotificationVolume >= 100; _vol_up = "%(_g)▲%(_d)"
 	_vol_down = "\q[▼,OnQuickVolume,Down]"
@@ -441,7 +455,7 @@ OnChangeNotif : all
 	
 	"\C\![lock,balloonrepaint]\c\0\b2\_q\![set,autoscroll,disable]\*"
 	"\![close,dialog,OnPickCustomNotif]"
-	"\f[align,center]%(emdash) Reminder Sound %(emdash)\n\n[half]\f[align,left]"
+	"\f[align,center]%(emdash) Reminder sound %(emdash)\n\n[half]\f[align,left]"
 	
 	"Volume: %(_vol_up)%(_vol_down) %(Config.NotificationVolume)\n\n[half]"
 	
@@ -449,10 +463,11 @@ OnChangeNotif : all
 	"\__q[OnNotifSet,None]None\__q\n"
 	
 	if Config.NotificationSound == "Custom"; "\![*]"
-	"\__q[OnNotifSet,Custom]Custom\__q \__q[OnCustomNotif](Pick sound)\__q\n"
+	"\__q[OnNotifSet,Custom]Custom\__q  \__q[OnCustomNotif](Pick sound)\__q\n"
 	
 	if Config.NotificationSound == "Random"; "\![*]"
-	"\__q[OnNotifSet,Random]Random Each Time\__q\n\__q[OnToggleIncludeCustom](Custom %(('excluded','included')[Config.IncludeCustomSound]))\__q\n\n[half]"
+	"\__q[OnNotifSet,Random]Random each time\__q\n"
+	"\_l[@1em]\__q[OnToggleIncludeCustom](Custom %(_b)%(('excluded','included')[Config.IncludeCustomSound])%(_bd))\__q\n\n[half]"
 	
 	foreach _opts; _opt
 	{
