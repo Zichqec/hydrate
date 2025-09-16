@@ -319,6 +319,11 @@ OnWaterStats : all
 {
 	_h = "\f[color,default.anchor]"
 	_d = "\f[color,default]"
+	if SHIORI3FW.BalloonName == "H2O"
+	{
+		_h = "\f[bold,1]"
+		_d = "\f[bold,default]"
+	}
 	
 	"\0\*\b[4]\_q"
 	
