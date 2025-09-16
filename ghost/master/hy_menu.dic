@@ -63,7 +63,7 @@ OnMenuRun : all
 	
 	if currentdrinkstreak > 3; "\n%(currentdrinkstreak) drinks in a row!"
 	
-	"\n\f[height,-2]Runtime: %(passhour):%(displaymin)\nVersion %(ghostver)"
+	"\n\f[height,-2]Runtime: %(RuntimeDisplay)\nVersion %(ghostver)"
 }
 
 OnExtraSip
@@ -719,22 +719,6 @@ OnHourTalk
 
 OnSecondChange
 {
-	//TODO set up a proper runtime counter later...
-	if passsec >= 59
-	{
-		passsec = 0
-		passmin++
-		if passmin >= 59
-		{
-			passmin = 0
-			passhour++
-		}
-	}
-	else
-	{
-		passsec++
-	}
-	
 	//Reminders when minimized - for cases such as being overstimulated and needed to minimize what you have open, but still wanting water reminders! No streak or drink tracking available in this mode...
 	if IsMinimized && Config.RemindWhenMinimized
 	{

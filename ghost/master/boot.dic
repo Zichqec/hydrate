@@ -1,9 +1,6 @@
 OnFirstBoot
 {
 	lastTalk = ""
-	passsec = 0
-	passmin = 0
-	passhour = 0
 	deleteshitai = "OFF"
 	todayswaters = 0
 	totalwaters = 0
@@ -39,6 +36,12 @@ OnFirstBoot
 OnInitialize
 {
 	OnUpdateVars //Ensure these are set even if updated via things other than normal network update
+	
+	//Stuff to set on actual boot only
+	if reference0 != "reload"
+	{
+		opentime = GETSECCOUNT
+	}
 }
 
 OnUpdateVars
@@ -100,9 +103,6 @@ OnUpdateVars
 OnBoot //Normal booting
 {
 	lastTalk = ""
-	passsec = 0
-	passmin = 0
-	passhour = 0
 	todayswaters = 0
 	extrasipstoday = 0
 	AutoUpdates.CheckedToday = 0

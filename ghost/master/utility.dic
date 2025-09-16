@@ -35,10 +35,14 @@ ASUB //ASEARCH but for substrings
 	-1
 }
 
-displaymin
+RuntimeDisplay
 {
-	if passmin <= 9; "0%(passmin)"
-	else; "%(passmin)"
+	_runtime = (GETSECCOUNT - opentime) / 60
+	_hours = _runtime / 60
+	_minutes = _runtime % 60
+	if _minutes < 10; _minutes = "0%(_minutes)"
+	
+	"%(_hours):%(_minutes)"
 }
 
 TalkRateLabel
