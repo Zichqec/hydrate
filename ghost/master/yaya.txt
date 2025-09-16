@@ -11,12 +11,12 @@ dic, boot.dic
 dic, commu.dic
 dic, deprecated.dic
 dic, legacy.dic
+dic, menu.dic
 dic, meta.dic
 dic, other.dic
 dic, reminder.dic
 dic, shell.dic
 dic, utility.dic
-dic, hy_menu.dic
 
 
 //log, ayame.log
