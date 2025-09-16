@@ -378,7 +378,7 @@ OnConfigMenu : all
 	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('Off','On')[Config.RemindWhenMinimized])\_a\n"
 	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a\n"
 	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a\n"
-	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a\n"
+	"Enable uninstall: \![*]\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a\n"
 	
 	"\n"
 	"\![*]\q[Back,OnMenuRun]\n"
