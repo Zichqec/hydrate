@@ -178,22 +178,15 @@ OnWindowStateRestore
 
 OnGhostChanging //Changing to another ghost
 {
-	if reference0 == "Hydrate" //If reloading
+	OnSendStats
+	--
+	if todayswaters > 0
 	{
-		"\0\s[0](Reloading!)"
+		"\0\s[0](You took %(todayswaters) sips of water today,\w4 well done!)"
 	}
 	else
 	{
-		OnSendStats
-		--
-		if todayswaters > 0
-		{
-			"\0\s[0](You took %(todayswaters) sips of water today,\w4 well done!)"
-		}
-		else
-		{
-			"\0\s[0](Remind %(reference0) to hydrate too!)"
-		}
+		"\0\s[0](Remind %(reference0) to hydrate too!)"
 	}
 }
 
