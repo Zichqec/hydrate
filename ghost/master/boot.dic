@@ -1,6 +1,5 @@
 OnFirstBoot
 {
-	lastTalk = ""
 	deleteshitai = "OFF"
 	todayswaters = 0
 	totalwaters = 0
@@ -40,7 +39,6 @@ OnInitialize
 	//Stuff to set on actual boot only
 	if reference0 != "reload"
 	{
-		lastTalk = ""
 		todayswaters = 0
 		extrasipstoday = 0
 		AutoUpdates.CheckedToday = 0
