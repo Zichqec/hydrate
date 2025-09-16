@@ -107,7 +107,7 @@ OnPause : all
 		_hours++
 	}
 	
-	"\C\![lock,balloonrepaint]\c\0\_q\*\t\b2\![set,autoscroll,disable]"
+	"\C\![lock,balloonrepaint]\c\0\_q\*\t\b[2]\![set,autoscroll,disable]"
 	
 	"\f[height,+2]\f[bold,1](Drink reminders are paused!)\f[bold,0]\f[height,default]\n\n"
 	
@@ -214,7 +214,7 @@ OnDressupMenu
 	{
 		if ARRAYSIZE(_currentcategories) > 18; "\b[4]\n[half]\![*]\q[Back,OnMenuRun]\n"
 		elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
-		else; "\b2"
+		else; "\b[2]"
 		--
 		"\![*]\q[Randomize all categories,OnRandomDressup]"
 	}
@@ -222,7 +222,7 @@ OnDressupMenu
 	{
 		if _items > 18; "\b[4]\n\n[half]\![*]\q[Back,OnDressupMenu]\n"
 		elseif _items > 11; "\b[4]"
-		else; "\b2"
+		else; "\b[2]"
 		--
 		"\![*]\q[Random,OnRandomDressup,%(reference0)]"
 	}
@@ -458,7 +458,7 @@ OnChangeNotif : all
 	_vol_down = "\q[▼,OnQuickVolume,Down]"
 	if Config.NotificationVolume <= 0; _vol_down = "%(_g)▼%(_d)"
 	
-	"\C\![lock,balloonrepaint]\c\0\b2\_q\![set,autoscroll,disable]\*"
+	"\C\![lock,balloonrepaint]\c\0\b[2]\_q\![set,autoscroll,disable]\*"
 	"\![close,dialog,OnPickCustomNotif]"
 	"\f[align,center]%(emdash) Reminder sound %(emdash)\n\n[half]\f[align,left]"
 	
@@ -510,7 +510,7 @@ OnCustomNotif : all
 	_h = "\f[color,default.anchor]"
 	_d = "\f[color,default]"
 	
-	"\0\_q\b2\![set,autoscroll,disable]\![open,dialog,open,--id=OnPickCustomNotif]\*"
+	"\0\_q\b[2]\![set,autoscroll,disable]\![open,dialog,open,--id=OnPickCustomNotif]\*"
 	
 	"(Choose a sound file. Supported types are %(_h).mp3%(_d), %(_h).wav%(_d), %(_h).wma%(_d), and %(_h).mid%(_d).)\n\n"
 	
