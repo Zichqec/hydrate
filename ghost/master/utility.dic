@@ -152,3 +152,33 @@ ErrorLog
 	ErrorsToPush.level ,= _level
 	ErrorsToPush.description ,= _argv[0]
 }
+
+notification_sound : all
+{
+	if !ISVAR("volume"); volume = 50
+	if !ISVAR("notif"); notif = "None"
+	
+	//Skip if empty, or if set to custom and also empty...
+	if !(notif == "None" || notif == "" || (notif == "Custom" && custom_sound_path == ""))
+	{
+		"\![sound,play,"""
+		
+		if notif == "Custom"
+		{
+			custom_sound_path
+		}
+		elseif notif == "Random"
+		{
+			_opts = ("Water_Drop","Bubbles","Splash","Campana","Stop","Success")
+			_opts = "snd/" + _opts + ".mp3"
+			if Config.IncludeCustomSound && custom_sound_path != ""; _opts ,= custom_sound_path
+			ANY(_opts)
+		}
+		else
+		{
+			"snd/" + REPLACE(notif," ","_") + ".mp3"
+		}
+		
+		""",--volume=%(volume),--window=false]"
+	}
+}
