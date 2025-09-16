@@ -368,17 +368,17 @@ OnConfigMenu : all
 	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(TalkRateLabel(aitalkinterval))\_a\n"
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
 	
-	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('OFF','ON')[Config.AutoUpdates])\_a\n"
+	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a\n"
 	"Update...\n"
 	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n\n"
 	
 	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
 	
-	"Match position when changing shells: \![*]\_a[OnToggleMatchShellPosition]%(('OFF','ON')[Config.MatchShellPosition])\_a\n"
-	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('OFF','ON')[Config.RemindWhenMinimized])\_a\n"
-	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(('OFF','ON')[Config.HourNotifs])\_a\n"
-	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
-	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(('OFF','ON')[Config.EnableUninstall])\_a\n"
+	"Match position when changing shells: \![*]\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a\n"
+	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('Off','On')[Config.RemindWhenMinimized])\_a\n"
+	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a\n"
+	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a\n"
+	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a\n"
 	
 	"\n"
 	"\![*]\q[Back,OnMenuRun]\n"
