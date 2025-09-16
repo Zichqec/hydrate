@@ -135,3 +135,44 @@ OnSecondChange
 		ErrorsToPush.description = IARRAY
 	}
 }
+
+
+//—————————————————————————————— Owner draw menu ——————————————————————————————
+On_recommendrootbutton.caption
+{
+	"More from the devs"
+}
+
+On_sakura.recommendsites
+{
+	FormatLinks(recommendsites)
+}
+
+recommendsites : array
+{
+	//Use craftman if craftmanw is not present (but it always should be! it's a mandatory field! please use craftmanw)
+	//TODO check with Pona, this might be unnecessary
+	_shellauthor = shellauthor[0]
+	if _shellauthor == ""; _shellauthor = shellauthor[1]
+	
+	"'%(SHIORI3FW.ShellName)' shell by %(_shellauthor)"; "%(shellauthor[2])"
+	"Zi's Ukagaka Space"; "https://ukagaka.zichqec.com/"
+	"Zdzisiu's website"; "https://zdzisiu.github.io/Cemetery/index.html"
+}
+ 
+On_portalrootbutton.caption
+{
+	"Reference sites"
+}
+
+On_sakura.portalsites
+{
+	FormatLinks(portalsites)
+}
+
+portalsites : array
+{
+	"SSP"; "http://ssp.shillest.net/"
+	"Ukadoc"; "https://ukagakadreamteam.github.io/ukadoc/manual/index.html"
+	"AYAYA"; "https://ukagakadreamteam.github.io/ayaya/index"
+}

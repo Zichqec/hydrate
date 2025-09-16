@@ -182,3 +182,12 @@ notification_sound : all
 		""",--volume=%(volume),--window=false]"
 	}
 }
+
+FormatLinks : all
+{
+	//Loop jumps by 2 so that it works with pairs. Url can be grabbed by using _i + 1
+	for _i = 0; _i < ARRAYSIZE(_argv); _i += 2
+	{
+		"%(_argv[_i])%(CHR(1))%(_argv[_i + 1])%(CHR(2))"
+	}
+}
