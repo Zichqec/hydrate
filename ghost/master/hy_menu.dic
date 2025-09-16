@@ -158,7 +158,7 @@ OnShellUrl
 
 OnSwitchShell
 {
-	"\![change,shell,%(reference0),--option=raise-event]"
+	"\![change,shell,""%(reference0)"",--option=raise-event]"
 }
 
 OnDressupMenu
