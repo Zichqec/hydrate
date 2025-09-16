@@ -32,7 +32,7 @@ OnDrankWater : nonoverlap
 	
 	//Don't start saying this until you get 3 in a row I think??
 	//This will completely not track a streak unless you get at least 3...
-	if currentdrinkstreak > highestdrinkstreak && currentdrinkstreak >= 3
+	if currentdrinkstreak > highestdrinkstreak && currentdrinkstreak >= 3 //TODO maybe? i should?? make it save this even before you hit 3? hm. decide later, but it should match how the current streak is displayed
 	{
 		highestdrinkstreak = currentdrinkstreak
 		
