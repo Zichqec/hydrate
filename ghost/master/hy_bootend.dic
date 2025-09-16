@@ -31,7 +31,8 @@ OnFirstBoot //Dialogue when you first open the ghost
 	
 	Config.MatchShellPosition = 1
 	
-	
+	OnSendStats
+	--
 	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
 }
 

@@ -2,7 +2,7 @@ Stats from Hydrate come from an event called OnHydrateGhost.GetStats
 This is sent as NOTIFY, and is broadcast to all open ghosts.
 It is sent in the following instances:
 
-- When Hydrate boots
+- When Hydrate boots (including firstboot)
 - When Hydrate closes
 - When another ghost boots
 - When the hour rolls over
