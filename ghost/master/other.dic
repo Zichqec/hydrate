@@ -2,16 +2,15 @@ OnTranslate
 {
 	_talk = reference0
 	
+	//Process embedded elements in script input
+	if reference1 == "" && reference2 == ""
+	{
+		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
+	}
+	
 	_talk = REPLACE(_talk,"\b[4]","\b[4,--fallback=2]")
 	
-	if reference1 == "" && reference2 == ""
-	{ //send input box : no event (ref2) , no special flag (ref1)
-		EVAL('"' + REPLACE(_talk,'"','" + CHR(0x22) + "') + '"')
-	}
-    else
-	{ //event result from ghost
-		TOSTR(_talk)
-	}
+	TOSTR(_talk)
 }
 
 OnAnchorSelect
