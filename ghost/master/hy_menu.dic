@@ -352,7 +352,7 @@ OnConfigMenu : all
 	
 	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
-	"\f[align,center]%(emdash) Config %(emdash)\n\n\f[align,default]"
+	"\f[align,center]%(emdash) Config %(emdash)\n\f[align,default]"
 	
 	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]Every %(TalkRateLabel(aitalkinterval))\_a\n"
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
