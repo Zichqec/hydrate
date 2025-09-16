@@ -8,15 +8,15 @@ charset.extension, UTF-8
 dicdir, yaya_base
 
 dic, boot.dic
+dic, commu.dic
 dic, deprecated.dic
-dic, utility.dic
 dic, legacy.dic
+dic, other.dic
+dic, utility.dic
 dic, hy_bootend.dic
-dic, hy_commu.dic
 dic, hy_etc.dic
 dic, hy_menu.dic
 dic, hy_string.dic
-dic, hy_word.dic
 
 
 //log, ayame.log
