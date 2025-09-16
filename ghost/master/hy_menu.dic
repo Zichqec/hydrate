@@ -467,7 +467,7 @@ OnChangeNotif : all
 	
 	if Config.NotificationSound == "Random"; "\![*]"
 	"\__q[OnNotifSet,Random]Random each time\__q\n"
-	"\_l[@1em]\__q[OnToggleIncludeCustom](Custom %(_b)%(('excluded','included')[Config.IncludeCustomSound])%(_bd))\__q\n\n[half]"
+	"\__q[OnToggleIncludeCustom](Custom %(_b)%(('excluded','included')[Config.IncludeCustomSound])%(_bd))\__q\n\n[half]"
 	
 	foreach _opts; _opt
 	{
