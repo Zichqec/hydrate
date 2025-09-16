@@ -18,7 +18,7 @@ OnMouseDoubleClick : all
 			"\![*]\q[Maybe later,OnUpdateLater]\n\n"
 			"\![*]\q[Turn off auto updates,OnUpdateOff]"
 		}
-		else; OnMenuRun
+		else; OnMainMenu
 	}
 }
 
@@ -43,7 +43,7 @@ OnUpdateOff //If the user no longer wants to be notified about updates
 	"\0\s[0](Auto Update checks turned off, you can turn them on again in the Config menu.)"
 }
 
-OnMenuRun : all
+OnMainMenu : all
 {
 	"\0\![set,autoscroll,disable]\b[2]\_q"
 	
@@ -149,14 +149,14 @@ OnShellMenu : all
 	
 	"\f[align,center]%(emdash) Shells %(emdash)\n\f[align,left]"
 	
-	if ARRAYSIZE(ShellList) > 16; "\b[4]\n\![*]\q[Back,OnMenuRun]\n"
+	if ARRAYSIZE(ShellList) > 16; "\b[4]\n\![*]\q[Back,OnMainMenu]\n"
 	elseif ARRAYSIZE(ShellList) > 11; "\b[4]"
 	else; "\b[2]"
 	
 	"\![*]\q[Random shell,OnRandomShell]\n"
 	"\![*]\q[Download more shells,OnShellUrl]"
 	"\n\n"
-	"%(_display)\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
+	"%(_display)\n\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
 }
 
 OnRandomShell
@@ -212,7 +212,7 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		if ARRAYSIZE(_currentcategories) > 18; "\b[4]\n[half]\![*]\q[Back,OnMenuRun]\n"
+		if ARRAYSIZE(_currentcategories) > 18; "\b[4]\n[half]\![*]\q[Back,OnMainMenu]\n"
 		elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
 		else; "\b[2]"
 		--
@@ -231,7 +231,7 @@ OnDressupMenu
 	--
 	if reference0 == ""
 	{
-		"\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
+		"\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
 	}
 	else
 	{
@@ -356,7 +356,7 @@ OnWaterStats : all
 	"(Look at you go!)"
 	}
 	
-	"\n\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
+	"\n\n\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
 }
 
 
@@ -401,7 +401,7 @@ OnConfigMenu : all
 	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n"
 	
 	"\n"
-	"\![*]\q[Back,OnMenuRun]\n"
+	"\![*]\q[Back,OnMainMenu]\n"
 	"\![*]\q[Done,OnBlank]"
 	"\![unlock,balloonrepaint]"
 }
