@@ -208,3 +208,9 @@ portalsites : array
 	"Ukadoc"; "https://ukagakadreamteam.github.io/ukadoc/manual/index.html"
 	"AYAYA"; "https://ukagakadreamteam.github.io/ayaya/index"
 }
+
+On_vanishbutton.visible
+{
+	if Config.EnableUninstall; 1
+	else; 0
+}
