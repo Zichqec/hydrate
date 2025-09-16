@@ -39,13 +39,25 @@ OnGetCoordsAfter : all
 
 ShellChangedEnd
 {
+	AutoShell.LastChangeTime = GETSECCOUNT
+	
 	"\1\s[-1]\0\s[0]"
 	--
 	OnGetShellAuthorInfo
 	--
 	OnSendStats
 	--
-	if SHIORI3FW.ShellName == SHIORI3FW.ShellNameOld //If the shell they changed to is the same as the last one
+	if Config.AutoUpdates
+	{
+		"\![update,shell,checkonly]"
+	}
+	--
+	if AutoShell.ChangingOnBoot
+	{
+		AutoShell.ChangingOnBoot = 0
+		BootFinish
+	}
+	elseif SHIORI3FW.ShellName == SHIORI3FW.ShellNameOld //If the shell they changed to is the same as the last one
 	{
 		"(Reloaded %(SHIORI3FW.ShellName)!)"
 	}
@@ -58,11 +70,6 @@ ShellChangedEnd
 		"(Now using %(SHIORI3FW.ShellName).)\w8\w8\n\n" //If they're using anything other than the default
 		--
 		ShellChangeComments
-	}
-	--
-	if Config.AutoUpdates
-	{
-		"\![update,shell,checkonly]"
 	}
 }
 

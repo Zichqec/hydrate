@@ -226,6 +226,8 @@ HourNotification
 	{
 		"\0\s[0](It's %(hour12).)"
 	}
+	--
+	"\_w[3000]" //Here for the occasions where it also switches shells
 }
 
 //Doesn't notify every minute anymore but I think that's for the best

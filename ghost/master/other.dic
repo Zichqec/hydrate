@@ -63,11 +63,17 @@ OnMinuteChange
 			AutoUpdates.BalloonReady = 0
 		}
 		
-		if Config.HourNotifs; HourNotification
-		--
 		OnSendStats
 		--
 		SendOldStats //Deprecated version
+		--
+		if Config.HourNotifs; HourNotification
+	}
+	--
+	if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellHours * 3600)
+	{
+		"\![change,shell,random,--option=raise-event]"
+		return //Don't do the checks below until after changing shells... I don't think this will come up but just in case
 	}
 	--
 	//Once a day the ghost will check for updates if the user has auto updates on
@@ -144,6 +150,12 @@ OnShellScaling
 	OnSendStats
 	--
 	"\0\s[0](%(reference0)% hydration.)"
+}
+
+OnUserInputCancel
+{
+	if reference0 == "OnConfig.AutoShell.HourSet"; OnConfig.AutoShell
+	elseif reference0 == "OnDrinkTime"; OnConfigMenu
 }
 
 

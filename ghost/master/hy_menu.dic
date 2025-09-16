@@ -374,16 +374,22 @@ OnConfigMenu : all
 	
 	"\![*]Reminder rate:%(br)%(_b)\_a[OnChangeTalk]%(TalkRateLabel(aitalkinterval))\_a%(_d)\n"
 	"\![*]Sound: %(_b)\_a[OnChangeNotif]%(Config.NotificationSound)\_a%(_d)\n"
+	"\![*]Reminders while minimized: %(_b)\_a[OnToggleRemindWhenMinimized]%(('Off','On')[Config.RemindWhenMinimized])\_a%(_d)\n"
+	"\n"
+	
+	"\![*]Match position when changing shells: %(_b)\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a%(_d)\n"
+	_s = "s"; if Config.AutoShellHours == 1; _s = ""
+	_shellchange = REPLACE(Config.AutoShellChange,"interval","%(Config.AutoShellHours) hour%(_s)")
+	"\![*]Auto shell change:%(br)%(_b)\_a[OnConfig.AutoShell]%(_shellchange)\_a%(_d)\n"
 	"\n"
 	
 	"Auto update checks: \![*]%(_b)\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a%(_d)\n"
 	"Update...\n"
-	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n\n"
+	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n"
+	"\n"
 	
 	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
 	
-	"\![*]Match position when changing shells: %(_b)\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a%(_d)\n"
-	"\![*]Reminders while minimized: %(_b)\_a[OnToggleRemindWhenMinimized]%(('Off','On')[Config.RemindWhenMinimized])\_a%(_d)\n"
 	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
 	"\![*]Offscreen notifs: %(_b)\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a%(_d)\n"
 	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n"
@@ -560,6 +566,58 @@ OnToggleMatchShellPosition
 	OnConfigMenu
 }
 
+OnConfig.AutoShell : all
+{
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[2]\_q\![set,autoscroll,disable]\*"
+	"\![close,inputbox,OnConfig.AutoShell.HourSet]"
+	"\f[align,center]%(emdash) Auto shell change %(emdash)\n\n\f[align,left]"
+	
+	"\![*]\__q[OnConfig.AutoShell.Set,Off]Off\__q\n"
+	"\![*]\__q[OnConfig.AutoShell.Set,On boot]On boot\__q\n"
+	"\![*]\__q[OnConfig.AutoShell.Set,After a drink]After a drink\__q\n"
+	_s = "s"; if Config.AutoShellHours == 1; _s = ""
+	"\![*]\__q[OnConfig.AutoShell.Set,Every interval]Every %(Config.AutoShellHours) hour%(_s)\__q\n"
+	"\__q[OnConfig.AutoShell.HourChange](Change rate)\__q\n"
+	"\n"
+	"\![*]\q[Back,OnConfigMenu]"
+	"\![unlock,balloonrepaint]"
+}
+
+OnConfig.AutoShell.Set
+{
+	Config.AutoShellChange = reference0
+	AutoShell.LastChangeTime = GETSECCOUNT
+	OnConfigMenu
+}
+
+OnConfig.AutoShell.HourChange : all
+{
+	"\0\_q\s[0]\![open,inputbox,OnConfig.AutoShell.HourSet,-1]\![set,balloontimeout,-1]" //TODO add the input cancel thingy for if you close this box
+	
+	_s = "s"; if Config.AutoShellHours == 1; _s = ""
+	"(How many hours would you like between shell changes? Currently set to %(Config.AutoShellHours) hour%(_s).)\n\n"
+	"(Note that the timer is reset each session.)"
+	"\n\n"
+	"\![*]\q[Cancel,OnConfig.AutoShell]"
+}
+
+OnConfig.AutoShell.HourSet : all
+{
+	if TOINT(reference0) > 0
+	{
+		Config.AutoShellHours = TOINT(reference0)
+		AutoShell.LastChangeTime = GETSECCOUNT
+		OnConfig.AutoShell
+	}
+	else
+	{
+		"\0\s[0]\_q"
+		"(Invalid time. Please input an integer greater than 0.)"
+		"\x\![raise,OnConfig.AutoShell.HourChange]"
+	}
+}
+
 OnToggleRemindWhenMinimized
 {
 	if Config.RemindWhenMinimized != 1; Config.RemindWhenMinimized = 1
@@ -661,6 +719,11 @@ OnDrankWater : nonoverlap
 	if _amt > 10000; _amt = 10000 //100 max - lets not do a hyponatremia
 	if _amt == 800; _amt = 820
 	_talk += "\![raiseplugin,c58b6320-caf8-11ed-a901-0800200c9a66,OnWalletOfUnyu,set,%(_amt),Thanks for hydrating!]"
+	
+	if Config.AutoShellChange == "After a drink"
+	{
+		_talk += "\_w[3000]\![change,shell,random,--option=raise-event]"
+	}
 	_talk
 }
 

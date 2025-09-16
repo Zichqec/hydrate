@@ -30,6 +30,12 @@ OnFirstBoot
 	Config.MatchShellPosition = 1
 	Config.EnableUninstall = 0
 	
+	Config.AutoShellChange = "Off"
+	Config.AutoShellHours = 2
+	AutoShell.LastChangeTime = GETSECCOUNT
+	AutoShell.ChangingOnBoot = 0
+	
+	
 	OnSendStats
 	--
 	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
@@ -38,6 +44,7 @@ OnFirstBoot
 OnInitialize
 {
 	OnUpdateVars //Ensure these are set even if updated via things other than normal network update
+	AutoShell.ChangingOnBoot = 0
 	
 	//Stuff to set on actual boot only
 	if reference0 != "reload"
@@ -87,6 +94,10 @@ OnUpdateVars
 	}
 	ERASEVAR("custom_sound_path")
 	
+	if !ISVAR("Config.AutoShellChange"); Config.AutoShellChange = "Off"
+	if !ISVAR("Config.AutoShellHours"); Config.AutoShellHours = 2
+	if !ISVAR("AutoShell.LastChangeTime"); AutoShell.LastChangeTime = GETSECCOUNT
+	
 	
 	//——— 2.0.2 ———
 	if !ISVAR("Config.MatchShellPosition"); Config.MatchShellPosition = 1
@@ -134,18 +145,32 @@ OnUpdateVars
 
 OnBoot
 {
-	"\1\s[-1]\0\s[0]"
-	--
 	if Config.AutoUpdates
 	{
 		"\![update,ghost+shell+balloon,checkonly]"
 	}
 	--
-	OnGetShellAuthorInfo
+	if Config.AutoShellChange == "On boot"
+	{
+		AutoShell.ChangingOnBoot = 1
+		"\1\s[-1]\0\s[-1]\![change,shell,random,--option=raise-event]"
+	}
+	else
+	{
+		//These are handled by the shell change function, so not needed above...
+		OnGetShellAuthorInfo
+		--
+		OnSendStats
+		--
+		BootFinish
+	}
+}
+
+BootFinish
+{
+	"\1\s[-1]\0\s[0]"
 	--
-	OnSendStats
-	--
-	"\0\s[0](Thank you for choosing to hydrate today.)\w8\n\n"
+	"(Thank you for choosing to hydrate today.)\w8\n\n"
 	--
 	if aitalkinterval == 0
 	{
