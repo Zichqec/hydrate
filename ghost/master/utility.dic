@@ -168,19 +168,16 @@ ErrorLog
 
 notification_sound : all
 {
-	if !ISVAR("volume"); volume = 50
-	if !ISVAR("notif"); notif = "None"
-	
 	//Skip if empty, or if set to custom and also empty...
-	if !(notif == "None" || notif == "" || (notif == "Custom" && custom_sound_path == ""))
+	if !(Config.NotificationSound == "None" || Config.NotificationSound == "" || (Config.NotificationSound == "Custom" && custom_sound_path == ""))
 	{
 		"\![sound,play,"""
 		
-		if notif == "Custom"
+		if Config.NotificationSound == "Custom"
 		{
 			custom_sound_path
 		}
-		elseif notif == "Random"
+		elseif Config.NotificationSound == "Random"
 		{
 			_opts = ("Water_Drop","Bubbles","Splash","Campana","Stop","Success")
 			_opts = "snd/" + _opts + ".mp3"
@@ -189,10 +186,10 @@ notification_sound : all
 		}
 		else
 		{
-			"snd/" + REPLACE(notif," ","_") + ".mp3"
+			"snd/" + REPLACE(Config.NotificationSound," ","_") + ".mp3"
 		}
 		
-		""",--volume=%(volume),--window=false]"
+		""",--volume=%(Config.NotificationVolume),--window=false]"
 	}
 }
 

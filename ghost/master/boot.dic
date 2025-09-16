@@ -11,8 +11,10 @@ OnFirstBoot
 	AutoUpdates.ShellReady = 0
 	AutoUpdates.BalloonReady = 0
 	
-	notif = "None"
-	volume = 50
+	Config.NotificationSound = "None"
+	Config.IncludeCustomSound = 0
+	
+	Config.NotificationVolume = 50
 	Config.HourNotifs = 0
 	
 	highestdrinkstreak = 0
@@ -63,6 +65,20 @@ OnUpdateVars
 	}
 	ERASEVAR("deleteshitai")
 	
+	if !ISVAR("Config.NotificationSound")
+	{
+		if ISVAR("notif"); Config.NotificationSound = notif
+		else; Config.NotificationSound = "None"
+	}
+	ERASEVAR("notif")
+	
+	if !ISVAR("Config.NotificationVolume")
+	{
+		if ISVAR("volume"); Config.NotificationVolume = volume
+		else; Config.NotificationVolume = 50
+	}
+	ERASEVAR("volume")
+	
 	
 	//——— 2.0.2 ———
 	if !ISVAR("Config.MatchShellPosition"); Config.MatchShellPosition = 1
@@ -106,9 +122,6 @@ OnUpdateVars
 	if ISVAR('currentdrinkstreak') == 0; currentdrinkstreak = 0
 	if ISVAR('extrasipstoday') == 0; extrasipstoday = 0
 	if ISVAR('extrasipstotal') == 0; extrasipstotal = 0
-	
-	if !ISVAR("notif"); notif = "None"
-	if !ISVAR("volume"); volume = 50
 }
 
 OnBoot

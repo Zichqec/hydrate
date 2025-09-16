@@ -357,16 +357,12 @@ OnWaterStats : all
 //----------Config Menu----------
 OnConfigMenu : all
 {
-	//This is here in case the variables get erased. The uninstall will automatically be set to OFF so the user has something to click.
-	if notif == ""; notif = "None"
-	if volume == ""; volume = 50
-	
 	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
 	"\f[align,center]%(emdash) Config %(emdash)\n\f[align,default]"
 	
 	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(TalkRateLabel(aitalkinterval))\_a\n"
-	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
+	"Reminder sound: \_a[OnChangeNotif]%(Config.NotificationSound)\_a\n\n"
 	
 	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a\n"
 	"Update...\n"
@@ -435,34 +431,32 @@ OnChangeNotif : all
 {
 	_opts = ("Water Drop","Bubbles","Splash","Campana","Stop","Success")
 	
-	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = "Excluding Custom"
-	
 	_g = "\f[color,disable]"
 	_d = "\f[color,default]"
 	
 	_vol_up = "\q[▲,OnQuickVolume,Up]"
-	if volume >= 100; _vol_up = "%(_g)▲%(_d)"
+	if Config.NotificationVolume >= 100; _vol_up = "%(_g)▲%(_d)"
 	_vol_down = "\q[▼,OnQuickVolume,Down]"
-	if volume <= 0; _vol_down = "%(_g)▼%(_d)"
+	if Config.NotificationVolume <= 0; _vol_down = "%(_g)▼%(_d)"
 	
 	"\C\![lock,balloonrepaint]\c\0\b2\_q\![set,autoscroll,disable]\*"
 	"\![close,dialog,OnPickCustomNotif]"
 	"\f[align,center]%(emdash) Reminder Sound %(emdash)\n\n[half]\f[align,left]"
 	
-	"Volume: %(_vol_up)%(_vol_down) %(volume)\n\n[half]"
+	"Volume: %(_vol_up)%(_vol_down) %(Config.NotificationVolume)\n\n[half]"
 	
-	if notif == "None"; "\![*]"
+	if Config.NotificationSound == "None"; "\![*]"
 	"\__q[OnNotifSet,None]None\__q\n"
 	
-	if notif == "Custom"; "\![*]"
+	if Config.NotificationSound == "Custom"; "\![*]"
 	"\__q[OnNotifSet,Custom]Custom\__q \__q[OnCustomNotif](Pick sound)\__q\n"
 	
-	if notif == "Random"; "\![*]"
+	if Config.NotificationSound == "Random"; "\![*]"
 	"\__q[OnNotifSet,Random]Random Each Time\__q\n\__q[OnToggleIncludeCustom](Custom %(('excluded','included')[Config.IncludeCustomSound]))\__q\n\n[half]"
 	
 	foreach _opts; _opt
 	{
-		if notif == _opt; "\![*]"
+		if Config.NotificationSound == _opt; "\![*]"
 		"\__q[OnNotifSet,%(_opt)]%(_opt)\__q\n"
 	}
 	
@@ -472,18 +466,22 @@ OnChangeNotif : all
 //Up/Down volume buttons
 OnQuickVolume
 {
-	if reference0 == "Up"; volume += 5
-	else; volume -= 5
+	_new = Config.NotificationVolume
 	
-	if volume > 100; volume = 100
-	if volume < 0; volume = 0
+	if reference0 == "Up"; _new += 5
+	else; _new -= 5
+	
+	if _new > 100; _new = 100
+	if _new < 0; _new = 0
+	
+	Config.NotificationVolume = _new
 	
 	OnChangeNotif
 }
 
 OnNotifSet
 {
-	notif = reference0
+	Config.NotificationSound = reference0
 	"\C\![sound,stop]%(notification_sound)\![raise,OnChangeNotif]"
 }
 
@@ -503,7 +501,7 @@ OnCustomNotif : all
 
 OnPickCustomNotif
 {
-	notif = "Custom"
+	Config.NotificationSound = "Custom"
 	custom_sound_path = reference2
 	"\C\![sound,stop]%(notification_sound)\![raise,OnChangeNotif]"
 }
