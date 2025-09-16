@@ -1,2 +1,3 @@
 ghost/master/hy_commu.dic
+ghost/master/hy_etc.dic
 ghost/master/hy_word.dic

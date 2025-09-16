@@ -11,10 +11,10 @@ dic, boot.dic
 dic, commu.dic
 dic, deprecated.dic
 dic, legacy.dic
+dic, meta.dic
 dic, other.dic
 dic, utility.dic
 dic, hy_bootend.dic
-dic, hy_etc.dic
 dic, hy_menu.dic
 dic, hy_string.dic
 
