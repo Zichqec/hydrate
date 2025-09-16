@@ -35,7 +35,7 @@ OnSurfaceRestore
 
 OnWindowStateMinimize
 {
-	OnHydrateGhost.GetStats //This is the ONE place so far that I have to call this directly... if I go to another event it does not work
+	OnHydrateStatsNotify //This is the ONE place so far that I have to call this directly... if I go to another event it does not work
 }
 
 OnWindowStateRestore

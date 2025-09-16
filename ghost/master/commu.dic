@@ -33,10 +33,10 @@ OnSendStats
 {
 	if reference0 == "balloonopen"; "\C"
 	--
-	"\![embed,OnHydrateGhost.GetStats]"
+	"\![embed,OnHydrateStatsNotify]"
 }
 
-OnHydrateGhost.GetStats : all
+OnHydrateStatsNotify : all
 {
 	//0xFDEF used to delimit the big chunks, C_BYTE1 used to delimit the category and part name. This way around because otherwise it's a damn pain to process on the receiving end later!? Also, surely all SHIORI must support C_BYTE1, or else they can't process all events... so, that's the safer bet to be at the more granular level, maybe??? hm
 	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
@@ -48,7 +48,7 @@ OnHydrateGhost.GetStats : all
 		_dressups += _dressup
 	}
 	//%(Scale.X),%(Scale.Y) //To be added later if a way to determine scale when the shell is changed is added...
-	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateGhost.GetStats,""%(SHIORI3FW.ShellName)"",""%(_dressups)"",,,%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal),%(IsMinimized)]"
+	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateStatsNotify,""%(SHIORI3FW.ShellName)"",""%(_dressups)"",,,%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal),%(IsMinimized)]"
 }
 
 HydrateCommuResponse : nonoverlap_pool
