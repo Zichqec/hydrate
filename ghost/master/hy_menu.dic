@@ -367,7 +367,7 @@ OnConfigMenu : all
 	
 	"\f[align,center]%(emdash) Config %(emdash)\n\f[align,default]"
 	
-	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]Every %(TalkRateLabel(aitalkinterval))\_a\n"
+	"Reminder rate:%(br)\![*]\_a[OnChangeTalk]%(TalkRateLabel(aitalkinterval))\_a\n"
 	"Reminder sound: \_a[OnChangeNotif]%(notif)\_a\n\n"
 	
 	"Auto update checks: \![*]\_a[OnToggleAutoUpdates]%(('OFF','ON')[Config.AutoUpdates])\_a\n"
@@ -380,7 +380,9 @@ OnConfigMenu : all
 	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('OFF','ON')[Config.RemindWhenMinimized])\_a\n"
 	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(HourNotifs)\_a\n"
 	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
-	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(deleteshitai)\_a\n\n"
+	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(deleteshitai)\_a\n"
+	
+	"\n"
 	"\![*]\q[Back,OnMenuRun]\n"
 	"\![*]\q[Done,OnBlank]"
 	"\![unlock,balloonrepaint]"
@@ -389,7 +391,13 @@ OnConfigMenu : all
 OnChangeTalk : all
 {
 	"\0\_q\s[0]\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
-	"(How many minutes would you like between reminders? Right now it's every %(TalkRateLabel(aitalkinterval)).)"
+	
+	"(How many minutes would you like between reminders? "
+	switch aitalkinterval == 0
+	{
+		"Currently set to %(TalkRateLabel(aitalkinterval)).)"
+		"Reminders are currently off.)"
+	}
 	"\n\n"
 	"\![*]\q[Cancel,OnConfigMenu]"
 }
