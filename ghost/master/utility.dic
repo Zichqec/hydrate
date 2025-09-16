@@ -45,6 +45,19 @@ RuntimeDisplay
 	"%(_hours):%(_minutes)"
 }
 
+ReminderTimeDisplay : all
+{
+	_since_last_reminder = GETSECCOUNT - SHIORI3FW.LastAITalkTime
+	_until_next_reminder = aitalkinterval - _since_last_reminder
+	
+	_until_mins = TOINT(CEIL(_until_next_reminder / 60.0)) //CEIL so that it doesn't show a partial minute as not a minute...??? don't lose the seconds, seconds more than 0 should be a minute. ... There might be a better way to do this
+	_hours = _until_mins / 60
+	_minutes = _until_mins % 60
+	
+	if _hours > 0; "%(_hours)h "
+	"%(_minutes)m"
+}
+
 TalkRateLabel
 {
 	_num = TOINT(_argv[0])

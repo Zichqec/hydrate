@@ -58,12 +58,25 @@ OnMenuRun : all
 	"\![*]\q[Config,OnConfigMenu]\n\n"
 	"\![*]\q[Done,OnBlank]"
 	
+	"\n\n[half]"
 	_s = ""; if todayswaters != 1; _s = "s"
-	"\n\n\n[half]%(todayswaters) drink%(_s) taken this session!"
+	"%(todayswaters) drink%(_s) taken this session!"
 	
 	if currentdrinkstreak > 3; "\n%(currentdrinkstreak) drinks in a row!"
 	
-	"\n\f[height,-2]Runtime: %(RuntimeDisplay)\nVersion %(ghostver)"
+	"\n\f[height,-2]"
+	if aitalkinterval > 0
+	{
+		if GETSECCOUNT - SHIORI3FW.LastAITalkTime >= aitalkinterval; "Next reminder imminent"
+		else
+		{
+			"Next reminder in %(ReminderTimeDisplay)"
+		}
+	}
+	else; "Reminders are off"
+	"\n"
+	"Runtime: %(RuntimeDisplay)\n"
+	"Version %(ghostver)"
 }
 
 OnExtraSip
