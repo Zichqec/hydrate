@@ -234,6 +234,65 @@ OnUpdateOtherFailure
 	"\0(%(reference3) update failed: '%(reference0)'.)"
 }
 
+
+//—————————————————————————————— SNTP (clock fixing) ——————————————————————————————
+OnSNTPCompare
+{
+	if reference3 != 0
+	{
+		_s = ""; if reference3 != 1; _s = "s"
+		
+		"\0\s[0](The clock is off by %(reference3) second%(_s).)\n\n"
+		--
+		"\![*]\q[Fix it,script:\6]  \![*]\q[Leave it,blank]"
+	}
+	else
+	{
+		"\0\s[0](The clock is accurate.)"
+	}
+}
+
+OnSNTPCorrect
+{
+	"\0\s[0](The clock has been corrected.)"
+}
+
+OnSNTPFailure
+{
+	"\0\s[0](Could not correct the clock.)"
+}
+
+
+//—————————————————————————————— BIFF (Email check) ———————————————————————————————
+OnBIFFFailure
+{
+	_reason = reference0
+	case reference0
+	{
+		when "timeout"; _reason = "connection timed out"
+		when "kick"; _reason = "can't access account"
+		when "defect"; _reason = "POP settings incorrect"
+		when "artificial"; _reason = "canceled by user"
+	}
+
+	"\0\s[0](Could not get emails: %(_reason).)"
+}
+
+
+//———————————————————————————————— Headlines/RSS ——————————————————————————————————
+OnHeadlinesenseFailure
+{
+	_reason = reference0
+	case reference0
+	{
+		when "can't download"; _reason = "can't download the file"
+		when "can't analyze"; _reason = "can't analyze the file"
+	}
+
+	"\0\s[0](Could not get RSS: %(_reason).)"
+}
+
+
 OnShellScaling
 {
 	Scale.X = reference0
