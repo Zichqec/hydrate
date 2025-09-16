@@ -2,7 +2,8 @@ OnMouseDoubleClick : all
 {
 	if reference5 == 0 //Left click
 	{
-		if AutoUpdates.GhostReady == 1 || AutoUpdates.ShellReady == 1 || AutoUpdates.BalloonReady == 1  //If an update is available, the user will be notified when they try to open the menu
+		//If an update is available, the user will be notified when they try to open the menu
+		if AutoUpdates.GhostReady == 1 || AutoUpdates.ShellReady == 1 || AutoUpdates.BalloonReady == 1 
 		{
 			"(Updates are available for:)\n\n"
 			
@@ -42,20 +43,21 @@ OnUpdateOff //If the user no longer wants to be notified about updates
 
 OnMenuRun : all
 {
-	"\0\![set,autoscroll,disable]\b2\_q"
+	"\0\![set,autoscroll,disable]\b[2]\_q"
+	
 	"\![*]\q[I took an extra sip!,OnExtraSip]\n"
-	"\![*]\q[Pause drink reminders,OnPause]\n\n[half]"
 	"\![*]\q[Change Shell,OnShellMenu]"
+	"\![*]\q[Pause drink reminders,OnPause]\n\n"
 	
 	if ARRAYSIZE(availabledressups) > 0; "\n\![*]\q[Change Design,OnDressupMenu]"
 
-	"\n\n[half]"
+	"\n\n"
 	"\![*]\q[Stats,OnWaterStats]\n"
 	"\![*]\q[Config,OnConfigMenu]\n\n"
 	"\![*]\q[Done,OnBlank]"
 	
 	_s = ""; if todayswaters != 1; _s = "s"
-	"\n\n\n\n[half]%(todayswaters) drink%(_s) taken this session!"
+	"\n\n\n[half]%(todayswaters) drink%(_s) taken this session!"
 	
 	if currentdrinkstreak > 3; "\n%(currentdrinkstreak) drinks in a row!"
 	
@@ -132,13 +134,13 @@ OnShellMenu : all
 	
 	"\f[align,center]%(emdash) Shells %(emdash)\n\f[align,left]"
 	
-	if ARRAYSIZE(ShellList) > 16; "\b[4]\n[half]\![*]\q[Back,OnMenuRun]\n"
+	if ARRAYSIZE(ShellList) > 16; "\b[4]\n\![*]\q[Back,OnMenuRun]\n"
 	elseif ARRAYSIZE(ShellList) > 11; "\b[4]"
 	else; "\b[2]"
 	
 	"\![*]\q[Random shell,OnRandomShell]\n"
 	"\![*]\q[Download more shells,OnShellUrl]"
-	"\n\n[half]"
+	"\n\n"
 	"%(_display)\n\![*]\q[Back,OnMenuRun]\n\![*]\q[Done,OnBlank]"
 }
 
@@ -694,7 +696,8 @@ OnMinuteChange
 		OnHourTalk
 	}
 	--
-	if Config.AutoUpdates && AutoUpdates.CheckedToday == 0 //Once a day the ghost will check for updates if the user has auto updates on
+	//Once a day the ghost will check for updates if the user has auto updates on
+	if Config.AutoUpdates && AutoUpdates.CheckedToday == 0
 	{
 		AutoUpdates.GhostReady = 0
 		AutoUpdates.ShellReady = 0

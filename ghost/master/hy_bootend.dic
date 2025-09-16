@@ -103,7 +103,6 @@ OnBoot //Normal booting
 	passmin = 0
 	passhour = 0
 	todayswaters = 0
-	//currentdrinkstreak = 0
 	extrasipstoday = 0
 	AutoUpdates.CheckedToday = 0
 	
@@ -224,13 +223,13 @@ OnGetCoordsBefore //This gets the x coordinate
 
 OnGetCoordsAfter : all
 {
+	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	_AfterHeight = TOINT(reference1) - TOINT(reference0[1]) //Distance between feet and top
 	_FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(_AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
-	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	
 	AutoUpdates.ShellReady = 0
 	
-	"\0\![move,--X=%(ShellChange.BeforeX),--Y=%(TOINT(_FinalY)),--base=primaryscreen]"
+	"\0\![move,--X=%(ShellChange.BeforeX),--Y=%(_FinalY),--base=primaryscreen]"
 	
 	ERASEVAR("ShellChange.BeforeX","ShellChange.BeforeFeet")
 	
@@ -239,7 +238,8 @@ OnGetCoordsAfter : all
 
 ShellChangedEnd
 {
-	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]" //Craftman info
+	//Craftman info
+	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]"
 	--
 	"\1\s[-1]\0\s[0]"
 	--
