@@ -22,8 +22,8 @@ br
 
 ASUB //ASEARCH but for substrings
 {
-	_array = _argv //Takes in all the elements of the array
-	_array[0] = IARRAY //erases _argv[0] since that's the string we're searching for
+	_array = _argv
+	_array[0] = IARRAY //erase first element since that's the string we're searching for
 	for _i = 0; _i < ARRAYSIZE(_array); _i++
 	{
 		if _argv[0] _in_ _array[_i]

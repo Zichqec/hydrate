@@ -3,7 +3,7 @@ On_homeurl
 	"https://raw.githubusercontent.com/Zichqec/hydrate/refs/heads/main/"
 }
 
-On_recommendrootbutton.caption //Change to your username
+On_recommendrootbutton.caption
 {
 	"More from the devs"
 }
@@ -51,8 +51,9 @@ FormatLinks : all
 	}
 }
 
-On_headlinesenserootbutton.caption //Water facts
+On_headlinesenserootbutton.caption
 {
+	//Water facts
 	"(Being hydrated helps regulate your tempurature.)"
 	"(What you think is hunger might actually be thirst. Take a drink before you grab a snack!)"
 	"(Water cushions your vital organs. Take a drink and protect your organs.)"
