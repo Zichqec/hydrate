@@ -50,3 +50,88 @@ OnKeyPress
 	if reference0 == "f1"; "\![open,readme]"
 	elseif reference0 == "t" && SHIORI3FW.DebugMode; OnAITalk
 }
+
+OnMinuteChange
+{
+	if minute == 0
+	{
+		if hour == 0
+		{
+			AutoUpdates.CheckedToday = 0
+			AutoUpdates.GhostReady = 0
+			AutoUpdates.ShellReady = 0
+			AutoUpdates.BalloonReady = 0
+		}
+		
+		if HourNotifs == "ON"; HourNotification
+		--
+		OnSendStats
+		--
+		SendOldStats //Deprecated version
+	}
+	--
+	//Once a day the ghost will check for updates if the user has auto updates on
+	if Config.AutoUpdates && AutoUpdates.CheckedToday == 0
+	{
+		AutoUpdates.GhostReady = 0
+		AutoUpdates.ShellReady = 0
+		AutoUpdates.BalloonReady = 0
+		"\![update,ghost+shell+balloon,checkonly]"
+	}
+}
+
+OnSecondChange
+{
+	//Reminders when minimized - for cases such as being overstimulated and needed to minimize what you have open, but still wanting water reminders! No streak or drink tracking available in this mode...
+	if IsMinimized && Config.RemindWhenMinimized
+	{
+		//Based on the aitalkinterval stuff in the shiori3.dic file...
+		if aitalkinterval > 0
+		{
+			_sec = GETSECCOUNT
+			_diff = _sec - SHIORI3FW.LastAITalkTime
+			if _diff >= aitalkinterval
+			{
+				if (_sec - SHIORI3FW.LastTalkTime) >= 6
+				{
+					if (_sec - SHIORI3FW.TalkEndTime) >= 6
+					{
+						if SHIORI3FW.IsAITalkComplete == 0
+						{
+							//Send a notif banner with the appropriate text...
+							//Adjusting the last talk time here because that way it doesn't screw with the timing of your reminders
+							_dialogue = ReminderTalk
+							_command = "\![set,trayballoon,--text=""%(_dialogue)"",--title=Hydrate reminder,--icon=info]"
+							
+							SHIORI3FW.PushAdditionalReturn('ValueNotify',_command)
+							SHIORI3FW.ResetAITalkInterval(0)
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	//Create arrays if none exist
+	if !ISVAR("ErrorsToPush.level"); ErrorsToPush.level = IARRAY
+	if !ISVAR("ErrorsToPush.description"); ErrorsToPush.description = IARRAY
+
+	if ARRAYSIZE(ErrorsToPush.level) > 0 //If there are errors
+	{
+		_levels = ""
+		_descriptions = ""
+		for _i = 0; _i < ARRAYSIZE(ErrorsToPush.level); _i++ //CHR(1) in here is the divider between errors
+		{
+			if _i > 0; {_levels += CHR(1); _descriptions += CHR(1)}
+			_levels += ErrorsToPush.level[_i]
+			_descriptions += ErrorsToPush.description[_i]
+		}
+		//Push the whole list of errors together
+		SHIORI3FW.PushAdditionalReturn('ErrorLevel',_levels)
+		SHIORI3FW.PushAdditionalReturn('ErrorDescription',_descriptions)
+		
+		//Clear the arrays so we don't send any more errors later
+		ErrorsToPush.level = IARRAY
+		ErrorsToPush.description = IARRAY
+	}
+}
