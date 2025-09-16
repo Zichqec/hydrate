@@ -11,6 +11,7 @@ dic, yaya_base/shiori3.dic, UTF-8
 dicif, yaya_base/optional.dic, UTF-8
 dicif, yaya_base/compatible.dic, UTF-8
 
+dic, boot.dic
 dic, deprecated.dic
 dic, utility.dic
 dic, legacy.dic
