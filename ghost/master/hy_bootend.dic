@@ -10,20 +10,6 @@ OnWindowStateRestore
 	OnSurfaceRestore
 }
 
-OnGhostChanging //Changing to another ghost
-{
-	OnSendStats
-	--
-	if todayswaters > 0
-	{
-		"\0\s[0](You took %(todayswaters) sips of water today,\w4 well done!)"
-	}
-	else
-	{
-		"\0\s[0](Remind %(reference0) to hydrate too!)"
-	}
-}
-
 OnShellChanging
 {
 	//This gets the current ghost coordinates so that they don't jump around the screen when they change shells
