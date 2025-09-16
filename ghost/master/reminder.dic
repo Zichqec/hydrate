@@ -76,6 +76,16 @@ OnDismissWater
 	OnSendStats
 }
 
+OnChoiceTimeout
+{
+	if "drinknotif" _in_ reference0
+	{
+		currentdrinkstreak = 0
+		newhighscorelatch = 0
+		OnSendStats
+	}
+}
+
 StreakStartDrink : nonoverlap
 {
 	"(You've reached a streak of drinks, good job! Keep it up!)"

@@ -704,15 +704,3 @@ OnToggleUninstall
 	else; Config.EnableUninstall = 0
 	OnConfigMenu
 }
-
-//----------Misc Functions----------
-
-OnChoiceTimeout
-{
-	if "drinknotif" _in_ reference0
-	{
-		currentdrinkstreak = 0
-		newhighscorelatch = 0
-		OnSendStats
-	}
-}
