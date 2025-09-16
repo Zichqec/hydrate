@@ -63,7 +63,7 @@ OnMinuteChange
 			AutoUpdates.BalloonReady = 0
 		}
 		
-		if HourNotifs == "ON"; HourNotification
+		if Config.HourNotifs; HourNotification
 		--
 		OnSendStats
 		--

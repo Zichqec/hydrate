@@ -361,7 +361,6 @@ OnConfigMenu : all
 	if deleteshitai == ""; deleteshitai = "OFF"
 	if notif == ""; notif = "None"
 	if volume == ""; volume = 50
-	if HourNotifs == ""; HourNotifs = "OFF"
 	
 	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
@@ -378,7 +377,7 @@ OnConfigMenu : all
 	
 	"Match position when changing shells: \![*]\_a[OnToggleMatchShellPosition]%(('OFF','ON')[Config.MatchShellPosition])\_a\n"
 	"Reminders while minimized: \![*]\_a[OnToggleRemindWhenMinimized]%(('OFF','ON')[Config.RemindWhenMinimized])\_a\n"
-	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(HourNotifs)\_a\n"
+	"Hour notifications: \![*]\_a[OnToggleHourNotifs]%(('OFF','ON')[Config.HourNotifs])\_a\n"
 	"Offscreen notifs: \![*]\_a[OnToggleOffscreenTalk]%(('OFF','ON')[Config.OffscreenDialogue])\_a\n"
 	"Enable uninstall? \![*]\_a[OnToggleUninstall]%(deleteshitai)\_a\n"
 	
@@ -553,9 +552,8 @@ OnToggleRemindWhenMinimized
 
 OnToggleHourNotifs
 {
-	if HourNotifs != "ON"; HourNotifs = "ON"
-	else; HourNotifs = "OFF"
-	
+	if Config.HourNotifs != 1; Config.HourNotifs = 1
+	else; Config.HourNotifs = 0
 	OnConfigMenu
 }
 
