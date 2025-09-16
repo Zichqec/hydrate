@@ -1,3 +1,4 @@
+ghost/master/hy_bootend.dic
 ghost/master/hy_commu.dic
 ghost/master/hy_etc.dic
 ghost/master/hy_string.dic
