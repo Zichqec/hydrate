@@ -286,14 +286,3 @@ OnHeadlinesenseFailure
 
 	"\0\s[0](Could not get RSS: %(_reason).)"
 }
-
-
-OnShellScaling
-{
-	Scale.X = reference0
-	Scale.Y = reference2
-	
-	OnSendStats
-	--
-	"\0\s[0](%(reference0)% hydration.)"
-}
