@@ -249,6 +249,8 @@ OnChangeDesign
 //TODO i'm not sure if the newer version of this function offers me any benefits or not... hm. The new one does have the thing where if it doesn't add anything to a category that is mustselect or multiple, it force picks at least one. Maybe do that
 OnRandomDressup
 {
+	AutoDressup.LastChangeTime = GETSECCOUNT
+	
 	_command = ""
 	foreach currentdressups; _dressup //Remove all current dressups
 	{

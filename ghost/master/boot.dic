@@ -57,6 +57,8 @@ OnInitialize
 		extrasipstoday = 0
 		AutoUpdates.CheckedToday = 0
 		opentime = GETSECCOUNT
+		AutoShell.LastChangeTime = GETSECCOUNT
+		AutoDressup.LastChangeTime = GETSECCOUNT
 	}
 }
 
