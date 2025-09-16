@@ -1,15 +1,3 @@
-OnWindowStateMinimize
-{
-	OnHydrateGhost.GetStats //This is the ONE place so far that I have to call this directly... if I go to another event it does not work
-}
-
-OnWindowStateRestore
-{
-	OnSendStats
-	--
-	OnSurfaceRestore
-}
-
 OnShellChanging
 {
 	//This gets the current ghost coordinates so that they don't jump around the screen when they change shells

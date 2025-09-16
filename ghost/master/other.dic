@@ -13,7 +13,34 @@ OnTranslate
 	TOSTR(_talk)
 }
 
+ghostver
+{
+	"2.0.2"
+}
+
+On_homeurl
+{
+	"https://raw.githubusercontent.com/Zichqec/hydrate/refs/heads/main/"
+}
+
 OnAnchorSelect
 {
 	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
+}
+
+OnSurfaceRestore
+{
+	"\0\s[0]"
+}
+
+OnWindowStateMinimize
+{
+	OnHydrateGhost.GetStats //This is the ONE place so far that I have to call this directly... if I go to another event it does not work
+}
+
+OnWindowStateRestore
+{
+	OnSendStats
+	--
+	OnSurfaceRestore
 }

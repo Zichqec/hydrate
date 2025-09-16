@@ -163,11 +163,6 @@ OnUpdateComplete
 	}
 }
 
-ghostver
-{
-	"2.0.2"
-}
-
 OnChangeLog : all
 {
 	"\j[https://ukagaka.zichqec.com/ghost/hydrate#version_history]"
@@ -301,9 +296,4 @@ OnShellScaling
 	OnSendStats
 	--
 	"\0\s[0](%(reference0)% hydration.)"
-}
-
-OnSurfaceRestore
-{
-	"\0\s[0]"
 }
