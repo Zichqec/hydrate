@@ -169,19 +169,19 @@ ErrorLog
 notification_sound : all
 {
 	//Skip if empty, or if set to custom and also empty...
-	if !(Config.NotificationSound == "None" || Config.NotificationSound == "" || (Config.NotificationSound == "Custom" && custom_sound_path == ""))
+	if !(Config.NotificationSound == "None" || Config.NotificationSound == "" || (Config.NotificationSound == "Custom" && Config.NotificationCustomPath == ""))
 	{
 		"\![sound,play,"""
 		
 		if Config.NotificationSound == "Custom"
 		{
-			custom_sound_path
+			Config.NotificationCustomPath
 		}
 		elseif Config.NotificationSound == "Random"
 		{
 			_opts = ("Water_Drop","Bubbles","Splash","Campana","Stop","Success")
 			_opts = "snd/" + _opts + ".mp3"
-			if Config.IncludeCustomSound && custom_sound_path != ""; _opts ,= custom_sound_path
+			if Config.IncludeCustomSound && Config.NotificationCustomPath != ""; _opts ,= Config.NotificationCustomPath
 			ANY(_opts)
 		}
 		else

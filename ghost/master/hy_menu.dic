@@ -502,7 +502,7 @@ OnCustomNotif : all
 OnPickCustomNotif
 {
 	Config.NotificationSound = "Custom"
-	custom_sound_path = reference2
+	Config.NotificationCustomPath = reference2
 	"\C\![sound,stop]%(notification_sound)\![raise,OnChangeNotif]"
 }
 

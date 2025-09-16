@@ -12,6 +12,7 @@ OnFirstBoot
 	AutoUpdates.BalloonReady = 0
 	
 	Config.NotificationSound = "None"
+	Config.NotificationCustomPath = ""
 	Config.IncludeCustomSound = 0
 	
 	Config.NotificationVolume = 50
@@ -78,6 +79,13 @@ OnUpdateVars
 		else; Config.NotificationVolume = 50
 	}
 	ERASEVAR("volume")
+	
+	if !ISVAR("Config.NotificationCustomPath")
+	{
+		if ISVAR("custom_sound_path"); Config.NotificationCustomPath = custom_sound_path
+		else; Config.NotificationCustomPath = ""
+	}
+	ERASEVAR("custom_sound_path")
 	
 	
 	//——— 2.0.2 ———
