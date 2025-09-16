@@ -35,6 +35,10 @@ OnFirstBoot
 	AutoShell.LastChangeTime = GETSECCOUNT
 	AutoShell.ChangingOnBoot = 0
 	
+	Config.AutoDressupChange = "Off"
+	Config.AutoDressupHours = 1
+	AutoDressup.LastChangeTime = GETSECCOUNT
+	
 	
 	OnSendStats
 	--
@@ -97,6 +101,8 @@ OnUpdateVars
 	if !ISVAR("Config.AutoShellChange"); Config.AutoShellChange = "Off"
 	if !ISVAR("Config.AutoShellHours"); Config.AutoShellHours = 2
 	if !ISVAR("AutoShell.LastChangeTime"); AutoShell.LastChangeTime = GETSECCOUNT
+	if !ISVAR("Config.AutoDressupChange"); Config.AutoDressupChange = "Off"
+	if !ISVAR("Config.AutoDressupHours"); Config.AutoDressupHours = 1
 	
 	
 	//——— 2.0.2 ———
@@ -157,6 +163,8 @@ OnBoot
 	}
 	else
 	{
+		"\![embed,OnRandomDressup]"
+		--
 		//These are handled by the shell change function, so not needed above...
 		OnGetShellAuthorInfo
 		--

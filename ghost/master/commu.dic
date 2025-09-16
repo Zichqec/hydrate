@@ -31,7 +31,7 @@ I'm not sure how they will handle this! If for some reason your chosen SHIORI ca
 //This intermediary step is because otherwise the boot events pass along their own references...
 OnSendStats
 {
-	if reference0 == "dressupmenu"; "\C"
+	if reference0 == "balloonopen"; "\C"
 	--
 	"\![embed,OnHydrateGhost.GetStats]"
 }

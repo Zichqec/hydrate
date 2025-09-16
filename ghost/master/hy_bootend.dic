@@ -40,7 +40,13 @@ OnGetCoordsAfter : all
 ShellChangedEnd
 {
 	AutoShell.LastChangeTime = GETSECCOUNT
+	AutoDressup.LastChangeTime = GETSECCOUNT
 	
+	if Config.AutoDressupChange == "When shell changes"
+	{
+		"\![embed,OnRandomDressup]"
+	}
+	--
 	"\1\s[-1]\0\s[0]"
 	--
 	OnGetShellAuthorInfo
@@ -110,6 +116,7 @@ OnNotifyDressupInfo
 OnDressupChanged
 {
 	//Because this runs BEFORE the notify event above, add a delay so that the changes are processed before sending stats...
-	if reference4 == "script"; "\C\![timerraise,100,1,OnSendStats,dressupmenu]"
-	else; "\![timerraise,100,1,OnSendStats]"
+	//This check is a bit dodgy lol TODO
+	if reference4 == "user"; "\![timerraise,100,1,OnSendStats]"
+	else; "\C\![timerraise,100,1,OnSendStats,balloonopen]"
 }

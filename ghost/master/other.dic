@@ -70,10 +70,20 @@ OnMinuteChange
 		if Config.HourNotifs; HourNotification
 	}
 	--
-	if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellHours * 3600)
+	if Config.AutoShellChange == "Every interval"
 	{
-		"\![change,shell,random,--option=raise-event]"
-		return //Don't do the checks below until after changing shells... I don't think this will come up but just in case
+		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellHours * 3600)
+		{
+			"\![change,shell,random,--option=raise-event]"
+			return //Don't do the checks below until after changing shells... I don't think this will come up but just in case
+		}
+	}
+	elseif Config.AutoDressupChange == "Every interval"
+	{
+		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoDressup.LastChangeTime + (Config.AutoDressupHours * 3600)
+		{
+			"\![embed,OnRandomDressup]"
+		}
 	}
 	--
 	//Once a day the ghost will check for updates if the user has auto updates on

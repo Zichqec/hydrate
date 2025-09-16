@@ -216,7 +216,7 @@ OnDressupMenu
 		elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
 		else; "\b[2]"
 		--
-		"\![*]\q[Randomize all categories,OnRandomDressup]"
+		"\![*]\q[Randomize all categories,OnRandomDressup,,menu]"
 	}
 	elseif reference0 != ""
 	{
@@ -224,7 +224,7 @@ OnDressupMenu
 		elseif _items > 11; "\b[4]"
 		else; "\b[2]"
 		--
-		"\![*]\q[Random,OnRandomDressup,%(reference0)]"
+		"\![*]\q[Random,OnRandomDressup,%(reference0),menu]"
 	}
 	--
 	"\n\n[half]%(_display)\n[half]"
@@ -246,6 +246,7 @@ OnChangeDesign
 	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]" //TODO here, like the one below...
 }
 
+//TODO i'm not sure if the newer version of this function offers me any benefits or not... hm. The new one does have the thing where if it doesn't add anything to a category that is mustselect or multiple, it force picks at least one. Maybe do that
 OnRandomDressup
 {
 	_command = ""
@@ -258,7 +259,7 @@ OnRandomDressup
 		_command += "\![bind,%(_category),%(_name),0]"
 	}
 	
-	"\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
+	if reference1 == "menu"; "\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
 	--
 	"\0%(_command)\![done    removing]"
 	--
@@ -291,7 +292,7 @@ OnRandomDressup
 		if "mustselect" _in_ _options; _mustselect = 1
 		if "multiple" _in_ _options; _multiple = 1
 		
-		_skipchance = 3 //1/3 chance
+		_skipchance = 4 //1/4 chance
 		if !_mustselect && RAND(_skipchance) == 0; continue
 		
 		if !_multiple
@@ -312,7 +313,7 @@ OnRandomDressup
 	}
 	_command
 	--
-	"\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]" //TODO that is definitely not necessary... I think
+	if reference1 == "menu"; "\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]" //TODO that is definitely not necessary... I think
 }
 
 OnWaterStats : all
@@ -378,9 +379,14 @@ OnConfigMenu : all
 	"\n"
 	
 	"\![*]Match position when changing shells: %(_b)\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a%(_d)\n"
+	
 	_s = "s"; if Config.AutoShellHours == 1; _s = ""
 	_shellchange = REPLACE(Config.AutoShellChange,"interval","%(Config.AutoShellHours) hour%(_s)")
 	"\![*]Auto shell change:%(br)%(_b)\_a[OnConfig.AutoShell]%(_shellchange)\_a%(_d)\n"
+	
+	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
+	_dressupchange = REPLACE(Config.AutoDressupChange,"interval","%(Config.AutoDressupHours) hour%(_s)")
+	"\![*]Auto dressup change:%(br)%(_b)\_a[OnConfig.AutoDressup]%(_dressupchange)\_a%(_d)\n"
 	"\n"
 	
 	"Auto update checks: \![*]%(_b)\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a%(_d)\n"
@@ -593,7 +599,7 @@ OnConfig.AutoShell.Set
 
 OnConfig.AutoShell.HourChange : all
 {
-	"\0\_q\s[0]\![open,inputbox,OnConfig.AutoShell.HourSet,-1]\![set,balloontimeout,-1]" //TODO add the input cancel thingy for if you close this box
+	"\0\_q\s[0]\![open,inputbox,OnConfig.AutoShell.HourSet,-1]\![set,balloontimeout,-1]"
 	
 	_s = "s"; if Config.AutoShellHours == 1; _s = ""
 	"(How many hours would you like between shell changes? Currently set to %(Config.AutoShellHours) hour%(_s).)\n\n"
@@ -615,6 +621,59 @@ OnConfig.AutoShell.HourSet : all
 		"\0\s[0]\_q"
 		"(Invalid time. Please input an integer greater than 0.)"
 		"\x\![raise,OnConfig.AutoShell.HourChange]"
+	}
+}
+
+OnConfig.AutoDressup : all
+{
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[2]\_q\![set,autoscroll,disable]\*"
+	"\![close,inputbox,OnConfig.AutoDressup.HourSet]"
+	"\f[align,center]%(emdash) Auto dressup change %(emdash)\n\n\f[align,left]"
+	
+	"\![*]\__q[OnConfig.AutoDressup.Set,Off]Off\__q\n"
+	"\![*]\__q[OnConfig.AutoDressup.Set,On boot]On boot\__q\n"
+	"\![*]\__q[OnConfig.AutoDressup.Set,After a drink]After a drink\__q\n"
+	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
+	"\![*]\__q[OnConfig.AutoDressup.Set,Every interval]Every %(Config.AutoDressupHours) hour%(_s)\__q\n"
+	"\__q[OnConfig.AutoDressup.HourChange](Change rate)\__q\n"
+	"\![*]\__q[OnConfig.AutoDressup.Set,When shell changes]When shell changes\__q\n"
+	"\n"
+	"\![*]\q[Back,OnConfigMenu]"
+	"\![unlock,balloonrepaint]"
+}
+
+OnConfig.AutoDressup.Set
+{
+	Config.AutoDressupChange = reference0
+	AutoDressup.LastChangeTime = GETSECCOUNT
+	OnConfigMenu
+}
+
+OnConfig.AutoDressup.HourChange : all
+{
+	"\0\_q\s[0]\b[2]\![open,inputbox,OnConfig.AutoDressup.HourSet,-1]\![set,balloontimeout,-1]"
+	
+	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
+	"(How many hours would you like between dressup changes? Currently set to %(Config.AutoDressupHours) hour%(_s).)\n\n"
+	"(Note that the timer is reset each session and any time the shell changes.)"
+	"\n\n"
+	"\![*]\q[Cancel,OnConfig.AutoDressup]"
+}
+
+OnConfig.AutoDressup.HourSet : all
+{
+	if TOINT(reference0) > 0
+	{
+		Config.AutoDressupHours = TOINT(reference0)
+		AutoDressup.LastChangeTime = GETSECCOUNT
+		OnConfig.AutoDressup
+	}
+	else
+	{
+		"\0\s[0]\_q"
+		"(Invalid time. Please input an integer greater than 0.)"
+		"\x\![raise,OnConfig.AutoDressup.HourChange]"
 	}
 }
 
@@ -723,6 +782,10 @@ OnDrankWater : nonoverlap
 	if Config.AutoShellChange == "After a drink"
 	{
 		_talk += "\_w[3000]\![change,shell,random,--option=raise-event]"
+	}
+	elseif Config.AutoDressupChange == "After a drink"
+	{
+		_talk += "\_w[3000]\![embed,OnRandomDressup]"
 	}
 	_talk
 }
