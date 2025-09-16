@@ -7,11 +7,13 @@ OnMouseDoubleClick : all
 		{
 			"\_q"
 			"(Updates are available for:)"
+			"\n\n"
 			
 			if AutoUpdates.GhostReady == 1; "(Hydrate)\n"
 			if AutoUpdates.ShellReady == 1; "('%(SHIORI3FW.ShellName)' shell)\n"
 			if AutoUpdates.BalloonReady == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
 			
+			"\n"
 			"\![*]\q[Download updates now,OnStartUpdate]\n"
 			"\![*]\q[Maybe later,OnUpdateLater]\n\n"
 			"\![*]\q[Turn off auto updates,OnUpdateOff]"
