@@ -114,6 +114,8 @@ OnBoot //Normal booting
 		"\![update,ghost+shell+balloon,checkonly]"
 	}
 	--
+	OnGetShellAuthorInfo
+	--
 	OnSendStats
 	--
 	"\0\s[0](Thank you for choosing to hydrate today.)\w8\n\n"
@@ -232,10 +234,9 @@ OnGetCoordsAfter : all
 
 ShellChangedEnd
 {
-	//Craftman info
-	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftmanurl]"
-	--
 	"\1\s[-1]\0\s[0]"
+	--
+	OnGetShellAuthorInfo
 	--
 	OnSendStats
 	--
@@ -260,12 +261,15 @@ ShellChangedEnd
 	}
 }
 
+OnGetShellAuthorInfo
+{
+	"\![get,property,OnShellAuthor,currentghost.shelllist.current.craftmanw,currentghost.shelllist.current.craftman,currentghost.shelllist.current.craftmanurl]"
+}
+
 OnShellAuthor
 {
-	shellauthor = IARRAY
-	shellauthor[0] = reference0 //craftman
-	if shellauthor[0] == ""; shellauthor[0] = reference1 //Craftman is replaced by craftmanw if craftman is empty
-	shellauthor[1] = reference1 //craftmanw
+	shellauthor[0] = reference0 //craftmanw
+	shellauthor[1] = reference1 //craftman -- i THINK that this is automatically using craftmanw when not present? There's no other way to explain this behavior. It's not documented on Ukadoc... yet
 	shellauthor[2] = reference2 //craftmanurl
 }
 
