@@ -5,13 +5,13 @@ OnMouseDoubleClick : all
 		//If an update is available, the user will be notified when they try to open the menu
 		if AutoUpdates.GhostReady == 1 || AutoUpdates.ShellReady == 1 || AutoUpdates.BalloonReady == 1 
 		{
-			"(Updates are available for:)\n\n"
+			"\_q"
+			"(Updates are available for:)"
 			
 			if AutoUpdates.GhostReady == 1; "(Hydrate)\n"
 			if AutoUpdates.ShellReady == 1; "('%(SHIORI3FW.ShellName)' shell)\n"
 			if AutoUpdates.BalloonReady == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
 			
-			"\_q\n"
 			"\![*]\q[Download updates now,OnStartUpdate]\n"
 			"\![*]\q[Maybe later,OnUpdateLater]\n\n"
 			"\![*]\q[Turn off auto updates,OnUpdateOff]"
