@@ -127,10 +127,10 @@ OnResume
 OnShellMenu : all
 {
 	_display = ""
-	for _i = 0; _i < ARRAYSIZE(ShellList); _i++
+	foreach ShellList; _shell
 	{
-		if ShellList[_i] == SHIORI3FW.ShellName; _display += "\![*]"
-		_display += "\q[%(ShellList[_i]),OnSwitchShell,%(ShellList[_i])]\n"
+		if _shell == SHIORI3FW.ShellName; _display += "\![*]"
+		_display += "\q[%(_shell),OnSwitchShell,%(_shell)]\n"
 	}
 	
 	"\0\*\_q\![set,autoscroll,disable]"
@@ -144,7 +144,10 @@ OnShellMenu : all
 	"\![*]\q[Random shell,OnRandomShell]\n"
 	"\![*]\q[Download more shells,OnShellUrl]"
 	"\n\n"
-	"%(_display)\n\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
+	"%(_display)"
+	"\n"
+	"\![*]\q[Back,OnMainMenu]\n"
+	"\![*]\q[Done,OnBlank]"
 }
 
 OnRandomShell
