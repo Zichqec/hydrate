@@ -400,7 +400,9 @@ OnConfigMenu : all
 		_b = "\f[bold,1]"
 		_d = "\f[bold,default]"
 	}
-	"\C\![lock,balloonrepaint]\c\![close,inputbox,OnDrinkTime]\_q\b[4]\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
+	"\C\![lock,balloonrepaint]\c"
+	"\![close,inputbox,OnDrinkTime]"
+	"\0\b[4]\_q\f[anchorvisitedfontcolor,default.anchor]\![set,autoscroll,disable]"
 	
 	"\f[align,center]%(emdash) Config %(emdash)\n\f[align,default]"
 	
@@ -439,7 +441,7 @@ OnConfigMenu : all
 
 OnChangeTalk : all
 {
-	"\0\_q\s[0]\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
+	"\0\s[0]\_q\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
 	
 	"(How many minutes would you like between reminders? "
 	switch aitalkinterval == 0
@@ -448,37 +450,28 @@ OnChangeTalk : all
 		"Reminders are currently off.)"
 	}
 	"\n\n"
+	"(To turn reminders off, enter a 0.)"
+	"\n\n"
 	"\![*]\q[Cancel,OnConfigMenu]"
 }
 
-OnDrinkTime
+OnDrinkTime : all
 {
 	"\C\![lock,balloonrepaint]\c"
-	--
+	
 	if reference0 >= 0 && GETTYPE(reference0) == 1
 	{
 		aitalkinterval = (reference0 * 60)
 		
 		"\![unlock,balloonrepaint]"
-		--
-		if reference0 == 0
-		{
-			"\0\s[0](Reminders turned off.)"
-		}
-		else
-		{
-			"\0\s[0](You will be reminded every %(TalkRateLabel(aitalkinterval)).)"
-		}
+		OnConfigMenu
 	}
 	else
 	{
 		"\0\s[0]\_q\![open,inputbox,OnDrinkTime,-1]\![set,balloontimeout,-1]"
-		--
+		
 		"(Invalid input. Please enter a positive integer, or 0 to turn reminders off.)"
-		--
-		"\n\n"
-		--
-		"\![*]\q[Cancel,OnConfigMenu]\![unlock,balloonrepaint]"
+		"\![unlock,balloonrepaint]\x\![raise,OnChangeTalk]"
 	}
 }
 
