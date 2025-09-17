@@ -158,7 +158,7 @@ OnUpdateComplete : all
 	{
 		AutoUpdates.CheckedToday = 0
 		"\0\s[0](Update complete.)"
-		"\n\n"
+		"\_q\n\n"
 		"\![*]\__q[OnChangeLog]Show changelog\__q\n"
 		"\![*]\__q[OnBlank]Done\__q"
 	}
