@@ -117,6 +117,6 @@ OnDressupChanged
 {
 	//Because this runs BEFORE the notify event above, add a delay so that the changes are processed before sending stats...
 	//This check is a bit dodgy lol TODO
-	if reference4 == "user"; "\![timerraise,100,1,OnSendStats]"
-	else; "\C\![timerraise,100,1,OnSendStats,balloonopen]"
+	if BalloonIsOpen; "\C\![timerraise,100,1,OnSendStats,balloonopen]"
+	elseif reference4 == "user"; "\![timerraise,100,1,OnSendStats]"
 }
