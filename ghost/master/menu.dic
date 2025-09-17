@@ -340,7 +340,7 @@ OnWaterStats : all
 		_d = "\f[bold,default]"
 	}
 	
-	"\0\*\b[4]\_q"
+	"\0\*\b[4]\_q\![set,autoscroll,disable]"
 	
 	"\f[align,center]%(emdash) Stats %(emdash)\n\n\f[align,default]"
 	
@@ -372,7 +372,9 @@ OnWaterStats : all
 	"(Look at you go!)"
 	}
 	
-	"\n\n\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
+	"\n\n"
+	"\![*]\q[Back,OnMainMenu]\n"
+	"\![*]\q[Done,OnBlank]"
 }
 
 
