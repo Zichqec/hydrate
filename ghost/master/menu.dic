@@ -124,11 +124,6 @@ OnResume
 	"\0\![timerraise,0,0,OnPause](Hydration resumed!)"
 }
 
-On_installedshellname
-{
-	ShellList = reference
-}
-
 OnShellMenu : all
 {
 	_display = ""

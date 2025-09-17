@@ -168,6 +168,11 @@ OnUserInputCancel
 	elseif reference0 == "OnDrinkTime"; OnConfigMenu
 }
 
+On_installedshellname
+{
+	ShellList = reference
+}
+
 
 //—————————————————————————————— Owner draw menu ——————————————————————————————
 On_recommendrootbutton.caption
