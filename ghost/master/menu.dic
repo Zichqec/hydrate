@@ -1,3 +1,4 @@
+//—————————————————————————————— Update notification ——————————————————————————————
 OnMouseDoubleClick : all
 {
 	if reference5 == 0 //Left click
@@ -43,6 +44,8 @@ OnUpdateOff //If the user no longer wants to be notified about updates
 	"\0\s[0]\_q(Auto Update checks turned off, you can turn them on again in the Config menu.)\x\![raise,OnMainMenu]"
 }
 
+
+//—————————————————————————————— Main menu ——————————————————————————————
 OnMainMenu : all
 {
 	"\0\![set,autoscroll,disable]\b[2]\_q"
@@ -92,6 +95,8 @@ OnExtraSip
 	"\0(Great!\w4 1 extra sip added to your total!)"
 }
 
+
+//—————————————————————————————— Pause menu ——————————————————————————————
 OnPause : all
 {
 	_time = TOINT(reference0)
@@ -124,6 +129,8 @@ OnResume
 	"\0\![timerraise,0,0,OnPause](Hydration resumed!)"
 }
 
+
+//—————————————————————————————— Shell menu ——————————————————————————————
 OnShellMenu : all
 {
 	_display = ""
@@ -165,6 +172,8 @@ OnSwitchShell
 	"\![change,shell,""%(reference0)"",--option=raise-event]"
 }
 
+
+//—————————————————————————————— Dressup menu ——————————————————————————————
 //I feel like I could and maybe probably should split this into two distinct functions, but it would require a little retooling of the random dressup function...
 OnDressupMenu : all
 {
@@ -330,6 +339,7 @@ OnRandomDressup : all
 }
 
 
+//—————————————————————————————— Stats menu ——————————————————————————————
 OnWaterStats : all
 {
 	_h = "\f[color,default.anchor]"
@@ -381,7 +391,7 @@ StatsComment : nonoverlap_pool
 }
 
 
-//----------Config Menu----------
+//—————————————————————————————— Config menu ——————————————————————————————
 OnConfigMenu : all
 {
 	_b = ""; _d = ""
@@ -472,6 +482,7 @@ OnDrinkTime
 	}
 }
 
+//———————————————————— Notification sound submenu ————————————————————
 OnChangeNotif : all
 {
 	_opts = ("Water Drop","Bubbles","Splash","Campana","Stop","Success")
@@ -570,6 +581,8 @@ OnToggleIncludeCustom
 	else; Config.IncludeCustomSound = 0
 	OnChangeNotif
 }
+//———————————————————————————————————————————————————————————————————
+
 
 OnUpdateCheck
 {
@@ -593,6 +606,8 @@ OnToggleMatchShellPosition
 	OnConfigMenu
 }
 
+
+//———————————————————— Auto shell change submenu ————————————————————
 OnConfig.AutoShell : all
 {
 	"\C\![lock,balloonrepaint]\c"
@@ -645,6 +660,8 @@ OnConfig.AutoShell.HourSet : all
 	}
 }
 
+
+//———————————————————— Auto dressup change submenu ————————————————————
 OnConfig.AutoDressup : all
 {
 	"\C\![lock,balloonrepaint]\c"
@@ -697,6 +714,8 @@ OnConfig.AutoDressup.HourSet : all
 		"\x\![raise,OnConfig.AutoDressup.HourChange]"
 	}
 }
+//———————————————————————————————————————————————————————————————————
+
 
 OnToggleRemindWhenMinimized
 {
