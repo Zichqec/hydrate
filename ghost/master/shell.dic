@@ -85,6 +85,7 @@ OnShellAuthor
 	shellauthor[2] = reference2 //craftmanurl
 }
 
+//character ID, category name, part name, option, on-1/off-0, thumbnail path
 OnNotifyDressupInfo
 {
 	dressups.available = IARRAY //This one is to display the dressup menu
