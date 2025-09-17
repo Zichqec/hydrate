@@ -6,7 +6,7 @@ OnMouseDoubleClick : all
 		//If an update is available, the user will be notified when they try to open the menu
 		if AutoUpdates.GhostReady == 1 || AutoUpdates.ShellReady == 1 || AutoUpdates.BalloonReady == 1 
 		{
-			"\_q"
+			"\0\b[0]\_q"
 			"(Updates are available for:)"
 			"\n\n"
 			
