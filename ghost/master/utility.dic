@@ -137,20 +137,6 @@ Wobble
 	_word
 }
 
-//Example: ErrorLog("Some debug info","info")
-ErrorLog
-{
-	//Create arrays if none exist
-	if !ISVAR("ErrorsToPush.level"); ErrorsToPush.level = IARRAY
-	if !ISVAR("ErrorsToPush.description"); ErrorsToPush.description = IARRAY
-	
-	_level = "warning" //It defaults to warning if it doesn't recognize what you've put in, so I will too
-	if _argv[1] != ""; _level = _argv[1]
-	
-	ErrorsToPush.level ,= _level
-	ErrorsToPush.description ,= _argv[0]
-}
-
 notification_sound : all
 {
 	//Skip if empty, or if set to custom and also empty...
