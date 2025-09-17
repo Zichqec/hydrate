@@ -495,8 +495,10 @@ OnChangeNotif : all
 	_vol_down = "\q[▼,OnQuickVolume,Down]"
 	if Config.NotificationVolume <= 0; _vol_down = "%(_g)▼%(_d)"
 	
-	"\C\![lock,balloonrepaint]\c\0\b[2]\_q\![set,autoscroll,disable]\*"
+	"\C\![lock,balloonrepaint]\c"
 	"\![close,dialog,OnPickCustomNotif]"
+	"\0\b[2]\_q\![set,autoscroll,disable]\*"
+	
 	"\f[align,center]%(emdash) Reminder sound %(emdash)\n\n[half]\f[align,left]"
 	
 	"Volume: %(_vol_up)%(_vol_down) %(Config.NotificationVolume)\n\n[half]"
@@ -516,8 +518,10 @@ OnChangeNotif : all
 		if Config.NotificationSound == _opt; "\![*]"
 		"\__q[OnNotifSet,%(_opt)]%(_opt)\__q\n"
 	}
+	"\n"
 	
-	"\n[half]\![*]\q[Back,OnConfigMenu]\![unlock,balloonrepaint]"
+	"\![*]\q[Back,OnConfigMenu]"
+	"\![unlock,balloonrepaint]"
 }
 
 //Up/Down volume buttons
@@ -546,12 +550,21 @@ OnCustomNotif : all
 {
 	_h = "\f[color,default.anchor]"
 	_d = "\f[color,default]"
+	_b = ""
+	_bd = ""
+	if SHIORI3FW.BalloonName == "H2O"
+	{
+		_h = "\f[bold,1]"
+		_d = "\f[bold,default]"
+		_b = "\f[bold,1]"
+		_bd = "\f[bold,default]"
+	}
 	
 	"\0\_q\b[2]\![set,autoscroll,disable]\![open,dialog,open,--id=OnPickCustomNotif]\*"
 	
-	"(Choose a sound file. Supported types are %(_h).mp3%(_d), %(_h).wav%(_d), %(_h).wma%(_d), and %(_h).mid%(_d).)\n\n"
+	"(Choose a sound file. Supported types are %(_h).mp3%(_d),%(br)%(_h).wav%(_d), %(_h).wma%(_d), and %(_h).mid%(_d).)\n\n"
 	
-	"(If sound files give an error, or you would like access to more file types including %(_h).flac%(_d), %(_h).ogg%(_d), or %(_h).m4a%(_d), please consider installing \_a[https://github.com/Nevcairiel/LAVFilters/releases]LAV Filters\_a.)\n\n"
+	"(If sound files give an error, or you would like access to more file types including%(br)%(_h).flac%(_d), %(_h).ogg%(_d), or %(_h).m4a%(_d), please consider installing%(br)%(_b)\_a[https://github.com/Nevcairiel/LAVFilters/releases]LAV Filters\_a%(_bd).)\n\n"
 	
 	"\![*]\q[Cancel,OnChangeNotif]"
 }
