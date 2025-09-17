@@ -245,6 +245,8 @@ OnChangeDesign
 
 OnRandomDressup : all
 {
+	AutoDressup.LastChangeTime = GETSECCOUNT
+	
 	_currentcategory = reference0
 	_returnto = reference1
 	
