@@ -165,76 +165,82 @@ OnSwitchShell
 	"\![change,shell,""%(reference0)"",--option=raise-event]"
 }
 
-OnDressupMenu
+//I feel like I could and maybe probably should split this into two distinct functions, but it would require a little retooling of the random dressup function...
+OnDressupMenu : all
 {
-	_display = "" //Initializing variables
+	_display = ""
 	_currentcategories = IARRAY
+	
+	foreach availabledressups; _dressup
+	{
+		_category = _dressup[0,C_BYTE1]
+		
+		if ASEARCH(_category,_currentcategories) == -1
+		{
+			_currentcategories ,= _category
+			_display += "\__q[OnDressupMenu.Category,%(_category)]%(_category)\__q\n"
+		}
+	}
+	
+	"\C\![lock,balloonrepaint]\c"
+	"\0\*\_q\![set,autoscroll,disable]"
+	
+	"\f[align,center]%(emdash) Dressups %(emdash)\n\f[align,left]"
+	
+	if ARRAYSIZE(_currentcategories) > 18; "\b[4]\![*]\q[Back,OnMainMenu]\n"
+	elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
+	else; "\b[2]"
+	
+	"\![*]\q[Randomize all categories,OnRandomDressup,,OnDressupMenu]"
+	
+	"\n\n"
+	"%(_display)"
+	"\n"
+	
+	"\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
+	"\![unlock,balloonrepaint]"
+}
+
+OnDressupMenu.Category : all
+{
+	_display = ""
 	_items = 0
 	
-	foreach availabledressups; _dressup //For every dressup that the ghost has
+	foreach availabledressups; _dressup
 	{
-		_category = _dressup[0,C_BYTE1] //Gather the name and category of the current dressup
+		_category = _dressup[0,C_BYTE1]
 		_name = _dressup[1,C_BYTE1]
 		
-		if reference0 == "" && ASEARCH(_category,_currentcategories) == -1 //If the user is not in a submenu AND we haven't logged this category yet
-		{
-			_currentcategories ,= _category //Add the category to a list
-			_display += "\__q[OnDressupMenu,%(_category)]%(_category)\__q\n" //Make a menu option for it
-		}
-		elseif _category == reference0 //Otherwise, if the user IS in a submenu, AND this item matches the current submenu category
+		if _category == reference0 //If this item matches the current category
 		{
 			_items++
-			_pos = ASEARCH("%(_category)%(C_BYTE1)%(_name)",currentdressups) //See if the name of this item is in the name of dressups currently being used
-			if _pos != -1; _display += "\![*]"
+			if ASEARCH("%(_category)%(C_BYTE1)%(_name)",currentdressups) != -1; _display += "\![*]"
 			_display += "\__q[OnChangeDesign,%(_category),%(_name)]%(_name)\__q\n"
 		}
 	}
-	--
-	"\C\![lock,balloonrepaint]\c\0\*\_q\![set,autoscroll,disable]"
-	--
-	if reference0 == ""
-	{
-		"\f[align,center]%(emdash) Designs %(emdash)\n\f[align,left]"
-	}
-	else
-	{
-		"\f[align,center]%(emdash) %(reference0) %(emdash)\n\f[align,left]"
-	}
-	--
-	if reference0 == ""
-	{
-		if ARRAYSIZE(_currentcategories) > 18; "\b[4]\n[half]\![*]\q[Back,OnMainMenu]\n"
-		elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
-		else; "\b[2]"
-		--
-		"\![*]\q[Randomize all categories,OnRandomDressup,,menu]"
-	}
-	elseif reference0 != ""
-	{
-		if _items > 18; "\b[4]\n\n[half]\![*]\q[Back,OnDressupMenu]\n"
-		elseif _items > 11; "\b[4]"
-		else; "\b[2]"
-		--
-		"\![*]\q[Random,OnRandomDressup,%(reference0),menu]"
-	}
-	--
-	"\n\n[half]%(_display)\n[half]"
-	--
-	if reference0 == ""
-	{
-		"\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
-	}
-	else
-	{
-		"\![*]\q[Back,OnDressupMenu]\n\![*]\q[Done,OnBlank]"
-	}
-	--
+	
+	"\C\![lock,balloonrepaint]\c"
+	"\0\*\_q\![set,autoscroll,disable]"
+	
+	"\f[align,center]%(emdash) %(reference0) %(emdash)\n\f[align,left]"
+	
+	if _items > 18; "\b[4]\![*]\q[Back,OnDressupMenu]\n"
+	elseif _items > 11; "\b[4]"
+	else; "\b[2]"
+	
+	"\![*]\q[Random,OnRandomDressup,%(reference0),OnDressupMenu.Category]"
+	
+	"\n\n"
+	"%(_display)"
+	"\n"
+	
+	"\![*]\q[Back,OnDressupMenu]\n\![*]\q[Done,OnBlank]"
 	"\![unlock,balloonrepaint]"
 }
 
 OnChangeDesign
 {
-	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]" //TODO here, like the one below...
+	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\![set,balloonwait,0.01] \![raise,OnDressupMenu.Category,%(reference0)]" //TODO here, like the one below...
 }
 
 //TODO i'm not sure if the newer version of this function offers me any benefits or not... hm. The new one does have the thing where if it doesn't add anything to a category that is mustselect or multiple, it force picks at least one. Maybe do that
@@ -252,7 +258,7 @@ OnRandomDressup
 		_command += "\![bind,%(_category),%(_name),0]"
 	}
 	
-	if reference1 == "menu"; "\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
+	if reference1 != ""; "\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
 	--
 	"\0%(_command)\![done    removing]"
 	--
@@ -306,7 +312,7 @@ OnRandomDressup
 	}
 	_command
 	--
-	if reference1 == "menu"; "\![set,balloonwait,0.01] \![raise,OnDressupMenu,%(reference0)]" //TODO that is definitely not necessary... I think
+	if reference1 != ""; "\![set,balloonwait,0.01] \![raise,%(reference1),%(reference0)]" //TODO that is definitely not necessary... I think
 }
 
 OnWaterStats : all
