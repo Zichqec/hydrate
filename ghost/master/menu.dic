@@ -352,10 +352,10 @@ OnWaterStats : all
 	"\n"
 	
 	_s = ""; if Stats.CurrentDrinkStreak != 1; _s = "s"
-	"\![*]Currently on a streak of %(_h)%(Stats.CurrentDrinkStreak)%(_d) drink%(_s)!\n"
+	"\![*]Currently on a streak of %(_h)%(Stats.CurrentDrinkStreak)%(_d) drink%(_s)\n"
 	
 	_s = ""; if Stats.HighestDrinkStreak != 1; _s = "s"
-	"\![*]Your highest drink streak is %(_h)%(Stats.HighestDrinkStreak)%(_d) drink%(_s)!\n"
+	"\![*]Your highest drink streak is %(_h)%(Stats.HighestDrinkStreak)%(_d) drink%(_s)\n"
 	"\n"
 	
 	_s = ""; if Stats.ExtraSipsToday != 1; _s = "s"
