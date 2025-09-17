@@ -1,4 +1,4 @@
-Stats from Hydrate come from an event called OnHydrateGhost.GetStats
+Stats from Hydrate come from an event called OnHydrateStatsNotify
 This is sent as NOTIFY, and is broadcast to all open ghosts.
 It is sent in the following instances:
 
