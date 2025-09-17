@@ -584,18 +584,10 @@ OnToggleIncludeCustom
 //———————————————————————————————————————————————————————————————————
 
 
-OnUpdateCheck
+OnToggleRemindWhenMinimized
 {
-	if reference0 == "ghost"; "\![updatebymyself]"
-	elseif reference0 == "balloon"; "\![update,balloon]"
-	else; "\![update,shell]"
-}
-
-OnToggleAutoUpdates
-{
-	if Config.AutoUpdates != 1; Config.AutoUpdates = 1
-	else; Config.AutoUpdates = 0
-	
+	if Config.RemindWhenMinimized != 1; Config.RemindWhenMinimized = 1
+	else; Config.RemindWhenMinimized = 0
 	OnConfigMenu
 }
 
@@ -717,11 +709,19 @@ OnConfig.AutoDressup.HourSet : all
 //———————————————————————————————————————————————————————————————————
 
 
-OnToggleRemindWhenMinimized
+OnToggleAutoUpdates
 {
-	if Config.RemindWhenMinimized != 1; Config.RemindWhenMinimized = 1
-	else; Config.RemindWhenMinimized = 0
+	if Config.AutoUpdates != 1; Config.AutoUpdates = 1
+	else; Config.AutoUpdates = 0
+	
 	OnConfigMenu
+}
+
+OnUpdateCheck
+{
+	if reference0 == "ghost"; "\![updatebymyself]"
+	elseif reference0 == "balloon"; "\![update,balloon]"
+	else; "\![update,shell]"
 }
 
 OnToggleHourNotifs
