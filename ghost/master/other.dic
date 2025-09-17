@@ -98,6 +98,7 @@ OnMinuteChange
 
 OnSecondChange
 {
+	//If reloaded from the legacy menu, bring it back up
 	if legacyreloadlatch
 	{
 		"\![embed,OnConfig.Legacy]"

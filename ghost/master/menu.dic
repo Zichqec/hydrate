@@ -663,7 +663,7 @@ OnConfig.Legacy : all
 	
 	"\C\![lock,balloonrepaint]\c"
 	"\0\b[4]\_q\![set,autoscroll,disable]\*"
-	"\f[align,center]%(emdash) Legacy content %(emdash)\n\n\f[align,left]"
+	"\f[align,center]%(emdash) Legacy content %(emdash)\n\f[align,left]"
 	
 	"\![*]Shell change comments:%(br)%(_b)\_a[OnToggleShellChangeComments]%(('Off','On')[Config.ShellChangeComments])\_a%(_d)\n"
 	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
@@ -731,5 +731,4 @@ OnConfig.Legacy.Reload
 	legacyreloadlatch = 1
 	"\![reload,ghost]"
 }
-
 //———————————————————————————————————————————————————————————————————
