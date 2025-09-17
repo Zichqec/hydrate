@@ -62,7 +62,7 @@ OnMainMenu : all
 	_s = ""; if todayswaters != 1; _s = "s"
 	"%(todayswaters) drink%(_s) taken this session!"
 	
-	if currentdrinkstreak > 3; "\n%(currentdrinkstreak) drinks in a row!"
+	if currentdrinkstreak >= 3; "\n%(currentdrinkstreak) drinks in a row!"
 	
 	"\n\f[height,-2]"
 	if aitalkinterval > 0
@@ -83,6 +83,7 @@ OnExtraSip
 {
 	extrasipstoday++
 	extrasipstotal++
+	
 	OnSendStats
 	--
 	"\0(That's awesome,\w4 good job!)"
