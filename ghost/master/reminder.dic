@@ -3,7 +3,7 @@ OnAITalk
 	_talk = ReminderTalk
 	if SHIORI3FW.ShellName == "Alkohol"; _talk = Wobble(_talk,0,0,Stats.CurrentDrinkStreak)
 	_talk = "\0\s[0]%(notification_sound)" + _talk
-	_talk += "\![set,choicetimeout,%(TimeoutInterval)]\n\n\![*]\__q[OnDrankWater]Done\__q\n\n\![*]\__q[OnDismissWater]Dismiss\__q\e drinknotif"
+	_talk += "\![set,choicetimeout,%(TimeoutInterval)]\_q\n\n\n\![*]\__q[OnDrankWater]Done\__q\n\n\![*]\__q[OnDismissWater]Dismiss\__q\e drinknotif"
 	_talk
 }
 
