@@ -37,44 +37,38 @@ OnGetCoordsAfter : all
 	ShellChangedEnd
 }
 
-ShellChangedEnd
+ShellChangedEnd : all
 {
 	AutoShell.LastChangeTime = GETSECCOUNT
 	AutoDressup.LastChangeTime = GETSECCOUNT
 	
-	if Config.AutoDressupChange == "When shell changes"
-	{
-		"\![embed,OnRandomDressup]"
-	}
-	--
-	"\1\s[-1]\0\s[0]"
-	--
+	if Config.AutoDressupChange == "When shell changes"; "\![embed,OnRandomDressup]"
+	
 	OnGetShellAuthorInfo
-	--
 	OnSendStats
-	--
-	if Config.AutoUpdates
-	{
-		"\![update,shell,checkonly]"
-	}
-	--
+	
+	"\1\s[-1]\0\s[0]"
+	
+	if Config.AutoUpdates; "\![update,shell,checkonly]"
+	
 	if AutoShell.ChangingOnBoot
 	{
 		AutoShell.ChangingOnBoot = 0
 		BootFinish
 	}
-	elseif SHIORI3FW.ShellName == SHIORI3FW.ShellNameOld //If the shell they changed to is the same as the last one
+	elseif SHIORI3FW.ShellName == SHIORI3FW.ShellNameOld
 	{
 		"(Reloaded %(SHIORI3FW.ShellName)!)"
 	}
-	elseif SHIORI3FW.ShellName == "Clear" //If they've switched back to the default
+	elseif SHIORI3FW.ShellName == "Clear" //Default
 	{
 		"(Default water.)"
 	}
 	else
 	{
-		"(Now using %(SHIORI3FW.ShellName).)\w8\w8\n\n" //If they're using anything other than the default
-		--
+		"(Now using %(SHIORI3FW.ShellName).)"
+		"\w8\w8\n\n"
+		
 		ShellChangeComments
 	}
 }
