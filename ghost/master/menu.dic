@@ -137,7 +137,7 @@ OnShellMenu : all
 	
 	"\f[align,center]%(emdash) Shells %(emdash)\n\f[align,left]"
 	
-	if ARRAYSIZE(ShellList) > 16; "\b[4]\n\![*]\q[Back,OnMainMenu]\n"
+	if ARRAYSIZE(ShellList) > 16; "\b[4]\![*]\q[Back,OnMainMenu]\n"
 	elseif ARRAYSIZE(ShellList) > 11; "\b[4]"
 	else; "\b[2]"
 	
