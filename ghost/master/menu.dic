@@ -29,7 +29,7 @@ OnUpdateLater //If the user decides to update later
 	AutoUpdates.ShellReady = 0
 	AutoUpdates.BalloonReady = 0
 	
-	"\0\s[0](Alright, you will be reminded once a day.)"
+	OnMainMenu
 }
 
 OnUpdateOff //If the user no longer wants to be notified about updates
@@ -40,7 +40,7 @@ OnUpdateOff //If the user no longer wants to be notified about updates
 	AutoUpdates.ShellReady = 0
 	AutoUpdates.BalloonReady = 0
 	
-	"\0\s[0](Auto Update checks turned off, you can turn them on again in the Config menu.)"
+	"\0\s[0]\_q(Auto Update checks turned off, you can turn them on again in the Config menu.)\x\![raise,OnMainMenu]"
 }
 
 OnMainMenu : all
