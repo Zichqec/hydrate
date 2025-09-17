@@ -32,12 +32,17 @@ OnFirstBoot
 	Config.AutoDressupMinutes = 60
 	AutoDressup.LastChangeTime = GETSECCOUNT
 	
-	Config.EnableUninstall = 0
+	Config.EnableUninstall = 1
 	Config.OffscreenDialogue = 0
 	Config.HourNotifs = 0
+	Config.ShellChangeComments = 0
+	Config.RightClickWaterFacts = 0
+	Config.RightClickEncouragement = 0
+	legacyreloadlatch = 0
 	
 	Scale.X = 100
 	Scale.Y = 100
+	
 	
 	OnSendStats
 	--
@@ -108,6 +113,12 @@ OnUpdateVars
 		else; Config.AutoDressupMinutes = 60
 	}
 	
+	if !ISVAR("Config.ShellChangeComments"); Config.ShellChangeComments = 0
+	if !ISVAR("Config.RightClickWaterFacts"); Config.RightClickWaterFacts = 0
+	if !ISVAR("Config.RightClickEncouragement"); Config.RightClickEncouragement = 0
+	if !ISVAR("legacyreloadlatch"); legacyreloadlatch = 0
+	
+	
 	//——— 2.0.3 ———
 	if !ISVAR("Config.HourNotifs")
 	{
@@ -119,7 +130,7 @@ OnUpdateVars
 	if !ISVAR("Config.EnableUninstall")
 	{
 		if ISVAR("deleteshitai") && deleteshitai == "ON"; Config.EnableUninstall = 1
-		else; Config.EnableUninstall = 0 //Can't decide if I want this as default or not...
+		else; Config.EnableUninstall = 1
 	}
 	ERASEVAR("deleteshitai")
 	
@@ -209,6 +220,8 @@ OnBoot
 
 BootFinish
 {
+	"\![quicksection,false]"
+	--
 	"\1\s[-1]\0\s[0]"
 	--
 	"(Thank you for choosing to hydrate today.)\w8\n\n"

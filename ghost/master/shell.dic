@@ -69,7 +69,7 @@ ShellChangedEnd : all
 		"(Now using %(SHIORI3FW.ShellName).)"
 		"\w8\w8\n\n"
 		
-		ShellChangeComments
+		if Config.ShellChangeComments; ShellChangeComments
 	}
 }
 

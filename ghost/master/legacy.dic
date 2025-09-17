@@ -239,25 +239,30 @@ OnOffscreen
 	}
 }
 
+//These toggles don't work unless you restart... I could slot in another string but then you would lose menu translations. How strange. I guess maybe if they exist, it gets handed over to the ghost...? And......... hm. Hm! More testing would be ideal...
 On_headlinesenserootbutton.caption
 {
-	//Water facts
-	"(Being hydrated helps regulate your tempurature.)"
-	"(What you think is hunger might actually be thirst. Take a drink before you grab a snack!)"
-	"(Water cushions your vital organs. Take a drink and protect your organs.)"
-	"(Water is the main component of your blood.)"
-	"(A lot of water actually comes in through what we eat. Try eating some fruits and vegetables high in water!)"
-	"(Water is essential for your kidneys to function.)"
-	"(You should drink more when it's hot or if you're sick.)"
+	if Config.RightClickWaterFacts
+	{
+		"(Being hydrated helps regulate your tempurature.)"
+		"(What you think is hunger might actually be thirst. Take a drink before you grab a snack!)"
+		"(Water cushions your vital organs. Take a drink and protect your organs.)"
+		"(Water is the main component of your blood.)"
+		"(A lot of water actually comes in through what we eat. Try eating some fruits and vegetables high in water!)"
+		"(Water is essential for your kidneys to function.)"
+		"(You should drink more when it's hot or if you're sick.)"
+	}
 }
 
 On_biffbutton.caption 
 {
-	//Encouragement
-	"(You're doing good, keep going!)"
-	"(Be kind to yourself today!)"
-	"(Keep taking small steps, you'll eventually get there!)"
-	"(Get up and stretch, movement helps you feel better!)"
-	"(You should be proud of the things you've gotten done today, no matter how small!)"
-	"(Treat yourself like you would a friend!)"
+	if Config.RightClickEncouragement
+	{
+		"(You're doing good, keep going!)"
+		"(Be kind to yourself today!)"
+		"(Keep taking small steps, you'll eventually get there!)"
+		"(Get up and stretch, movement helps you feel better!)"
+		"(You should be proud of the things you've gotten done today, no matter how small!)"
+		"(Treat yourself like you would a friend!)"
+	}
 }

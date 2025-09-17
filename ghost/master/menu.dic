@@ -343,11 +343,8 @@ OnConfigMenu : all
 	
 	"\![*]\__q[OnChangeLog,FromMenu]See the changelog\__q\n\n"
 	
-	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
-	"\![*]Offscreen notifs: %(_b)\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a%(_d)\n"
-	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n"
+	"\![*]\__q[OnConfig.Legacy]Legacy content\__q\n\n"
 	
-	"\n"
 	"\![*]\__q[OnMainMenu]Back\__q\n"
 	"\![*]\__q[OnBlank]Done\__q"
 	"\![unlock,balloonrepaint]"
@@ -652,23 +649,87 @@ OnUpdateCheck
 	else; "\![update,shell]"
 }
 
+//———————————————————— Legacy settings submenu ————————————————————
+OnConfig.Legacy : all
+{
+	legacyreloadlatch = 0
+	
+	_b = ""; _d = ""
+	if SHIORI3FW.BalloonName == "H2O"
+	{
+		_b = "\f[bold,1]"
+		_d = "\f[bold,default]"
+	}
+	
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[4]\_q\![set,autoscroll,disable]\*"
+	"\f[align,center]%(emdash) Legacy content %(emdash)\n\n\f[align,left]"
+	
+	"\![*]Shell change comments:%(br)%(_b)\_a[OnToggleShellChangeComments]%(('Off','On')[Config.ShellChangeComments])\_a%(_d)\n"
+	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
+	"\![*]Offscreen notifs: %(_b)\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a%(_d)\n"
+	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n\n"
+	"\n"
+	"Right click menu:\n"
+	"\![*]Encouragement: %(_b)\_a[OnToggleRightClickEncouragement]%(('Off','On')[Config.RightClickEncouragement])\_a%(_d)\n"
+	"\![*]Water facts: %(_b)\_a[OnToggleRightClickWaterFacts]%(('Off','On')[Config.RightClickWaterFacts])\_a%(_d)\n"
+	"(These require %(_b)\_a[OnConfig.Legacy.Reload]reload\_a%(_d) to take effect)\n"
+	//Note to future me: It seems like the string it uses for the right click menu is based on the FIRST TIME you open it that session.
+	//Additionally, when you turn these settings ON, you only need to reload the shiori, but to turn them off you have to reload the ghost... what a pain!
+	//TODO i would like to improve this
+	"\n"
+	
+	"\![*]\__q[OnConfigMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
+	"\![unlock,balloonrepaint]"
+}
+
+OnToggleShellChangeComments
+{
+	if Config.ShellChangeComments != 1; Config.ShellChangeComments = 1
+	else; Config.ShellChangeComments = 0
+	OnConfig.Legacy
+}
+
 OnToggleHourNotifs
 {
 	if Config.HourNotifs != 1; Config.HourNotifs = 1
 	else; Config.HourNotifs = 0
-	OnConfigMenu
+	OnConfig.Legacy
 }
 
 OnToggleOffscreenTalk
 {
 	if Config.OffscreenDialogue != 1; Config.OffscreenDialogue = 1
 	else; Config.OffscreenDialogue = 0
-	OnConfigMenu
+	OnConfig.Legacy
 }
 
 OnToggleUninstall
 {
 	if Config.EnableUninstall != 1; Config.EnableUninstall = 1
 	else; Config.EnableUninstall = 0
-	OnConfigMenu
+	OnConfig.Legacy
 }
+
+OnToggleRightClickEncouragement
+{
+	if Config.RightClickEncouragement != 1; Config.RightClickEncouragement = 1
+	else; Config.RightClickEncouragement = 0
+	OnConfig.Legacy
+}
+
+OnToggleRightClickWaterFacts
+{
+	if Config.RightClickWaterFacts != 1; Config.RightClickWaterFacts = 1
+	else; Config.RightClickWaterFacts = 0
+	OnConfig.Legacy
+}
+
+OnConfig.Legacy.Reload
+{
+	legacyreloadlatch = 1
+	"\![reload,ghost]"
+}
+
+//———————————————————————————————————————————————————————————————————

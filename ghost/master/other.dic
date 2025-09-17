@@ -98,6 +98,12 @@ OnMinuteChange
 
 OnSecondChange
 {
+	if legacyreloadlatch
+	{
+		"\![embed,OnConfig.Legacy]"
+		return
+	}
+	
 	//Reminders when minimized - for cases such as being overstimulated and needed to minimize what you have open, but still wanting water reminders! No streak or drink tracking available in this mode...
 	if IsMinimized && Config.RemindWhenMinimized
 	{
