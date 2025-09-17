@@ -115,3 +115,89 @@ OnDressupChanged
 	if BalloonIsOpen; "\C\![timerraise,100,1,OnSendStats,balloonopen]"
 	elseif reference4 == "user"; "\![timerraise,100,1,OnSendStats]"
 }
+
+OnRandomDressup : all
+{
+	AutoDressup.LastChangeTime = GETSECCOUNT
+	
+	_currentcategory = reference0
+	_returnto = reference1
+	
+	if _returnto != ""; "\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
+	"\0\_q"
+	
+	//—— Unbind all active ——
+	//ID, category, name
+	foreach dressups.current; _dressup
+	{
+		"\![bind,%(_dressup[1,C_BYTE1]),%(_dressup[2,C_BYTE1]),0]"
+	}
+	
+	//—— Break dressups into categories ——
+	_category.key = IARRAY
+	_category.val = IARRAY
+	_category.opt = IARRAY
+	
+	//category, name, opts
+	foreach dressups.available; _dressup
+	{
+		_dressup = SPLIT(_dressup,C_BYTE1)
+		
+		_index = ASEARCH(_dressup[0],_category.key)
+		
+		//Add new category if none found
+		if _index == -1
+		{
+			_category.key ,= _dressup[0]
+			_category.val ,= _dressup[1]
+			_category.opt ,= _dressup[2] //It's ok if this is an empty string...
+		}
+		else
+		{
+			_category.val[_index] += C_BYTE1 + _dressup[1]
+		}
+	}
+	
+	//—— Assign new dressups ——
+	_skipratio = 4 //1 out of 4
+	for _i = 0; _i < ARRAYSIZE(_category.key); _i++
+	{
+		_multiple = 0
+		_mustselect = 0
+		if "multiple" _in_ _category.opt[_i]; _multiple = 1
+		if "mustselect" _in_ _category.opt[_i]; _mustselect = 1
+		
+		_category = _category.key[_i]
+		if _currentcategory != "" //A category is assigned
+		{
+			if _currentcategory != _category; continue //Skip if not the correct one
+		}
+		else //No category
+		{
+			if !_mustselect && RAND(_skipratio) != 0; continue //Chance to skip if not mustselect
+		}
+		
+		_dressups = SPLIT(_category.val[_i],C_BYTE1)
+		
+		_dressup_added = 0
+		if _multiple
+		{
+			foreach _dressups; _dressup
+			{
+				if RAND(_skipratio) != 0
+				{
+					_dressup_added = 1
+					"\![bind,%(_category),%(_dressup),1]"
+				}
+			}
+		}
+		
+		//If this is a pick-one category, or it's multiple but no dressups were added
+		if !_dressup_added
+		{
+			"\![bind,%(_category),%(ANY(_dressups)),1]"
+		}
+	}
+	
+	if _returnto != ""; "\![set,balloonwait,0.01] \![raise,%(_returnto),%(_currentcategory)]"
+}
