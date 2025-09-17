@@ -51,7 +51,7 @@ OnKeyPress
 	elseif reference0 == "t" && SHIORI3FW.DebugMode; OnAITalk
 }
 
-OnMinuteChange
+OnMinuteChange : all
 {
 	if minute == 0
 	{
@@ -64,12 +64,12 @@ OnMinuteChange
 		}
 		
 		OnSendStats
-		--
+		
 		SendOldStats //Deprecated version
-		--
+		
 		if Config.HourNotifs; HourNotification
 	}
-	--
+	
 	if Config.AutoShellChange == "Every interval"
 	{
 		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellMinutes * 60)
@@ -85,7 +85,7 @@ OnMinuteChange
 			"\![embed,OnRandomDressup]"
 		}
 	}
-	--
+	
 	//Once a day the ghost will check for updates if the user has auto updates on
 	if Config.AutoUpdates && AutoUpdates.CheckedToday == 0
 	{
