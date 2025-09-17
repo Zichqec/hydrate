@@ -145,6 +145,11 @@ OnUserInputCancel
 	elseif reference0 == "OnDrinkTime"; OnConfigMenu
 }
 
+OnSystemDialogCancel
+{
+	if reference1 == "OnPickCustomNotif"; "\C\![sound,stop]\![raise,OnChangeNotif]"
+}
+
 On_installedshellname
 {
 	ShellList = reference

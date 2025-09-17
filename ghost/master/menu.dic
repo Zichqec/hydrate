@@ -490,11 +490,6 @@ OnPickCustomNotif
 	"\C\![sound,stop]%(notification_sound)\![raise,OnChangeNotif]"
 }
 
-OnSystemDialogCancel
-{
-	if reference1 == "OnPickCustomNotif"; "\C\![sound,stop]\![raise,OnChangeNotif]"
-}
-
 OnToggleIncludeCustom
 {
 	if Config.IncludeCustomSound != 1; Config.IncludeCustomSound = 1
