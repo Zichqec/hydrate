@@ -611,6 +611,7 @@ OnConfig.AutoShell : all
 	"\C\![lock,balloonrepaint]\c"
 	"\0\b[2]\_q\![set,autoscroll,disable]\*"
 	"\![close,inputbox,OnConfig.AutoShell.HourSet]"
+	
 	"\f[align,center]%(emdash) Auto shell change %(emdash)\n\n\f[align,left]"
 	
 	"\![*]\__q[OnConfig.AutoShell.Set,Off]Off\__q\n"
@@ -620,6 +621,7 @@ OnConfig.AutoShell : all
 	"\![*]\__q[OnConfig.AutoShell.Set,Every interval]Every %(Config.AutoShellHours) hour%(_s)\__q\n"
 	"\__q[OnConfig.AutoShell.HourChange](Change rate)\__q\n"
 	"\n"
+	
 	"\![*]\q[Back,OnConfigMenu]"
 	"\![unlock,balloonrepaint]"
 }
@@ -633,13 +635,17 @@ OnConfig.AutoShell.Set
 
 OnConfig.AutoShell.HourChange : all
 {
-	"\0\_q\s[0]\![open,inputbox,OnConfig.AutoShell.HourSet,-1]\![set,balloontimeout,-1]"
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[0]\s[0]\_q"
+	"\![open,inputbox,OnConfig.AutoShell.HourSet,-1]\![set,balloontimeout,-1]"
 	
 	_s = "s"; if Config.AutoShellHours == 1; _s = ""
 	"(How many hours would you like between shell changes? Currently set to %(Config.AutoShellHours) hour%(_s).)\n\n"
 	"(Note that the timer is reset each session.)"
 	"\n\n"
+	
 	"\![*]\q[Cancel,OnConfig.AutoShell]"
+	"\![unlock,balloonrepaint]"
 }
 
 OnConfig.AutoShell.HourSet : all
@@ -652,9 +658,10 @@ OnConfig.AutoShell.HourSet : all
 	}
 	else
 	{
-		"\0\s[0]\_q"
+		"\C\![lock,balloonrepaint]\c"
+		"\0\b[0]\s[0]\_q"
 		"(Invalid time. Please input an integer greater than 0.)"
-		"\x\![raise,OnConfig.AutoShell.HourChange]"
+		"\![unlock,balloonrepaint]\x\![raise,OnConfig.AutoShell.HourChange]"
 	}
 }
 
@@ -675,6 +682,7 @@ OnConfig.AutoDressup : all
 	"\__q[OnConfig.AutoDressup.HourChange](Change rate)\__q\n"
 	"\![*]\__q[OnConfig.AutoDressup.Set,When shell changes]When shell changes\__q\n"
 	"\n"
+	
 	"\![*]\q[Back,OnConfigMenu]"
 	"\![unlock,balloonrepaint]"
 }
@@ -688,13 +696,17 @@ OnConfig.AutoDressup.Set
 
 OnConfig.AutoDressup.HourChange : all
 {
-	"\0\_q\s[0]\b[2]\![open,inputbox,OnConfig.AutoDressup.HourSet,-1]\![set,balloontimeout,-1]"
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[2]\s[0]\_q"
+	"\![open,inputbox,OnConfig.AutoDressup.HourSet,-1]\![set,balloontimeout,-1]"
 	
 	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
 	"(How many hours would you like between dressup changes? Currently set to %(Config.AutoDressupHours) hour%(_s).)\n\n"
 	"(Note that the timer is reset each session and any time the shell changes.)"
 	"\n\n"
+	
 	"\![*]\q[Cancel,OnConfig.AutoDressup]"
+	"\![unlock,balloonrepaint]"
 }
 
 OnConfig.AutoDressup.HourSet : all
@@ -707,9 +719,10 @@ OnConfig.AutoDressup.HourSet : all
 	}
 	else
 	{
-		"\0\s[0]\_q"
+		"\C\![lock,balloonrepaint]\c"
+		"\0\b[0]\s[0]\_q"
 		"(Invalid time. Please input an integer greater than 0.)"
-		"\x\![raise,OnConfig.AutoDressup.HourChange]"
+		"\![unlock,balloonrepaint]\x\![raise,OnConfig.AutoDressup.HourChange]"
 	}
 }
 //———————————————————————————————————————————————————————————————————
