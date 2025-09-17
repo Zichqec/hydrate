@@ -1,10 +1,12 @@
 OnFirstBoot
 {
-	todayswaters = 0
-	totalwaters = 0
-	currentdrinkstreak = 0
-	extrasipstoday = 0
-	extrasipstotal = 0
+	Stats.DrinksToday = 0
+	Stats.DrinksTotal = 0
+	Stats.CurrentDrinkStreak = 0
+	Stats.HighestDrinkStreak = 0
+	Stats.ExtraSipsToday = 0
+	Stats.ExtraSipsTotal = 0
+	
 	Config.AutoUpdates = 1
 	AutoUpdates.CheckedToday = 0
 	AutoUpdates.GhostReady = 0
@@ -18,7 +20,6 @@ OnFirstBoot
 	Config.NotificationVolume = 50
 	Config.HourNotifs = 0
 	
-	highestdrinkstreak = 0
 	newhighscorelatch = 0
 	
 	Config.OffscreenDialogue = 0
@@ -53,8 +54,8 @@ OnInitialize
 	//Stuff to set on actual boot only
 	if reference0 != "reload"
 	{
-		todayswaters = 0
-		extrasipstoday = 0
+		Stats.DrinksToday = 0
+		Stats.ExtraSipsToday = 0
 		AutoUpdates.CheckedToday = 0
 		opentime = GETSECCOUNT
 		AutoShell.LastChangeTime = GETSECCOUNT
@@ -66,6 +67,38 @@ OnUpdateVars
 {
 	//——— 2.0.4 ———
 	ERASEVAR("currentdressups","availabledressups","dressupcategories")
+	
+	if !ISVAR("Stats.DrinksToday")
+	{
+		if ISVAR("todayswaters"); Stats.DrinksToday = todayswaters
+		else; Stats.DrinksToday = 0
+	}
+	if !ISVAR("Stats.DrinksTotal")
+	{
+		if ISVAR("totalwaters"); Stats.DrinksTotal = totalwaters
+		else; Stats.DrinksTotal = 0
+	}
+	if !ISVAR("Stats.CurrentDrinkStreak")
+	{
+		if ISVAR("currentdrinkstreak"); Stats.CurrentDrinkStreak = currentdrinkstreak
+		else; Stats.CurrentDrinkStreak = 0
+	}
+	if !ISVAR("Stats.HighestDrinkStreak")
+	{
+		if ISVAR("highestdrinkstreak"); Stats.HighestDrinkStreak = highestdrinkstreak
+		else; Stats.HighestDrinkStreak = 0
+	}
+	if !ISVAR("Stats.ExtraSipsToday")
+	{
+		if ISVAR("extrasipstoday"); Stats.ExtraSipsToday = extrasipstoday
+		else; Stats.ExtraSipsToday = 0
+	}
+	if !ISVAR("Stats.ExtraSipsTotal")
+	{
+		if ISVAR("extrasipstotal"); Stats.ExtraSipsTotal = extrasipstotal
+		else; Stats.ExtraSipsTotal = 0
+	}
+	
 	
 	//——— 2.0.3 ———
 	if !ISVAR("Config.HourNotifs")
@@ -139,19 +172,11 @@ OnUpdateVars
 		Scale.Y = nowscale
 		if Scale.Y == ""; Scale.Y = 100
 	}
-	if !ISVAR("highestdrinkstreak"); highestdrinkstreak = 0
 	if !ISVAR("newhighscorelatch"); newhighscorelatch = 0
 	
 	//——— 2.0.0 ———
 	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0
 	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
-	
-	
-	//——— 1.1.0 ———
-	if ISVAR('totalwaters') == 0; totalwaters = 0
-	if ISVAR('currentdrinkstreak') == 0; currentdrinkstreak = 0
-	if ISVAR('extrasipstoday') == 0; extrasipstoday = 0
-	if ISVAR('extrasipstotal') == 0; extrasipstotal = 0
 }
 
 OnBoot
@@ -219,10 +244,10 @@ OnClose
 {
 	OnSendStats //A bit superfluous perhaps...
 	--
-	if todayswaters > 0
+	if Stats.DrinksToday > 0
 	{
-		_s = "s"; if todayswaters == 1; _s = ""
-		"\0\s[0](You took %(todayswaters) sip%(_s) of water today,\w4 well done!)"
+		_s = "s"; if Stats.DrinksToday == 1; _s = ""
+		"\0\s[0](You took %(Stats.DrinksToday) sip%(_s) of water today,\w4 well done!)"
 	}
 	else
 	{
@@ -236,10 +261,10 @@ OnGhostChanging
 {
 	OnSendStats
 	--
-	if todayswaters > 0
+	if Stats.DrinksToday > 0
 	{
-		_s = "s"; if todayswaters == 1; _s = ""
-		"\0\s[0](You took %(todayswaters) sip%(_s) of water today,\w4 well done!)"
+		_s = "s"; if Stats.DrinksToday == 1; _s = ""
+		"\0\s[0](You took %(Stats.DrinksToday) sip%(_s) of water today,\w4 well done!)"
 	}
 	else
 	{

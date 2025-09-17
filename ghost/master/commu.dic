@@ -48,7 +48,7 @@ OnHydrateStatsNotify : all
 		_dressups += _dressup
 	}
 	//%(Scale.X),%(Scale.Y) //To be added later if a way to determine scale when the shell is changed is added...
-	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateStatsNotify,""%(SHIORI3FW.ShellName)"",""%(_dressups)"",,,%(todayswaters),%(totalwaters),%(currentdrinkstreak),%(highestdrinkstreak),%(extrasipstoday),%(extrasipstotal),%(IsMinimized)]"
+	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateStatsNotify,""%(SHIORI3FW.ShellName)"",""%(_dressups)"",,,%(Stats.DrinksToday),%(Stats.DrinksTotal),%(Stats.CurrentDrinkStreak),%(Stats.HighestDrinkStreak),%(Stats.ExtraSipsToday),%(Stats.ExtraSipsTotal),%(IsMinimized)]"
 }
 
 HydrateCommuResponse : nonoverlap_pool

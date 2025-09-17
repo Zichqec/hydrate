@@ -59,10 +59,10 @@ OnMainMenu : all
 	"\![*]\q[Done,OnBlank]"
 	
 	"\n\n[half]"
-	_s = ""; if todayswaters != 1; _s = "s"
-	"%(todayswaters) drink%(_s) taken this session!"
+	_s = ""; if Stats.DrinksToday != 1; _s = "s"
+	"%(Stats.DrinksToday) drink%(_s) taken this session!"
 	
-	if currentdrinkstreak >= 3; "\n%(currentdrinkstreak) drinks in a row!"
+	if Stats.CurrentDrinkStreak >= 3; "\n%(Stats.CurrentDrinkStreak) drinks in a row!"
 	
 	"\n\f[height,-2]"
 	if aitalkinterval > 0
@@ -81,8 +81,8 @@ OnMainMenu : all
 
 OnExtraSip
 {
-	extrasipstoday++
-	extrasipstotal++
+	Stats.ExtraSipsToday++
+	Stats.ExtraSipsTotal++
 	
 	OnSendStats
 	--
@@ -344,23 +344,25 @@ OnWaterStats : all
 	
 	"\f[align,center]%(emdash) Stats %(emdash)\n\n\f[align,default]"
 	
-	_s = ""; if todayswaters != 1; _s = "s"
-	"\![*]%(_h)%(todayswaters)%(_d) drink%(_s) taken this session\n"
+	_s = ""; if Stats.DrinksToday != 1; _s = "s"
+	"\![*]%(_h)%(Stats.DrinksToday)%(_d) drink%(_s) taken this session\n"
 	
-	_s = ""; if totalwaters != 1; _s = "s"
-	"\![*]%(_h)%(totalwaters)%(_d) drink%(_s) taken in total\n"
+	_s = ""; if Stats.DrinksTotal != 1; _s = "s"
+	"\![*]%(_h)%(Stats.DrinksTotal)%(_d) drink%(_s) taken in total\n"
 	"\n"
-	_s = ""; if currentdrinkstreak != 1; _s = "s"
-	"\![*]Currently on a streak of %(_h)%(currentdrinkstreak)%(_d) drink%(_s)!\n"
 	
-	_s = ""; if highestdrinkstreak != 1; _s = "s"
-	"\![*]Your highest drink streak is %(_h)%(highestdrinkstreak)%(_d) drink%(_s)!\n"
+	_s = ""; if Stats.CurrentDrinkStreak != 1; _s = "s"
+	"\![*]Currently on a streak of %(_h)%(Stats.CurrentDrinkStreak)%(_d) drink%(_s)!\n"
+	
+	_s = ""; if Stats.HighestDrinkStreak != 1; _s = "s"
+	"\![*]Your highest drink streak is %(_h)%(Stats.HighestDrinkStreak)%(_d) drink%(_s)!\n"
 	"\n"
-	_s = ""; if extrasipstoday != 1; _s = "s"
-	"\![*]%(_h)%(extrasipstoday)%(_d) extra sip%(_s) taken today\n"
 	
-	_s = ""; if extrasipstotal != 1; _s = "s"
-	"\![*]%(_h)%(extrasipstotal)%(_d) extra sip%(_s) taken in total\n\n"
+	_s = ""; if Stats.ExtraSipsToday != 1; _s = "s"
+	"\![*]%(_h)%(Stats.ExtraSipsToday)%(_d) extra sip%(_s) taken today\n"
+	
+	_s = ""; if Stats.ExtraSipsTotal != 1; _s = "s"
+	"\![*]%(_h)%(Stats.ExtraSipsTotal)%(_d) extra sip%(_s) taken in total\n\n"
 	
 	nonoverlap : {
 	"(You're doing awesome, keep it up!)"
