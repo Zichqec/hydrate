@@ -7,16 +7,6 @@ OnAITalk
 	_talk
 }
 
-ReminderTalk : nonoverlap
-{
-	"(It's time to drink some water!)"
-	"(You should take a sip of water.)"
-	"(Stay hydrated! Take a sip of water if you haven't lately.)"
-	"(It's time for a sip of water!)"
-	"(You should get a drink!)"
-	"(Get a drink and move around a little!)"
-}
-
 OnDrankWater : nonoverlap
 {
 	Stats.DrinksToday++
@@ -86,12 +76,14 @@ OnChoiceTimeout
 	}
 }
 
-StreakStartDrink : nonoverlap
+ReminderTalk : nonoverlap
 {
-	"(You've reached a streak of drinks, good job! Keep it up!)"
-	"(You've started a streak! Keep going!)"
-	"(You're doing really well, you've started a streak!)"
-	"(3 drink combo! Keep going!)"
+	"(It's time to drink some water!)"
+	"(You should take a sip of water.)"
+	"(Stay hydrated! Take a sip of water if you haven't lately.)"
+	"(It's time for a sip of water!)"
+	"(You should get a drink!)"
+	"(Get a drink and move around a little!)"
 }
 
 GeneralDrink : nonoverlap
@@ -112,6 +104,14 @@ GeneralDrink : nonoverlap
 	"(Look at you go!)"
 }
 
+StreakStartDrink : nonoverlap
+{
+	"(You've reached a streak of drinks, good job! Keep it up!)"
+	"(You've started a streak! Keep going!)"
+	"(You're doing really well, you've started a streak!)"
+	"(3 drink combo! Keep going!)"
+}
+
 StreakDrink : nonoverlap
 {
 	"(That's %(Stats.CurrentDrinkStreak) drinks in a row! Way to go!)"
@@ -120,16 +120,16 @@ StreakDrink : nonoverlap
 	"(You've had %(Stats.CurrentDrinkStreak) so far! That's really great, good job!)"
 }
 
+NewStreakHighScoreDrink
+{
+	"(You've reached a new high score of %(Stats.HighestDrinkStreak) drinks in a row! Way to go!)"
+	"(New high score! %(Stats.HighestDrinkStreak) drinks in a row! Incredible!)"
+}
+
 MilestoneDrink : nonoverlap
 {
 	"(You've reached %(Stats.DrinksTotal) total timed drinks, good job!)"
 	"(You've reached %(Stats.DrinksTotal) total timed drinks, you're a hydration pro!)"
 	"(You've reached %(Stats.DrinksTotal) total timed drinks, fantastic!)"
 	"(You've reached %(Stats.DrinksTotal) total timed drinks, look at you go!)"
-}
-
-NewStreakHighScoreDrink
-{
-	"(You've reached a new high score of %(Stats.HighestDrinkStreak) drinks in a row! Way to go!)"
-	"(New high score! %(Stats.HighestDrinkStreak) drinks in a row! Incredible!)"
 }
