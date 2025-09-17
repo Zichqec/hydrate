@@ -42,7 +42,7 @@ OnHydrateStatsNotify : all
 	//Note for future Zi: 0xFDEF is what's called a "noncharacter" in the unicode standard. They're neat! They go from 0xFDD0 to 0xFDEF
 	
 	_dressups = ""
-	foreach currentdressups; _dressup
+	foreach dressups.current; _dressup
 	{
 		if _dressups != ""; _dressups += CHR(0xFDEF)
 		_dressups += _dressup

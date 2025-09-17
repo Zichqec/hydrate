@@ -64,6 +64,9 @@ OnInitialize
 
 OnUpdateVars
 {
+	//——— 2.0.4 ———
+	ERASEVAR("currentdressups","availabledressups","dressupcategories")
+	
 	//——— 2.0.3 ———
 	if !ISVAR("Config.HourNotifs")
 	{

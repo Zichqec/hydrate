@@ -51,7 +51,7 @@ OnMainMenu : all
 	"\![*]\q[Pause drink reminders,OnPause]\n\n"
 	"\![*]\q[Change shell,OnShellMenu]"
 	
-	if ARRAYSIZE(availabledressups) > 0; "\n\![*]\q[Change dressups,OnDressupMenu]"
+	if ARRAYSIZE(dressups.available) > 0; "\n\![*]\q[Change dressups,OnDressupMenu]"
 
 	"\n\n"
 	"\![*]\q[Stats,OnWaterStats]\n"
@@ -171,7 +171,7 @@ OnDressupMenu : all
 	_display = ""
 	_currentcategories = IARRAY
 	
-	foreach availabledressups; _dressup
+	foreach dressups.available; _dressup
 	{
 		_category = _dressup[0,C_BYTE1]
 		
@@ -206,7 +206,7 @@ OnDressupMenu.Category : all
 	_display = ""
 	_items = 0
 	
-	foreach availabledressups; _dressup
+	foreach dressups.available; _dressup
 	{
 		_category = _dressup[0,C_BYTE1]
 		_name = _dressup[1,C_BYTE1]
@@ -214,7 +214,7 @@ OnDressupMenu.Category : all
 		if _category == reference0 //If this item matches the current category
 		{
 			_items++
-			if ASEARCH("%(_category)%(C_BYTE1)%(_name)",currentdressups) != -1; _display += "\![*]"
+			if ASEARCH("%(_category)%(C_BYTE1)%(_name)",dressups.current) != -1; _display += "\![*]"
 			_display += "\__q[OnChangeDesign,%(_category),%(_name)]%(_name)\__q\n"
 		}
 	}
@@ -243,77 +243,90 @@ OnChangeDesign
 	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\![set,balloonwait,0.01] \![raise,OnDressupMenu.Category,%(reference0)]" //TODO here, like the one below...
 }
 
-//TODO i'm not sure if the newer version of this function offers me any benefits or not... hm. The new one does have the thing where if it doesn't add anything to a category that is mustselect or multiple, it force picks at least one. Maybe do that
-OnRandomDressup
+OnRandomDressup : all
 {
-	AutoDressup.LastChangeTime = GETSECCOUNT
+	_currentcategory = reference0
+	_returnto = reference1
 	
-	_command = ""
-	foreach currentdressups; _dressup //Remove all current dressups
+	if _returnto != ""; "\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
+	"\0\_q"
+	
+	//—— Unbind all active ——
+	//ID, category, name
+	foreach dressups.current; _dressup
 	{
-		if reference0 != "" && _dressup[0,C_BYTE1] != reference0; continue //Skip unless this is for the category we want to randomize
-		
-		_category = _dressup[0,C_BYTE1]
-		_name = _dressup[1,C_BYTE1]
-		_command += "\![bind,%(_category),%(_name),0]"
+		"\![bind,%(_dressup[1,C_BYTE1]),%(_dressup[2,C_BYTE1]),0]"
 	}
 	
-	if reference1 != ""; "\C\![lock,balloonrepaint]\![set,autoscroll,disable]"
-	--
-	"\0%(_command)\![done    removing]"
-	--
-	_availabledressups = ASORT("string,ascending",availabledressups)
+	//—— Break dressups into categories ——
+	_category.key = IARRAY
+	_category.val = IARRAY
+	_category.opt = IARRAY
 	
-	LOGGING("_availabledressups: %(_availabledressups)")
-	
-	foreach dressupcategories; _category
+	//category, name, opts
+	foreach dressups.available; _dressup
 	{
-		if reference0 != "" && _category != reference0; continue //Skip unless this is for the category we want to randomize
-		_dressups = IARRAY
-		_options = ""
+		_dressup = SPLIT(_dressup,C_BYTE1)
 		
-		_i = 0
-		foreach _availabledressups; _dressup
+		_index = ASEARCH(_dressup[0],_category.key)
+		
+		//Add new category if none found
+		if _index == -1
 		{
-			if _dressup[0,C_BYTE1] == _category
-			{
-				if _options == ""; _options = _dressup[2,C_BYTE1]
-				_dressups ,= _dressup[1,C_BYTE1]
-				
-				_availabledressups[_i] = IARRAY
-			}
-			else
-			{
-				_i++
-			}
-		}
-		_mustselect = 0; _multiple = 0
-		if "mustselect" _in_ _options; _mustselect = 1
-		if "multiple" _in_ _options; _multiple = 1
-		
-		_skipchance = 4 //1/4 chance
-		if !_mustselect && RAND(_skipchance) == 0; continue
-		
-		if !_multiple
-		{
-			_command += "\![bind,%(_category),%(ANY(_dressups)),1]"
+			_category.key ,= _dressup[0]
+			_category.val ,= _dressup[1]
+			_category.opt ,= _dressup[2] //It's ok if this is an empty string...
 		}
 		else
 		{
-			while ARRAYSIZE(_dressups) >= 1
-			{
-				_dressup = ANY(_dressups)
-				_dressups[LSO] = IARRAY
-				if RAND(_skipchance) == 0; continue
-				
-				_command += "\![bind,%(_category),%(_dressup),1]"
-			}
+			_category.val[_index] += C_BYTE1 + _dressup[1]
 		}
 	}
-	_command
-	--
-	if reference1 != ""; "\![set,balloonwait,0.01] \![raise,%(reference1),%(reference0)]" //TODO that is definitely not necessary... I think
+	
+	//—— Assign new dressups ——
+	_skipratio = 4 //1 out of 4
+	for _i = 0; _i < ARRAYSIZE(_category.key); _i++
+	{
+		_multiple = 0
+		_mustselect = 0
+		if "multiple" _in_ _category.opt[_i]; _multiple = 1
+		if "mustselect" _in_ _category.opt[_i]; _mustselect = 1
+		
+		_category = _category.key[_i]
+		if _currentcategory != "" //A category is assigned
+		{
+			if _currentcategory != _category; continue //Skip if not the correct one
+		}
+		else //No category
+		{
+			if !_mustselect && RAND(_skipratio) != 0; continue //Chance to skip if not mustselect
+		}
+		
+		_dressups = SPLIT(_category.val[_i],C_BYTE1)
+		
+		_dressup_added = 0
+		if _multiple
+		{
+			foreach _dressups; _dressup
+			{
+				if RAND(_skipratio) != 0
+				{
+					_dressup_added = 1
+					"\![bind,%(_category),%(_dressup),1]"
+				}
+			}
+		}
+		
+		//If this is a pick-one category, or it's multiple but no dressups were added
+		if !_dressup_added
+		{
+			"\![bind,%(_category),%(ANY(_dressups)),1]"
+		}
+	}
+	
+	if _returnto != ""; "\![set,balloonwait,0.01] \![raise,%(_returnto),%(_currentcategory)]"
 }
+
 
 OnWaterStats : all
 {

@@ -20,21 +20,6 @@ br
 	else; " "
 }
 
-ASUB //ASEARCH but for substrings
-{
-	_array = _argv
-	_array[0] = IARRAY //erase first element since that's the string we're searching for
-	for _i = 0; _i < ARRAYSIZE(_array); _i++
-	{
-		if _argv[0] _in_ _array[_i]
-		{
-			_i
-			return
-		}
-	}
-	-1
-}
-
 RuntimeDisplay
 {
 	_runtime = (GETSECCOUNT - opentime) / 60

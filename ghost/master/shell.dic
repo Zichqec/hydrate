@@ -91,12 +91,10 @@ OnShellAuthor
 	shellauthor[2] = reference2 //craftmanurl
 }
 
-//Character ID, category name, part name, option, valid / invalid 0, thumbnail path
 OnNotifyDressupInfo
 {
-	availabledressups = IARRAY //This one is to display the dressup menu
-	currentdressups = IARRAY //This one is so we can display which dressups are currently in use
-	dressupcategories = IARRAY
+	dressups.available = IARRAY //This one is to display the dressup menu
+	dressups.current = IARRAY //This one is so we can display which dressups are currently in use
 	
 	//Has to be reference.raw because parts of this are delimited with C_BYTE1
 	foreach reference.raw; _dressup
@@ -104,12 +102,10 @@ OnNotifyDressupInfo
 		_dressup = SPLIT(_dressup,C_BYTE1)
 		
 		_toadd = _dressup[1] + C_BYTE1 + _dressup[2]
-		if _dressup[4] == 1; currentdressups ,= _toadd
-		
-		if ASUB(_dressup[1],dressupcategories) == -1; dressupcategories ,= _dressup[1]
+		if _dressup[4] == 1; dressups.current ,= _toadd
 		
 		if _dressup[3] != ""; _toadd += C_BYTE1 + _dressup[3]
-		availabledressups ,= _toadd
+		dressups.available ,= _toadd
 	}
 }
 

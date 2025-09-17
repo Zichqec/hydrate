@@ -26,7 +26,7 @@ OnCommunicate
 		HydrateCommuResponse(reference0)
 	}
 	--
-	_send = "%(currentdressups)"
+	_send = "%(dressups.current)"
 	_send = REPLACE(_send,",","|-|")
 	"\e [commu-%(_nocomma)] %(ConvoTag),%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),%(SHIORI3FW.ShellName),%(_send),%(Scale.X)"
 	/*
@@ -80,7 +80,7 @@ SendOldStats
 	//!!!!!!!!!!!!!!!!!!!! THIS VERSION IS DEPRECATED !!!!!!!!!!!!!!!!!!!!
 	//Please use OnHydrateStatsNotify, it can be found in commu.dic!
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
-	_send = "%(currentdressups)"
+	_send = "%(dressups.current)"
 	_send = REPLACE(_send,",","|-|")
 	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(todayswaters),%(currentdrinkstreak),%(totalwaters),%(extrasipstoday),%(extrasipstotal),""%(SHIORI3FW.ShellName)"",""%(_send)"",%(Scale.X)]"
 }
