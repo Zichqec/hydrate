@@ -6,6 +6,7 @@ OnFirstBoot
 	Stats.HighestDrinkStreak = 0
 	Stats.ExtraSipsToday = 0
 	Stats.ExtraSipsTotal = 0
+	newhighscorelatch = 0
 	
 	Config.AutoUpdates = 1
 	AutoUpdates.CheckedToday = 0
@@ -16,20 +17,11 @@ OnFirstBoot
 	Config.NotificationSound = "None"
 	Config.NotificationCustomPath = ""
 	Config.IncludeCustomSound = 0
-	
 	Config.NotificationVolume = 50
-	Config.HourNotifs = 0
 	
-	newhighscorelatch = 0
-	
-	Config.OffscreenDialogue = 0
 	Config.RemindWhenMinimized = 0
 	
-	Scale.X = 100
-	Scale.Y = 100
-	
 	Config.MatchShellPosition = 1
-	Config.EnableUninstall = 0
 	
 	Config.AutoShellChange = "Off"
 	Config.AutoShellHours = 2
@@ -40,6 +32,12 @@ OnFirstBoot
 	Config.AutoDressupHours = 1
 	AutoDressup.LastChangeTime = GETSECCOUNT
 	
+	Config.EnableUninstall = 0
+	Config.OffscreenDialogue = 0
+	Config.HourNotifs = 0
+	
+	Scale.X = 100
+	Scale.Y = 100
 	
 	OnSendStats
 	--
