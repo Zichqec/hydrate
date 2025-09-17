@@ -94,19 +94,11 @@ OnExtraSip
 
 OnPause : all
 {
-	_hours = TOINT(reference2); if _hours == ""; _hours = 0
-	_minutes = TOINT(reference1); if _minutes == ""; _minutes = 0
-	_seconds = TOINT(reference0); if _seconds == ""; _seconds = 0
-	if _seconds >= 60
-	{
-		_seconds = 0
-		_minutes++
-	}
-	if _minutes >= 60
-	{
-		_minutes = 0
-		_hours++
-	}
+	_time = TOINT(reference0)
+	_seconds = _time % 60
+	_minutes = _time / 60
+	_hours = _minutes / 60
+	_minutes %= 60
 	
 	"\C\![lock,balloonrepaint]\c\0\_q\*\t\b[2]\![set,autoscroll,disable]"
 	
@@ -124,7 +116,7 @@ OnPause : all
 	if _seconds < 10; "0"
 	"%(_seconds)"
 	
-	"\![unlock,balloonrepaint]\![timerraise,1000,1,OnPause,%(_seconds + 1),%(_minutes),%(_hours)]"
+	"\![unlock,balloonrepaint]\![timerraise,1000,1,OnPause,%(_time + 1)]"
 }
 
 OnResume
