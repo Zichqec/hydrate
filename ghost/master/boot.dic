@@ -179,10 +179,7 @@ OnUpdateVars
 
 OnBoot
 {
-	if Config.AutoUpdates
-	{
-		"\![update,ghost+shell+balloon,checkonly]"
-	}
+	if Config.AutoUpdates; "\![update,ghost+shell+balloon,checkonly]"
 	--
 	if Config.AutoShellChange == "On boot"
 	{
