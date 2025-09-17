@@ -364,17 +364,20 @@ OnWaterStats : all
 	_s = ""; if Stats.ExtraSipsTotal != 1; _s = "s"
 	"\![*]%(_h)%(Stats.ExtraSipsTotal)%(_d) extra sip%(_s) taken in total\n\n"
 	
-	nonoverlap : {
+	StatsComment
+	
+	"\n\n"
+	"\![*]\q[Back,OnMainMenu]\n"
+	"\![*]\q[Done,OnBlank]"
+}
+
+StatsComment : nonoverlap_pool
+{
 	"(You're doing awesome, keep it up!)"
 	"(Good job, keep going!)"
 	"(You've got this!)"
 	"(Heck yeah!)"
 	"(Look at you go!)"
-	}
-	
-	"\n\n"
-	"\![*]\q[Back,OnMainMenu]\n"
-	"\![*]\q[Done,OnBlank]"
 }
 
 
