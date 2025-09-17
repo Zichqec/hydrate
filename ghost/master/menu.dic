@@ -341,7 +341,7 @@ OnConfigMenu : all
 	"\![*]\__q[OnUpdateCheck,ghost]Ghost\__q  \![*]\__q[OnUpdateCheck,shell]Shell\__q  \![*]\__q[OnUpdateCheck,balloon]Balloon\__q\n"
 	"\n"
 	
-	"\![*]\__q[OnChangeLog,FromMenu]See the changelog\__q\n\n"
+	//"\![*]\__q[OnChangeLog,FromMenu]See the changelog\__q\n\n"
 	
 	"\![*]\__q[OnConfig.Legacy]Legacy content\__q\n\n"
 	
@@ -410,9 +410,9 @@ OnChangeNotif : all
 	"\![close,dialog,OnPickCustomNotif]"
 	"\0\b[2]\_q\![set,autoscroll,disable]\*"
 	
-	"\f[align,center]%(emdash) Reminder sound %(emdash)\n\n[half]\f[align,left]"
+	"\f[align,center]%(emdash) Reminder sound %(emdash)\n\f[align,left]"
 	
-	"Volume: %(_vol_up)%(_vol_down) %(Config.NotificationVolume)\n\n[half]"
+	"Volume: %(_vol_up)%(_vol_down) %(Config.NotificationVolume)\n\n"
 	
 	if Config.NotificationSound == "None"; "\![*]"
 	"\__q[OnNotifSet,None]None\__q\n"
