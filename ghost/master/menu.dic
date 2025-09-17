@@ -668,7 +668,7 @@ OnConfig.Legacy : all
 	"\![*]Shell change comments:%(br)%(_b)\_a[OnToggleShellChangeComments]%(('Off','On')[Config.ShellChangeComments])\_a%(_d)\n"
 	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
 	"\![*]Offscreen notifs: %(_b)\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a%(_d)\n"
-	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n\n"
+	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n"
 	"\n"
 	"Right click menu:\n"
 	"\![*]Encouragement: %(_b)\_a[OnToggleRightClickEncouragement]%(('Off','On')[Config.RightClickEncouragement])\_a%(_d)\n"
