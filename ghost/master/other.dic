@@ -72,7 +72,7 @@ OnMinuteChange
 	--
 	if Config.AutoShellChange == "Every interval"
 	{
-		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellHours * 3600)
+		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellMinutes * 60)
 		{
 			"\![change,shell,random,--option=raise-event]"
 			return //Don't do the checks below until after changing shells... I don't think this will come up but just in case
@@ -80,7 +80,7 @@ OnMinuteChange
 	}
 	elseif Config.AutoDressupChange == "Every interval"
 	{
-		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoDressup.LastChangeTime + (Config.AutoDressupHours * 3600)
+		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoDressup.LastChangeTime + (Config.AutoDressupMinutes * 60)
 		{
 			"\![embed,OnRandomDressup]"
 		}

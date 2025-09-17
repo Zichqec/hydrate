@@ -15,9 +15,9 @@ OnMouseDoubleClick : all
 			if AutoUpdates.BalloonReady == 1; "('%(SHIORI3FW.BalloonName)' balloon)\n"
 			
 			"\n"
-			"\![*]\q[Download updates now,OnStartUpdate]\n"
-			"\![*]\q[Maybe later,OnUpdateLater]\n\n"
-			"\![*]\q[Turn off auto updates,OnUpdateOff]"
+			"\![*]\__q[OnStartUpdate]Download updates now\__q\n"
+			"\![*]\__q[OnUpdateLater]Maybe later\__q\n\n"
+			"\![*]\__q[OnUpdateOff]Turn off auto updates\__q"
 		}
 		else; OnMainMenu
 	}
@@ -50,16 +50,16 @@ OnMainMenu : all
 {
 	"\0\![set,autoscroll,disable]\b[2]\_q"
 	
-	"\![*]\q[I took an extra sip!,OnExtraSip]\n"
-	"\![*]\q[Pause drink reminders,OnPause]\n\n"
-	"\![*]\q[Change shell,OnShellMenu]"
+	"\![*]\__q[OnExtraSip]I took an extra sip!\__q\n"
+	"\![*]\__q[OnPause]Pause drink reminders\__q\n\n"
+	"\![*]\__q[OnShellMenu]Change shell\__q"
 	
-	if ARRAYSIZE(dressups.available) > 0; "\n\![*]\q[Change dressups,OnDressupMenu]"
+	if ARRAYSIZE(dressups.available) > 0; "\n\![*]\__q[OnDressupMenu]Change dressups\__q"
 
 	"\n\n"
-	"\![*]\q[Stats,OnWaterStats]\n"
-	"\![*]\q[Config,OnConfigMenu]\n\n"
-	"\![*]\q[Done,OnBlank]"
+	"\![*]\__q[OnWaterStats]Stats\__q\n"
+	"\![*]\__q[OnConfigMenu]Config\__q\n\n"
+	"\![*]\__q[OnBlank]Done\__q"
 	
 	"\n\n[half]"
 	_s = ""; if Stats.DrinksToday != 1; _s = "s"
@@ -111,7 +111,7 @@ OnPause : all
 	
 	"(Until you close this menu, you will not be given drink reminders, and your streak will not be broken.)\n\n"
 	
-	"\![*]\q[Resume reminders,OnResume]\n\n"
+	"\![*]\__q[OnResume]Resume reminders\__q\n\n"
 	
 	"\f[bold,1]Paused for: "
 	if _hours < 10; "0"
@@ -137,24 +137,24 @@ OnShellMenu : all
 	foreach ShellList; _shell
 	{
 		if _shell == SHIORI3FW.ShellName; _display += "\![*]"
-		_display += "\q[%(_shell),OnSwitchShell,%(_shell)]\n"
+		_display += "\__q[OnSwitchShell,%(_shell)]%(_shell)\__q\n"
 	}
 	
 	"\0\*\_q\![set,autoscroll,disable]"
 	
 	"\f[align,center]%(emdash) Shells %(emdash)\n\f[align,left]"
 	
-	if ARRAYSIZE(ShellList) > 16; "\b[4]\![*]\q[Back,OnMainMenu]\n"
+	if ARRAYSIZE(ShellList) > 16; "\b[4]\![*]\__q[OnMainMenu]Back\__q\n"
 	elseif ARRAYSIZE(ShellList) > 11; "\b[4]"
 	else; "\b[2]"
 	
-	"\![*]\q[Random shell,OnRandomShell]\n"
-	"\![*]\q[Download more shells,OnShellUrl]"
+	"\![*]\__q[OnRandomShell]Random shell\__q\n"
+	"\![*]\__q[OnShellUrl]Download more shells\__q"
 	"\n\n"
 	"%(_display)"
 	"\n"
-	"\![*]\q[Back,OnMainMenu]\n"
-	"\![*]\q[Done,OnBlank]"
+	"\![*]\__q[OnMainMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
 }
 
 OnRandomShell
@@ -196,17 +196,18 @@ OnDressupMenu : all
 	
 	"\f[align,center]%(emdash) Dressups %(emdash)\n\f[align,left]"
 	
-	if ARRAYSIZE(_currentcategories) > 18; "\b[4]\![*]\q[Back,OnMainMenu]\n"
+	if ARRAYSIZE(_currentcategories) > 18; "\b[4]\![*]\__q[OnMainMenu]Back\__q\n"
 	elseif ARRAYSIZE(_currentcategories) > 11; "\b[4]"
 	else; "\b[2]"
 	
-	"\![*]\q[Randomize all categories,OnRandomDressup,,OnDressupMenu]"
+	"\![*]\__q[OnRandomDressup,,OnDressupMenu]Randomize all categories\__q"
 	
 	"\n\n"
 	"%(_display)"
 	"\n"
 	
-	"\![*]\q[Back,OnMainMenu]\n\![*]\q[Done,OnBlank]"
+	"\![*]\__q[OnMainMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
 	"\![unlock,balloonrepaint]"
 }
 
@@ -233,17 +234,18 @@ OnDressupMenu.Category : all
 	
 	"\f[align,center]%(emdash) %(reference0) %(emdash)\n\f[align,left]"
 	
-	if _items > 18; "\b[4]\![*]\q[Back,OnDressupMenu]\n"
+	if _items > 18; "\b[4]\![*]\__q[OnDressupMenu]Back\__q\n"
 	elseif _items > 11; "\b[4]"
 	else; "\b[2]"
 	
-	"\![*]\q[Random,OnRandomDressup,%(reference0),OnDressupMenu.Category]"
+	"\![*]\__q[OnRandomDressup,%(reference0),OnDressupMenu.Category]Random\__q"
 	
 	"\n\n"
 	"%(_display)"
 	"\n"
 	
-	"\![*]\q[Back,OnDressupMenu]\n\![*]\q[Done,OnBlank]"
+	"\![*]\__q[OnDressupMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
 	"\![unlock,balloonrepaint]"
 }
 
@@ -291,8 +293,8 @@ OnWaterStats : all
 	StatsComment
 	
 	"\n\n"
-	"\![*]\q[Back,OnMainMenu]\n"
-	"\![*]\q[Done,OnBlank]"
+	"\![*]\__q[OnMainMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
 }
 
 StatsComment : nonoverlap_pool
@@ -327,29 +329,27 @@ OnConfigMenu : all
 	
 	"\![*]Match position when changing shells: %(_b)\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a%(_d)\n"
 	
-	_s = "s"; if Config.AutoShellHours == 1; _s = ""
-	_shellchange = REPLACE(Config.AutoShellChange,"interval","%(Config.AutoShellHours) hour%(_s)")
+	_shellchange = REPLACE(Config.AutoShellChange,"interval","%(TalkRateLabel(Config.AutoShellMinutes * 60))")
 	"\![*]Auto shell change:%(br)%(_b)\_a[OnConfig.AutoShell]%(_shellchange)\_a%(_d)\n"
 	
-	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
-	_dressupchange = REPLACE(Config.AutoDressupChange,"interval","%(Config.AutoDressupHours) hour%(_s)")
+	_dressupchange = REPLACE(Config.AutoDressupChange,"interval","%(TalkRateLabel(Config.AutoDressupMinutes * 60))")
 	"\![*]Auto dressup change:%(br)%(_b)\_a[OnConfig.AutoDressup]%(_dressupchange)\_a%(_d)\n"
 	"\n"
 	
 	"Auto update checks: \![*]%(_b)\_a[OnToggleAutoUpdates]%(('Off','On')[Config.AutoUpdates])\_a%(_d)\n"
 	"Update...\n"
-	"\![*]\q[Ghost,OnUpdateCheck,ghost]  \![*]\q[Shell,OnUpdateCheck,shell]  \![*]\q[Balloon,OnUpdateCheck,balloon]\n"
+	"\![*]\__q[OnUpdateCheck,ghost]Ghost\__q  \![*]\__q[OnUpdateCheck,shell]Shell\__q  \![*]\__q[OnUpdateCheck,balloon]Balloon\__q\n"
 	"\n"
 	
-	"\![*]\q[See the changelog,OnChangeLog,FromMenu]\n\n"
+	"\![*]\__q[OnChangeLog,FromMenu]See the changelog\__q\n\n"
 	
 	"\![*]Hour notifications: %(_b)\_a[OnToggleHourNotifs]%(('Off','On')[Config.HourNotifs])\_a%(_d)\n"
 	"\![*]Offscreen notifs: %(_b)\_a[OnToggleOffscreenTalk]%(('Off','On')[Config.OffscreenDialogue])\_a%(_d)\n"
 	"\![*]Enable uninstall: %(_b)\_a[OnToggleUninstall]%(('Off','On')[Config.EnableUninstall])\_a%(_d)\n"
 	
 	"\n"
-	"\![*]\q[Back,OnMainMenu]\n"
-	"\![*]\q[Done,OnBlank]"
+	"\![*]\__q[OnMainMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
 	"\![unlock,balloonrepaint]"
 }
 
@@ -366,7 +366,7 @@ OnChangeTalk : all
 	"\n\n"
 	"(To turn reminders off, enter a 0.)"
 	"\n\n"
-	"\![*]\q[Cancel,OnConfigMenu]"
+	"\![*]\__q[OnConfigMenu]Cancel\__q"
 }
 
 OnDrinkTime : all
@@ -404,9 +404,9 @@ OnChangeNotif : all
 		_bd = "\f[bold,default]"
 	}
 	
-	_vol_up = "\q[▲,OnQuickVolume,Up]"
+	_vol_up = "\__q[OnQuickVolume,Up]▲\__q"
 	if Config.NotificationVolume >= 100; _vol_up = "%(_g)▲%(_d)"
-	_vol_down = "\q[▼,OnQuickVolume,Down]"
+	_vol_down = "\__q[OnQuickVolume,Down]▼\__q"
 	if Config.NotificationVolume <= 0; _vol_down = "%(_g)▼%(_d)"
 	
 	"\C\![lock,balloonrepaint]\c"
@@ -434,7 +434,7 @@ OnChangeNotif : all
 	}
 	"\n"
 	
-	"\![*]\q[Back,OnConfigMenu]"
+	"\![*]\__q[OnConfigMenu]Back\__q"
 	"\![unlock,balloonrepaint]"
 }
 
@@ -480,7 +480,7 @@ OnCustomNotif : all
 	
 	"(If sound files give an error, or you would like access to more file types including%(br)%(_h).flac%(_d), %(_h).ogg%(_d), or %(_h).m4a%(_d), please consider installing%(br)%(_b)\_a[https://github.com/Nevcairiel/LAVFilters/releases]LAV Filters\_a%(_bd).)\n\n"
 	
-	"\![*]\q[Cancel,OnChangeNotif]"
+	"\![*]\__q[OnChangeNotif]Cancel\__q"
 }
 
 OnPickCustomNotif
@@ -519,19 +519,19 @@ OnConfig.AutoShell : all
 {
 	"\C\![lock,balloonrepaint]\c"
 	"\0\b[2]\_q\![set,autoscroll,disable]\*"
-	"\![close,inputbox,OnConfig.AutoShell.HourSet]"
+	"\![close,inputbox,OnConfig.AutoShell.MinuteSet]"
 	
 	"\f[align,center]%(emdash) Auto shell change %(emdash)\n\n\f[align,left]"
 	
 	"\![*]\__q[OnConfig.AutoShell.Set,Off]Off\__q\n"
 	"\![*]\__q[OnConfig.AutoShell.Set,On boot]On boot\__q\n"
 	"\![*]\__q[OnConfig.AutoShell.Set,After a drink]After a drink\__q\n"
-	_s = "s"; if Config.AutoShellHours == 1; _s = ""
-	"\![*]\__q[OnConfig.AutoShell.Set,Every interval]Every %(Config.AutoShellHours) hour%(_s)\__q\n"
-	"\__q[OnConfig.AutoShell.HourChange](Change rate)\__q\n"
+	_s = "s"; if Config.AutoShellMinutes == 1; _s = ""
+	"\![*]\__q[OnConfig.AutoShell.Set,Every interval]Every %(TalkRateLabel(Config.AutoShellMinutes * 60))\__q\n"
+	"\__q[OnConfig.AutoShell.MinuteChange](Change rate)\__q\n"
 	"\n"
 	
-	"\![*]\q[Back,OnConfigMenu]"
+	"\![*]\__q[OnConfigMenu]Back\__q"
 	"\![unlock,balloonrepaint]"
 }
 
@@ -542,26 +542,26 @@ OnConfig.AutoShell.Set
 	OnConfigMenu
 }
 
-OnConfig.AutoShell.HourChange : all
+OnConfig.AutoShell.MinuteChange : all
 {
 	"\C\![lock,balloonrepaint]\c"
-	"\0\b[0]\s[0]\_q"
-	"\![open,inputbox,OnConfig.AutoShell.HourSet,-1]\![set,balloontimeout,-1]"
+	"\0\b[2]\s[0]\_q"
+	"\![open,inputbox,OnConfig.AutoShell.MinuteSet,-1]\![set,balloontimeout,-1]"
 	
-	_s = "s"; if Config.AutoShellHours == 1; _s = ""
-	"(How many hours would you like between shell changes? Currently set to %(Config.AutoShellHours) hour%(_s).)\n\n"
+	_s = "s"; if Config.AutoShellMinutes == 1; _s = ""
+	"(How many minutes would you like between shell changes? Currently set to %(TalkRateLabel(Config.AutoShellMinutes * 60)).)\n\n"
 	"(Note that the timer is reset each session.)"
 	"\n\n"
 	
-	"\![*]\q[Cancel,OnConfig.AutoShell]"
+	"\![*]\__q[OnConfig.AutoShell]Cancel\__q"
 	"\![unlock,balloonrepaint]"
 }
 
-OnConfig.AutoShell.HourSet : all
+OnConfig.AutoShell.MinuteSet : all
 {
 	if TOINT(reference0) > 0
 	{
-		Config.AutoShellHours = TOINT(reference0)
+		Config.AutoShellMinutes = TOINT(reference0)
 		AutoShell.LastChangeTime = GETSECCOUNT
 		OnConfig.AutoShell
 	}
@@ -570,7 +570,7 @@ OnConfig.AutoShell.HourSet : all
 		"\C\![lock,balloonrepaint]\c"
 		"\0\b[0]\s[0]\_q"
 		"(Invalid time. Please input an integer greater than 0.)"
-		"\![unlock,balloonrepaint]\x\![raise,OnConfig.AutoShell.HourChange]"
+		"\![unlock,balloonrepaint]\x\![raise,OnConfig.AutoShell.MinuteChange]"
 	}
 }
 
@@ -580,19 +580,19 @@ OnConfig.AutoDressup : all
 {
 	"\C\![lock,balloonrepaint]\c"
 	"\0\b[2]\_q\![set,autoscroll,disable]\*"
-	"\![close,inputbox,OnConfig.AutoDressup.HourSet]"
+	"\![close,inputbox,OnConfig.AutoDressup.MinuteSet]"
 	"\f[align,center]%(emdash) Auto dressup change %(emdash)\n\n\f[align,left]"
 	
 	"\![*]\__q[OnConfig.AutoDressup.Set,Off]Off\__q\n"
 	"\![*]\__q[OnConfig.AutoDressup.Set,On boot]On boot\__q\n"
 	"\![*]\__q[OnConfig.AutoDressup.Set,After a drink]After a drink\__q\n"
-	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
-	"\![*]\__q[OnConfig.AutoDressup.Set,Every interval]Every %(Config.AutoDressupHours) hour%(_s)\__q\n"
-	"\__q[OnConfig.AutoDressup.HourChange](Change rate)\__q\n"
+	_s = "s"; if Config.AutoDressupMinutes == 1; _s = ""
+	"\![*]\__q[OnConfig.AutoDressup.Set,Every interval]Every %(TalkRateLabel(Config.AutoDressupMinutes * 60))\__q\n"
+	"\__q[OnConfig.AutoDressup.MinuteChange](Change rate)\__q\n"
 	"\![*]\__q[OnConfig.AutoDressup.Set,When shell changes]When shell changes\__q\n"
 	"\n"
 	
-	"\![*]\q[Back,OnConfigMenu]"
+	"\![*]\__q[OnConfigMenu]Back\__q"
 	"\![unlock,balloonrepaint]"
 }
 
@@ -603,26 +603,26 @@ OnConfig.AutoDressup.Set
 	OnConfigMenu
 }
 
-OnConfig.AutoDressup.HourChange : all
+OnConfig.AutoDressup.MinuteChange : all
 {
 	"\C\![lock,balloonrepaint]\c"
 	"\0\b[2]\s[0]\_q"
-	"\![open,inputbox,OnConfig.AutoDressup.HourSet,-1]\![set,balloontimeout,-1]"
+	"\![open,inputbox,OnConfig.AutoDressup.MinuteSet,-1]\![set,balloontimeout,-1]"
 	
-	_s = "s"; if Config.AutoDressupHours == 1; _s = ""
-	"(How many hours would you like between dressup changes? Currently set to %(Config.AutoDressupHours) hour%(_s).)\n\n"
+	_s = "s"; if Config.AutoDressupMinutes == 1; _s = ""
+	"(How many minutes would you like between dressup changes? Currently set to %(TalkRateLabel(Config.AutoDressupMinutes * 60)).)\n\n"
 	"(Note that the timer is reset each session and any time the shell changes.)"
 	"\n\n"
 	
-	"\![*]\q[Cancel,OnConfig.AutoDressup]"
+	"\![*]\__q[OnConfig.AutoDressup]Cancel\__q"
 	"\![unlock,balloonrepaint]"
 }
 
-OnConfig.AutoDressup.HourSet : all
+OnConfig.AutoDressup.MinuteSet : all
 {
 	if TOINT(reference0) > 0
 	{
-		Config.AutoDressupHours = TOINT(reference0)
+		Config.AutoDressupMinutes = TOINT(reference0)
 		AutoDressup.LastChangeTime = GETSECCOUNT
 		OnConfig.AutoDressup
 	}
@@ -631,7 +631,7 @@ OnConfig.AutoDressup.HourSet : all
 		"\C\![lock,balloonrepaint]\c"
 		"\0\b[0]\s[0]\_q"
 		"(Invalid time. Please input an integer greater than 0.)"
-		"\![unlock,balloonrepaint]\x\![raise,OnConfig.AutoDressup.HourChange]"
+		"\![unlock,balloonrepaint]\x\![raise,OnConfig.AutoDressup.MinuteChange]"
 	}
 }
 //———————————————————————————————————————————————————————————————————

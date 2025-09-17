@@ -9,7 +9,7 @@ OnInstallComplete
 		--
 		"\![*]\__q[OnInstallComplete.Action,call]Call %(reference0)\__q  \![*]\__q[OnInstallComplete.Action,change]Change to %(reference0)\__q\n\n"
 		--
-		"\![*]\q[Done,OnBlank]"
+		"\![*]\__q[OnBlank]Done\__q"
 	}
 	elseif "shell" _in_ reference0
 	{
@@ -17,7 +17,7 @@ OnInstallComplete
 		--
 		"\![*]\__q[OnInstallComplete.Action,changeshell]Change to %(reference0)\__q\n\n"
 		--
-		"\![*]\q[Done,OnBlank]"
+		"\![*]\__q[OnBlank]Done\__q"
 	}
 }
 
@@ -146,7 +146,7 @@ OnUpdateReady
 	"\0\s[0](There %(_are) %(reference0) new file%(_s).)\w8"
 }
 
-OnUpdateComplete
+OnUpdateComplete : all
 {
 	OnUpdateVars
 	
@@ -158,8 +158,9 @@ OnUpdateComplete
 	{
 		AutoUpdates.CheckedToday = 0
 		"\0\s[0](Update complete.)"
-		--
-		"\n\n\![*]\q[Show changelog,OnChangeLog]\n\![*]\q[Done,OnBlank]"
+		"\n\n"
+		"\![*]\__q[OnChangeLog]Show changelog\__q\n"
+		"\![*]\__q[OnBlank]Done\__q"
 	}
 }
 
@@ -239,7 +240,7 @@ OnSNTPCompare
 		
 		"\0\s[0](The clock is off by %(reference3) second%(_s).)\n\n"
 		--
-		"\![*]\q[Fix it,script:\6]  \![*]\q[Leave it,blank]"
+		"\![*]\__q[script:\6]Fix it\__q  \![*]\__q[OnBlank]Leave it\__q"
 	}
 	else
 	{

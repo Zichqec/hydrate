@@ -24,12 +24,12 @@ OnFirstBoot
 	Config.MatchShellPosition = 1
 	
 	Config.AutoShellChange = "Off"
-	Config.AutoShellHours = 2
+	Config.AutoShellMinutes = 120
 	AutoShell.LastChangeTime = GETSECCOUNT
 	AutoShell.ChangingOnBoot = 0
 	
 	Config.AutoDressupChange = "Off"
-	Config.AutoDressupHours = 1
+	Config.AutoDressupMinutes = 60
 	AutoDressup.LastChangeTime = GETSECCOUNT
 	
 	Config.EnableUninstall = 0
@@ -97,6 +97,16 @@ OnUpdateVars
 		else; Stats.ExtraSipsTotal = 0
 	}
 	
+	if !ISVAR("Config.AutoShellMinutes")
+	{
+		if ISVAR("Config.AutoShellHours"); Config.AutoShellMinutes = Config.AutoShellHours * 60
+		else; Config.AutoShellMinutes = 120
+	}
+	if !ISVAR("Config.Config.AutoDressupMinutes")
+	{
+		if ISVAR("Config.AutoDressupHours"); Config.AutoDressupMinutes = Config.AutoDressupHours * 60
+		else; Config.AutoDressupMinutes = 60
+	}
 	
 	//——— 2.0.3 ———
 	if !ISVAR("Config.HourNotifs")
@@ -135,10 +145,8 @@ OnUpdateVars
 	ERASEVAR("custom_sound_path")
 	
 	if !ISVAR("Config.AutoShellChange"); Config.AutoShellChange = "Off"
-	if !ISVAR("Config.AutoShellHours"); Config.AutoShellHours = 2
 	if !ISVAR("AutoShell.LastChangeTime"); AutoShell.LastChangeTime = GETSECCOUNT
 	if !ISVAR("Config.AutoDressupChange"); Config.AutoDressupChange = "Off"
-	if !ISVAR("Config.AutoDressupHours"); Config.AutoDressupHours = 1
 	
 	
 	//——— 2.0.2 ———
