@@ -133,7 +133,7 @@ OnShellMenu : all
 		_display += "\q[%(ShellList[_i]),OnSwitchShell,%(ShellList[_i])]\n"
 	}
 	
-	"\0\*\_q\![set,autoscroll,0]"
+	"\0\*\_q\![set,autoscroll,disable]"
 	
 	"\f[align,center]%(emdash) Shells %(emdash)\n\f[align,left]"
 	
@@ -187,7 +187,7 @@ OnDressupMenu
 		}
 	}
 	--
-	"\C\![lock,balloonrepaint]\c\0\*\_q\![set,autoscroll,0]"
+	"\C\![lock,balloonrepaint]\c\0\*\_q\![set,autoscroll,disable]"
 	--
 	if reference0 == ""
 	{
