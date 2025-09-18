@@ -120,7 +120,7 @@ StreakDrink : nonoverlap
 	"(You've had %(Stats.CurrentDrinkStreak) so far! That's really great, good job!)"
 }
 
-NewStreakHighScoreDrink
+NewStreakHighScoreDrink : nonoverlap
 {
 	"(You've reached a new high score of %(Stats.HighestDrinkStreak) drinks in a row! Way to go!)"
 	"(New high score! %(Stats.HighestDrinkStreak) drinks in a row! Incredible!)"
