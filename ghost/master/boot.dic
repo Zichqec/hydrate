@@ -107,7 +107,7 @@ OnUpdateVars
 		if ISVAR("Config.AutoShellHours"); Config.AutoShellMinutes = Config.AutoShellHours * 60
 		else; Config.AutoShellMinutes = 120
 	}
-	if !ISVAR("Config.Config.AutoDressupMinutes")
+	if !ISVAR("Config.AutoDressupMinutes")
 	{
 		if ISVAR("Config.AutoDressupHours"); Config.AutoDressupMinutes = Config.AutoDressupHours * 60
 		else; Config.AutoDressupMinutes = 60

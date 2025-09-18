@@ -15,7 +15,7 @@ OnTranslate
 
 ghostver
 {
-	"2.0.3"
+	"2.0.4"
 }
 
 On_homeurl
@@ -78,7 +78,8 @@ OnMinuteChange : all
 			return //Don't do the checks below until after changing shells... I don't think this will come up but just in case
 		}
 	}
-	elseif Config.AutoDressupChange == "Every interval"
+	
+	if Config.AutoDressupChange == "Every interval"
 	{
 		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoDressup.LastChangeTime + (Config.AutoDressupMinutes * 60)
 		{
