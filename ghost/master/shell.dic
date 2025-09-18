@@ -194,5 +194,5 @@ OnRandomDressup : all
 		}
 	}
 	
-	if _returnto != ""; "\![set,balloonwait,0.01] \![raise,%(_returnto),%(_currentcategory)]"
+	if _returnto != ""; "\![set,balloonwait,0.01] \![raise,%(_returnto),%(_currentcategory)]" //TODO check that balloonwait command and find if it's needed?
 }
