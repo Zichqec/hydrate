@@ -70,9 +70,9 @@ OnMinuteChange : all
 		if Config.HourNotifs; HourNotification
 	}
 	
-	if Config.AutoShellChange == "Every interval"
+	if Config.AutoShellChange == "Every interval" //I think this and the below are slipping by a minute each time, maybe need to subtract a second? Since this rolls over on the minute and not the second and it's weird... more testing needed
 	{
-		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoShell.LastChangeTime + (Config.AutoShellMinutes * 60)
+		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT >= AutoShell.LastChangeTime + (Config.AutoShellMinutes * 60)
 		{
 			"\![change,shell,random,--option=raise-event]"
 			return //Don't do the checks below until after changing shells... I don't think this will come up but just in case
@@ -81,7 +81,7 @@ OnMinuteChange : all
 	
 	if Config.AutoDressupChange == "Every interval"
 	{
-		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT > AutoDressup.LastChangeTime + (Config.AutoDressupMinutes * 60)
+		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT >= AutoDressup.LastChangeTime + (Config.AutoDressupMinutes * 60)
 		{
 			"\![embed,OnRandomDressup]"
 		}
