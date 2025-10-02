@@ -70,7 +70,7 @@ OnMinuteChange : all
 		if Config.HourNotifs; HourNotification
 	}
 	
-	if Config.AutoShellChange == "Every interval" //I think this and the below are slipping by a minute each time, maybe need to subtract a second? Since this rolls over on the minute and not the second and it's weird... more testing needed
+	if Config.AutoShellChange == "Every interval"
 	{
 		if !(BalloonIsOpen || "choosing" _in_ status) && GETSECCOUNT >= AutoShell.LastChangeTime + (Config.AutoShellMinutes * 60)
 		{
