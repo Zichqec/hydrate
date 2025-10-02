@@ -10,7 +10,7 @@
 OnCommunicate
 {
 	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
-	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
+	//Please use OnHydrateStatsNotify, it can be found in commu.dic!
 	//This method was a mistake because I didn't know better at the time
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	
@@ -31,7 +31,7 @@ OnCommunicate
 	"\e [commu-%(_nocomma)] %(ConvoTag),%(Stats.DrinksToday),%(Stats.CurrentDrinkStreak),%(Stats.DrinksTotal),%(Stats.ExtraSipsToday),%(Stats.ExtraSipsTotal),%(SHIORI3FW.ShellName),%(_send),%(Scale.X)"
 	/*
 	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
-	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
+	//Please use OnHydrateStatsNotify, it can be found in commu.dic!
 	//This method was a mistake because I didn't know better at the time
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	
@@ -45,7 +45,7 @@ OnCommunicate
 	Here's what I'm using with my ghosts if you just want to copy it:
 	
 	//!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!
-	//USE THE RAISEOTHER/NOTIFYOTHER METHOD INSTEAD
+	/Please use OnHydrateStatsNotify, it can be found in commu.dic!
 	//This method was a mistake because I didn't know better at the time
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	ConvoTag = SPLIT(reference1,"\e")[1]
