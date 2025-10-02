@@ -30,7 +30,7 @@ OnAnchorSelect
 
 OnSurfaceRestore
 {
-	"\0\s[0]"
+	"\1\s[-1]\0\s[0]"
 }
 
 OnWindowStateMinimize
