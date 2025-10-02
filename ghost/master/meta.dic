@@ -238,7 +238,7 @@ OnSNTPCompare
 	{
 		_s = ""; if reference3 != 1; _s = "s"
 		
-		"\0\s[0](The clock is off by %(reference3) second%(_s).)\n\n"
+		"\0\s[0](The clock is off by %(reference3) second%(_s).)\n\n\_q"
 		--
 		"\![*]\__q[script:\6]Fix it\__q  \![*]\__q[OnBlank]Leave it\__q"
 	}
