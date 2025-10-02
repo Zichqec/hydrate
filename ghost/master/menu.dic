@@ -174,7 +174,6 @@ OnSwitchShell
 
 
 //—————————————————————————————— Dressup menu ——————————————————————————————
-//I feel like I could and maybe probably should split this into two distinct functions, but it would require a little retooling of the random dressup function...
 OnDressupMenu : all
 {
 	_display = ""
