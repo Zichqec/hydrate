@@ -207,7 +207,7 @@ OnBoot
 	}
 	else
 	{
-		"\![embed,OnRandomDressup]"
+		if Config.AutoDressupChange == "On boot"; "\![embed,OnRandomDressup]"
 		--
 		//These are handled by the shell change function, so not needed above...
 		OnGetShellAuthorInfo
