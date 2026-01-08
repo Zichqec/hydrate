@@ -8,10 +8,21 @@ If you'd like to make your own shells, or are interested in having your ghost re
 Code and writing by Zichqec: https://ukagaka.zichqec.com/
 Master shell art by Zdzisiu: https://zdzisiu.github.io/Cemetery/index.html
 
-Sound Effects from Pixabay: https://pixabay.com/sound-effects/
-	Water Drop: spanrucker (Freesound) https://pixabay.com/sound-effects/water-drip-45622/
-	Bubbles: KevinHilt (Freesound) https://pixabay.com/sound-effects/water-bubbles-25070/
-	Splash: (url lost)
-	Campana: Trancox (Freesound) https://pixabay.com/sound-effects/campana-40773/
-	Stop: irinairinafomicheva https://pixabay.com/sound-effects/stop-13692/
-	Success: FunWithSound (Freesound) https://pixabay.com/sound-effects/short-success-sound-glockenspiel-treasure-video-game-6346/
+Sound effects from Pixabay: https://pixabay.com/sound-effects/
+	Water Drop: spanrucker (Freesound)
+	https://pixabay.com/sound-effects/water-drip-45622/
+	
+	Bubbles: KevinHilt (Freesound)
+	https://pixabay.com/sound-effects/water-bubbles-25070/
+	
+	Splash:
+	(url lost)
+	
+	Campana: Trancox (Freesound)
+	https://pixabay.com/sound-effects/campana-40773/
+	
+	Stop: irinairinafomicheva
+	https://pixabay.com/sound-effects/stop-13692/
+	
+	Success: FunWithSound (Freesound)
+	https://pixabay.com/sound-effects/short-success-sound-glockenspiel-treasure-video-game-6346/
