@@ -45,6 +45,7 @@ ShellChangedEnd : all
 	if Config.AutoDressupChange == "When shell changes"; "\![embed,OnRandomDressup]"
 	
 	OnGetShellAuthorInfo
+	OnGetScaling
 	OnSendStats
 	
 	"\1\s[-1]\0\s[0]"
@@ -83,6 +84,18 @@ OnShellAuthor
 	shellauthor[0] = reference0 //craftmanw
 	shellauthor[1] = reference1 //craftman -- i THINK that this is automatically using craftmanw when not present? There's no other way to explain this behavior. It's not documented on Ukadoc... yet
 	shellauthor[2] = reference2 //craftmanurl
+}
+
+OnGetScaling
+{
+	"\![get,property,OnScalingInfo,currentghost.scope(0).scaling]"
+}
+
+OnScalingInfo
+{
+	_scale = SPLIT(reference0,",")
+	Scale.X = _scale[0]
+	Scale.Y = _scale[1]
 }
 
 //character ID, category name, part name, option, on-1/off-0, thumbnail path

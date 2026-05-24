@@ -212,6 +212,8 @@ OnBoot
 		//These are handled by the shell change function, so not needed above...
 		OnGetShellAuthorInfo
 		--
+		OnGetScaling
+		--
 		OnSendStats
 		--
 		BootFinish
