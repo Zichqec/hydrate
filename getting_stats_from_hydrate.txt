@@ -17,8 +17,8 @@ Information is passed along as references. Most of it is straightforward to unde
 
 reference0: Name of the current shell.
 reference1: List of the current dressups. This is a two dimensional array. Each dressup is delimited by the unicode noncharacter 0xFDEF, and within each dressup the category name and part name are delimited by 0x01.
-reference2: Scale of the current shell, on the X axis.
-reference3: Scale of the current shell, on the Y axis.
+reference2: Current X scaling (as a percentage).
+reference3: Current Y scaling (as a percentage).
 reference4: Number of drinks today.
 reference5: Number of drinks total.
 reference6: Current drink streak (number of drinks in a row, can span multiple sessions).
