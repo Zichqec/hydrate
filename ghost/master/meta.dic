@@ -121,11 +121,12 @@ OnUpdateCheckResult
 
 OnStartUpdate
 {
-	_cmd = ""
-	if AutoUpdates.GhostReady == 1; _cmd += "ghost+"
-	if AutoUpdates.ShellReady == 1; _cmd += "shell+"
-	if AutoUpdates.BalloonReady == 1; _cmd += "balloon"
-	_cmd = ERASE(_cmd,(STRLEN(_cmd) - 1),1)
+	_cmd = IARRAY
+	if AutoUpdates.GhostReady == 1; _cmd ,= "ghost"
+	if AutoUpdates.ShellReady == 1; _cmd ,= "shell"
+	if AutoUpdates.BalloonReady == 1; _cmd ,= "balloon"
+	_cmd = TOSTR(_cmd)
+	_cmd = REPLACE(_cmd,",","+")
 	"\![update,%(_cmd)]"
 }
 

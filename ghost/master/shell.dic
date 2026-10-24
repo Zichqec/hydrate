@@ -9,6 +9,8 @@ OnShellChanging
 
 OnShellChanged
 {
+	AutoUpdates.ShellReady = 0
+	
 	if Config.MatchShellPosition
 	{
 		"\0\s[-1]\![get,property,OnGetCoordsAfter,currentghost.scope(0).rect,currentghost.scope(0).y]"
@@ -16,7 +18,7 @@ OnShellChanged
 	else; ShellChangedEnd
 }
 
-OnGetCoordsBefore //This gets the x coordinate
+OnGetCoordsBefore
 {
 	ShellChange.BeforeX = reference0[0] //Horizontal position
 	ShellChange.BeforeFeet = reference1 //Feet height
@@ -27,8 +29,6 @@ OnGetCoordsAfter : all
 	//Take the feet height and subtract the height after it because we want to get how far above the feet height the Y coordinate needs to be to place the bottom where it needs to land!
 	_AfterHeight = TOINT(reference1) - TOINT(reference0[1]) //Distance between feet and top
 	_FinalY = TOINT(ShellChange.BeforeFeet) - TOINT(_AfterHeight) //Should be the new position where the top must go to make the feet be in the right spot
-	
-	AutoUpdates.ShellReady = 0
 	
 	"\0\![move,--X=%(ShellChange.BeforeX),--Y=%(_FinalY),--base=primaryscreen]"
 	

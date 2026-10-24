@@ -163,6 +163,11 @@ On_installedshellname
 	ShellList = reference
 }
 
+//TODO maybe move?
+OnBalloonChange
+{
+	AutoUpdates.BalloonReady = 0
+}
 
 //—————————————————————————————— Owner draw menu ——————————————————————————————
 On_recommendrootbutton.caption
