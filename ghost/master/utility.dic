@@ -132,7 +132,8 @@ Wobble
 		{
 			if RAND(2) == 1; _Sz = "+" + _Sz; else; _Sz = "-" + _Sz 
 		}
-		_word += "\_l[@%(_X),%(_Y)]\f[height,%(_Sz)]" + _let //Add to the display
+		//Modified from the original wobble code, I think an SSP update changed this so it now word wraps? So the Y distance had to be made relative
+		_word += "\_l[@%(_X),@%(_Y)]\f[height,%(_Sz)]" + _let + "\_l[,@%(_Y * -1)]" //Add to the display
 	}
 	_word
 }
