@@ -29,11 +29,12 @@ I'm not sure how they will handle this! If for some reason your chosen SHIORI ca
 */
 
 //This intermediary step is because otherwise the boot events pass along their own references...
+//Also, the scaling is grabbed when needed here, otherwise sometimes it becomes desynced. It makes sense to do property command → embed anyway.
 OnSendStats
 {
 	if reference0 == "balloonopen"; "\C"
 	--
-	"\![embed,OnHydrateStatsNotify]"
+	"\![get,property,OnScalingInfo,currentghost.scope(0).scaling]\![embed,OnHydrateStatsNotify]"
 }
 
 OnHydrateStatsNotify : all

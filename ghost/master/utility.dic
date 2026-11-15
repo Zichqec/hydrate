@@ -173,3 +173,15 @@ FormatLinks : all
 		"%(_argv[_i])%(CHR(1))%(_argv[_i + 1])%(CHR(2))"
 	}
 }
+
+Abs
+{
+	_input = TOINT(_argv[0])
+	if _input < 0; _input * -1
+	else; _input
+}
+
+SetScaling
+{
+	"\![set,scaling,%(Config.ShellScaling.X),%(Config.ShellScaling.Y)]"
+}

@@ -327,6 +327,10 @@ OnConfigMenu : all
 	"\n"
 	
 	"\![*]Match position when changing shells: %(_b)\_a[OnToggleMatchShellPosition]%(('Off','On')[Config.MatchShellPosition])\_a%(_d)\n"
+	_shellscaling = "100%"
+	if Config.ShellScaling.X == Config.ShellScaling.Y; _shellscaling = "%(Config.ShellScaling.X)%"
+	else; _shellscaling = "%(Config.ShellScaling.X)% / %(Config.ShellScaling.Y)%"
+	"\![*]Scaling modifier: %(_b)\_a[OnConfig.ShellScaling]%(_shellscaling)\_a%(_d)\n"
 	
 	_shellchange = REPLACE(Config.AutoShellChange,"interval","%(TalkRateLabel(Config.AutoShellMinutes * 60))")
 	"\![*]Auto shell change:%(br)%(_b)\_a[OnConfig.AutoShell]%(_shellchange)\_a%(_d)\n"
@@ -510,6 +514,105 @@ OnToggleMatchShellPosition
 	OnConfigMenu
 }
 
+OnConfig.ShellScaling : all
+{
+	_b = ""; _d = ""
+	if SHIORI3FW.BalloonName == "H2O"
+	{
+		_b = "\f[bold,1]"
+		_d = "\f[bold,default]"
+	}
+	
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[4]\_q\![set,autoscroll,disable]\*"
+	"\![close,inputbox,__SYSTEM_ALL_INPUT__]"
+	"%(SetScaling)%(OnSendStats)"
+	"\f[align,center]%(emdash) Scaling modifier %(emdash)\n\n\f[align,left]"
+	
+	"X: %(_b)%(Config.ShellScaling.X)%%(_d)  \_a[OnConfig.ShellScaling.SetCustom,x](Set X)\_a\n"
+	"Y: %(_b)%(Config.ShellScaling.Y)%%(_d)  \_a[OnConfig.ShellScaling.SetCustom,y](Set Y)\_a\n"
+	"\n"
+	
+	"\![*]\__q[OnConfig.ShellScaling.SetCustom,both]Set custom value\__q\n"
+	"\![*]\__q[OnConfig.ShellScaling.Info]What is this?\__q\n"
+	"\![*]\__q[OnConfigMenu]Back\__q"
+	"\n\n"
+	
+	_currentscale = "-"
+	if Config.ShellScaling.X == Config.ShellScaling.Y; _currentscale = Config.ShellScaling.X
+	_scales = (300,275,250,225,200,175,166,150,133,125,100,80,75,66,50,33,25,20)
+	foreach _scales; _scale
+	{
+		if _scale == _currentscale; "\![*]"
+		"\__q[OnConfig.ShellScaling.QuickSet,%(_scale)]%(_scale)%\__q\n"
+	}
+	"\n"
+	
+	"\![*]\__q[OnConfigMenu]Back\__q\n"
+	"\![*]\__q[OnBlank]Done\__q"
+	"\![unlock,balloonrepaint]"
+}
+
+OnConfig.ShellScaling.SetCustom : all
+{
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[4]\_q\![set,autoscroll,disable]\*"
+	"\![close,inputbox,__SYSTEM_ALL_INPUT__]"
+	"\![open,inputbox,OnConfig.ShellScaling.CustomInput,--reference=%(reference0)]"
+	
+	_axis = "both the X and Y axis"
+	if reference0 == "x"; _axis = "the X axis"
+	elseif reference0 == "y"; _axis = "the Y axis"
+	
+	"Write a custom scaling value for %(_axis) axis.\n\n"
+	"The value must be:\n"
+	"- A whole number\n"
+	"- Not 0\n"
+	"- No higher than 1000\n"
+	"- No lower than -1000"
+	
+	"\n\n"
+	"\![*]\__q[OnConfig.ShellScaling]Cancel\__q"
+	"\![unlock,balloonrepaint]"
+}
+
+OnConfig.ShellScaling.CustomInput : all
+{
+	_axis = reference2
+	
+	//Non-integers, 0, and numbers over 1000 should be rejected
+	if GETTYPEEX("reference0") != 1 || reference0 == 0 || Abs(reference0) > 1000
+	{
+		"\C\![lock,balloonrepaint]\c"
+		"\0\b[4]\_q\![set,autoscroll,disable]\*"
+		"Invalid input."
+		"\![unlock,balloonrepaint]\x[noclear]\![raise,OnConfig.ShellScaling.SetCustom,%(_axis)]"
+		return
+	}
+	
+	if _axis == "x" || _axis == "both"; Config.ShellScaling.X = reference0
+	if _axis == "y" || _axis == "both"; Config.ShellScaling.Y = reference0
+	
+	OnConfig.ShellScaling
+}
+
+OnConfig.ShellScaling.Info : all
+{
+	"\C\![lock,balloonrepaint]\c"
+	"\0\b[4]\_q\![set,autoscroll,disable]\*"
+	
+	"This scaling is separate from the scaling option in the right click menu, and is applied to all shells.\n\n"
+	"It can be used for purposes such as setting all shells to half size, without needing to configure each one separately.\n\n"
+	"If you use both kinds of scaling they will be combined.\n\n"
+	"\![unlock,balloonrepaint]\x[noclear]\![raise,OnConfig.ShellScaling]"
+}
+
+OnConfig.ShellScaling.QuickSet
+{
+	Config.ShellScaling.X = TOINT(reference0)
+	Config.ShellScaling.Y = TOINT(reference0)
+	OnConfig.ShellScaling
+}
 
 //———————————————————— Auto shell change submenu ————————————————————
 OnConfig.AutoShell : all

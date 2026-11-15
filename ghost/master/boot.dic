@@ -23,6 +23,10 @@ OnFirstBoot
 	
 	Config.MatchShellPosition = 1
 	
+	//These are per the ghost-side scaling
+	Config.ShellScaling.X = 100
+	Config.ShellScaling.Y = 100
+	
 	Config.AutoShellChange = "Off"
 	Config.AutoShellMinutes = 120
 	AutoShell.LastChangeTime = GETSECCOUNT
@@ -40,13 +44,14 @@ OnFirstBoot
 	Config.RightClickEncouragement = 0
 	legacyreloadlatch = 0
 	
+	//These are the combined scaling value from both right click menu and ghost-side settings
 	Scale.X = 100
 	Scale.Y = 100
 	
 	
 	OnSendStats
 	--
-	"\0\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
+	"\0%(SetScaling)\s[0](Thank you for choosing to hydrate.)\w8\n\n(Reminders will be issued every hour;\w4 double click the bottle if you'd like to change the rate or switch shells!)"
 }
 
 OnInitialize
@@ -194,6 +199,10 @@ OnUpdateVars
 	//——— 2.0.0 ———
 	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0
 	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
+	
+	//——— 2.0.7 ———
+	if !ISVAR("Config.ShellScaling.X"); Config.ShellScaling.X = 100
+	if !ISVAR("Config.ShellScaling.Y"); Config.ShellScaling.Y = 100
 }
 
 OnBoot
@@ -212,7 +221,7 @@ OnBoot
 		//These are handled by the shell change function, so not needed above...
 		OnGetShellAuthorInfo
 		--
-		OnGetScaling
+		SetScaling //This is ghost-side scaling
 		--
 		OnSendStats
 		--
