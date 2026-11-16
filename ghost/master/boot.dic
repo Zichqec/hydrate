@@ -73,6 +73,11 @@ OnInitialize
 
 OnUpdateVars
 {
+	//——— 2.0.7 ———
+	if !ISVAR("Config.ShellScaling.X"); Config.ShellScaling.X = 100
+	if !ISVAR("Config.ShellScaling.Y"); Config.ShellScaling.Y = 100
+	
+	
 	//——— 2.0.4 ———
 	ERASEVAR("currentdressups","availabledressups","dressupcategories")
 	
@@ -196,13 +201,10 @@ OnUpdateVars
 	}
 	if !ISVAR("newhighscorelatch"); newhighscorelatch = 0
 	
+	
 	//——— 2.0.0 ———
 	if !ISVAR("Config.OffscreenDialogue"); Config.OffscreenDialogue = 0
 	if !ISVAR("Config.IncludeCustomSound"); Config.IncludeCustomSound = 0
-	
-	//——— 2.0.7 ———
-	if !ISVAR("Config.ShellScaling.X"); Config.ShellScaling.X = 100
-	if !ISVAR("Config.ShellScaling.Y"); Config.ShellScaling.Y = 100
 }
 
 OnBoot
