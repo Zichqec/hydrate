@@ -131,6 +131,7 @@ OnResume
 
 
 //—————————————————————————————— Shell menu ——————————————————————————————
+//TODO it flickers when I open this menu and I couldn't get it to fix. Speculating that it's because the balloon surface changes, maybe? But I don't think I've run into this before...
 OnShellMenu : all
 {
 	_display = ""
