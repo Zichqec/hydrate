@@ -139,12 +139,27 @@ OnSecondChange
 
 OnShellScaling
 {
-	Scale.X = reference0
-	Scale.Y = reference2
+	"\![embed,OnSendStats]\![embed,OnShellScaling.Comment,%(reference0),%(reference2)]"
+}
+
+OnShellScaling.Comment : all
+{
+	_b = "\f[bold,1]"
+	_d = "\f[bold,default]"
 	
-	OnSendStats
-	--
-	"\0\s[0](%(reference0)% hydration.)"
+	"\0\s[0](%(Scale.X)% "
+	if Scale.X != Scale.Y; "/ %(Scale.Y)% "
+	"hydration.)"
+	
+	if Config.ShellScaling.X != 100 || Config.ShellScaling.Y != 100
+	{
+		"\n\n\f[height,-2]"
+		
+		"(%(reference0)% scaling x %(Config.ShellScaling.X)% %(_b)\_a[OnConfig.ShellScaling]scaling modifier\_a%(_d).)"
+		if Scale.X != Scale.Y; "\n\n%(reference1)% scaling x %(Config.ShellScaling.Y)% %(_b)\_a[OnConfig.ShellScaling]scaling modifier\_a%(_d).)"
+		
+		"\f[height,default]"
+	}
 }
 
 OnUserInputCancel
