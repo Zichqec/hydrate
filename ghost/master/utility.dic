@@ -143,25 +143,25 @@ notification_sound : all
 	//Skip if empty, or if set to custom and also empty...
 	if !(Config.NotificationSound == "None" || Config.NotificationSound == "" || (Config.NotificationSound == "Custom" && Config.NotificationCustomPath == ""))
 	{
-		"\![sound,play,"""
+		_sound = ""
 		
 		if Config.NotificationSound == "Custom"
 		{
-			Config.NotificationCustomPath
+			_sound = Config.NotificationCustomPath
 		}
 		elseif Config.NotificationSound == "Random"
 		{
 			_opts = ("Water_Drop","Bubbles","Splash","Campana","Stop","Success")
 			_opts = "snd/" + _opts + ".mp3"
 			if Config.IncludeCustomSound && Config.NotificationCustomPath != ""; _opts ,= Config.NotificationCustomPath
-			ANY(_opts)
+			_sound = ANY(_opts)
 		}
 		else
 		{
-			"snd/" + REPLACE(Config.NotificationSound," ","_") + ".mp3"
+			_sound = "snd/" + REPLACE(Config.NotificationSound," ","_") + ".mp3"
 		}
 		
-		""",--volume=%(Config.NotificationVolume),--window=false]"
+		"\![sound,play,%(Sanitize(_sound)),--volume=%(Config.NotificationVolume),--window=false]"
 	}
 }
 
@@ -184,4 +184,10 @@ Abs
 SetScaling
 {
 	"\![set,scaling,%(Config.ShellScaling.X),%(Config.ShellScaling.Y)]"
+}
+
+//To sanitize sakurascript, double quotes must enclose the parameter, and any quotes within it must be doubled
+Sanitize
+{
+	'"' + REPLACE(_argv[0],'"','""') + '"'
 }

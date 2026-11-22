@@ -121,7 +121,7 @@ OnNotifyDressupInfo
 		_category = SPLIT(SHIORI3FW.LastTalk,"__BACK_TO_DRESSUPS__:")[1]
 		
 		if _category == ""; "\![raise,OnDressupMenu]"
-		else; "\![raise,OnDressupMenu.Category,""%(_category)""]"
+		else; "\![raise,OnDressupMenu.Category,%(Sanitize(_category))]"
 	}
 }
 
@@ -139,7 +139,7 @@ OnRandomDressup : all
 	//ID, category, name
 	foreach dressups.current; _dressup
 	{
-		"\![bind,%(_dressup[1,C_BYTE1]),%(_dressup[2,C_BYTE1]),0]"
+		"\![bind,%(Sanitize(_dressup[1,C_BYTE1])),%(Sanitize(_dressup[2,C_BYTE1])),0]"
 	}
 	
 	//—— Break dressups into categories ——
@@ -196,7 +196,7 @@ OnRandomDressup : all
 				if RAND(_skipratio) != 0
 				{
 					_dressup_added = 1
-					"\![bind,%(_category),%(_dressup),1]"
+					"\![bind,%(Sanitize(_category)),%(Sanitize(_dressup)),1]"
 				}
 			}
 		}
@@ -204,7 +204,7 @@ OnRandomDressup : all
 		//If this is a pick-one category, or it's multiple but no dressups were added
 		if !_dressup_added
 		{
-			"\![bind,%(_category),%(ANY(_dressups)),1]"
+			"\![bind,%(Sanitize(_category)),%(Sanitize(ANY(_dressups))),1]"
 		}
 	}
 	

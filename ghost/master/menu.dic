@@ -169,7 +169,7 @@ OnShellUrl
 
 OnSwitchShell
 {
-	"\![change,shell,""%(reference0)"",--option=raise-event]"
+	"\![change,shell,%(Sanitize(reference0)),--option=raise-event]"
 }
 
 
@@ -186,7 +186,7 @@ OnDressupMenu : all
 		if ASEARCH(_category,_currentcategories) == -1
 		{
 			_currentcategories ,= _category
-			_display += "\__q[OnDressupMenu.Category,%(_category)]%(_category)\__q\n"
+			_display += "\__q[OnDressupMenu.Category,%(Sanitize(_category))]%(_category)\__q\n"
 		}
 	}
 	
@@ -224,7 +224,7 @@ OnDressupMenu.Category : all
 		{
 			_items++
 			if ASEARCH("%(_category)%(C_BYTE1)%(_name)",dressups.current) != -1; _display += "\![*]"
-			_display += "\__q[OnChangeDesign,%(_category),%(_name)]%(_name)\__q\n"
+			_display += "\__q[OnChangeDesign,%(Sanitize(_category)),%(Sanitize(_name))]%(_name)\__q\n"
 		}
 	}
 	
@@ -237,7 +237,7 @@ OnDressupMenu.Category : all
 	elseif _items > 11; "\b[4]"
 	else; "\b[2]"
 	
-	"\![*]\__q[OnRandomDressup,%(reference0),OnDressupMenu.Category]Random\__q"
+	"\![*]\__q[OnRandomDressup,%(Sanitize(reference0)),OnDressupMenu.Category]Random\__q"
 	
 	"\n\n"
 	"%(_display)"
@@ -250,7 +250,7 @@ OnDressupMenu.Category : all
 
 OnChangeDesign
 {
-	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\e __BACK_TO_DRESSUPS__:%(reference0)"
+	"\C\![set,autoscroll,disable]\0\_q\![bind,%(Sanitize(reference0)),%(Sanitize(reference1))]\e __BACK_TO_DRESSUPS__:%(reference0)"
 }
 
 
@@ -431,7 +431,7 @@ OnChangeNotif : all
 	foreach _opts; _opt
 	{
 		if Config.NotificationSound == _opt; "\![*]"
-		"\__q[OnNotifSet,%(_opt)]%(_opt)\__q\n"
+		"\__q[OnNotifSet,%(Sanitize(_opt))]%(_opt)\__q\n"
 	}
 	"\n"
 	

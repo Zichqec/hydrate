@@ -82,5 +82,5 @@ SendOldStats
 	//This is being kept for compatibility for now, but I may eventually remove it, so use the updated version instead!
 	_send = "%(dressups.current)"
 	_send = REPLACE(_send,",","|-|")
-	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(Stats.DrinksToday),%(Stats.CurrentDrinkStreak),%(Stats.DrinksTotal),%(Stats.ExtraSipsToday),%(Stats.ExtraSipsTotal),""%(SHIORI3FW.ShellName)"",""%(_send)"",%(Scale.X)]"
+	"\![raiseother,__SYSTEM_ALL_GHOST__,OnHydrateGhostStats,,%(Stats.DrinksToday),%(Stats.CurrentDrinkStreak),%(Stats.DrinksTotal),%(Stats.ExtraSipsToday),%(Stats.ExtraSipsTotal),%(Sanitize(SHIORI3FW.ShellName)),%(Sanitize(_send)),%(Scale.X)]"
 }

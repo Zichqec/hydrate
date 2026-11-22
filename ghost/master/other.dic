@@ -25,7 +25,7 @@ On_homeurl
 
 OnAnchorSelect
 {
-	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
+	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[%(Sanitize(reference0))]"
 }
 
 OnSurfaceRestore
@@ -125,7 +125,7 @@ OnSecondChange
 							//Send a notif banner with the appropriate text...
 							//Adjusting the last talk time here because that way it doesn't screw with the timing of your reminders
 							_dialogue = ReminderTalk
-							_command = "\![set,trayballoon,--text=""%(_dialogue)"",--title=Hydrate reminder,--icon=info]"
+							_command = "\![set,trayballoon,--text=%(Sanitize(_dialogue)),--title=Hydrate reminder,--icon=info]"
 							
 							SHIORI3FW.PushAdditionalReturn('ValueNotify',_command)
 							SHIORI3FW.ResetAITalkInterval(0)

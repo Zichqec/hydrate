@@ -49,7 +49,7 @@ OnHydrateStatsNotify : all
 		_dressups += _dressup
 	}
 	
-	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateStatsNotify,""%(SHIORI3FW.ShellName)"",""%(_dressups)"",%(Scale.X),%(Scale.Y),%(Stats.DrinksToday),%(Stats.DrinksTotal),%(Stats.CurrentDrinkStreak),%(Stats.HighestDrinkStreak),%(Stats.ExtraSipsToday),%(Stats.ExtraSipsTotal),%(IsMinimized)]"
+	"\![notifyother,__SYSTEM_ALL_GHOST__,OnHydrateStatsNotify,%(Sanitize(SHIORI3FW.ShellName)),%(Sanitize(_dressups)),%(Scale.X),%(Scale.Y),%(Stats.DrinksToday),%(Stats.DrinksTotal),%(Stats.CurrentDrinkStreak),%(Stats.HighestDrinkStreak),%(Stats.ExtraSipsToday),%(Stats.ExtraSipsTotal),%(IsMinimized)]"
 }
 
 HydrateCommuResponse : nonoverlap_pool
