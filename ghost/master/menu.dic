@@ -250,7 +250,7 @@ OnDressupMenu.Category : all
 
 OnChangeDesign
 {
-	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\![set,balloonwait,0.01] \![raise,OnDressupMenu.Category,%(reference0)]" //TODO here, like the one below...
+	"\C\![set,autoscroll,disable]\0\_q\![bind,%(reference0),%(reference1)]\e __BACK_TO_DRESSUPS__:%(reference0)"
 }
 
 

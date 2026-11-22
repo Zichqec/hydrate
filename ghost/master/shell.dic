@@ -111,13 +111,18 @@ OnNotifyDressupInfo
 		if _dressup[3] != ""; _toadd += C_BYTE1 + _dressup[3]
 		dressups.available ,= _toadd
 	}
-}
-
-OnDressupChanged
-{
-	//Because this runs BEFORE the notify event above, add a delay so that the changes are processed before sending stats...
-	if BalloonIsOpen; "\C\![timerraise,100,1,OnSendStats,balloonopen]"
-	elseif reference4 == "user"; "\![timerraise,100,1,OnSendStats]"
+	
+	if BalloonIsOpen; "\C"
+	--
+	"\![embed,OnSendStats]"
+	--
+	if "__BACK_TO_DRESSUPS__" _in_ SHIORI3FW.LastTalk
+	{
+		_category = SPLIT(SHIORI3FW.LastTalk,"__BACK_TO_DRESSUPS__:")[1]
+		
+		if _category == ""; "\![raise,OnDressupMenu]"
+		else; "\![raise,OnDressupMenu.Category,""%(_category)""]"
+	}
 }
 
 OnRandomDressup : all
@@ -203,5 +208,5 @@ OnRandomDressup : all
 		}
 	}
 	
-	if _returnto != ""; "\![set,balloonwait,0.01] \![raise,%(_returnto),%(_currentcategory)]" //TODO check that balloonwait command and find if it's needed?
+	if _returnto != ""; "\e __BACK_TO_DRESSUPS__:%(_currentcategory)"
 }
