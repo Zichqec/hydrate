@@ -246,6 +246,7 @@ BootFinish
 	else
 	{
 		_rate = TalkRateLabel(aitalkinterval)
+		
 		"(Reminders are set to be issued every %(_rate).)\w8\n\n"
 		"(Reminders are set for every %(_rate).)\w8\n\n"
 		"(Reminders are set to every %(_rate).)\w8\n\n"

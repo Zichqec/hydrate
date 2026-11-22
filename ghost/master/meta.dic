@@ -169,9 +169,12 @@ OnChangeLog : all
 	"\j[https://ukagaka.zichqec.com/ghost/hydrate#version_history]"
 }
 
-OnUpdateFailure //If the update fails
+//If the update fails
+OnUpdateFailure
 {
-	_file = SPLITPATH(reference1)[2] + SPLITPATH(reference1)[3] //For MD5 errors, this gets the name and extension of the offending file
+	//For MD5 errors, this gets the name and extension of the offending file
+	_file = SPLITPATH(reference1)[2] + SPLITPATH(reference1)[3]
+	
 	_reason = reference0
 	case reference0
 	{
