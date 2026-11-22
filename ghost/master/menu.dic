@@ -592,7 +592,7 @@ OnConfig.ShellScaling.CustomInput : all
 	if _axis == "x" || _axis == "both"; Config.ShellScaling.X = reference0
 	if _axis == "y" || _axis == "both"; Config.ShellScaling.Y = reference0
 	
-	"\C%(SetScaling)%(OnSendStats)"
+	"\C%(SetScaling)\![embed,OnSendStats]"
 	--
 	OnConfig.ShellScaling
 }
@@ -613,7 +613,7 @@ OnConfig.ShellScaling.QuickSet
 	Config.ShellScaling.X = TOINT(reference0)
 	Config.ShellScaling.Y = TOINT(reference0)
 	
-	"\C%(SetScaling)%(OnSendStats)"
+	"\C%(SetScaling)\![embed,OnSendStats]"
 	--
 	OnConfig.ShellScaling
 }

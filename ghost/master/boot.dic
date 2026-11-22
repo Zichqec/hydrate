@@ -225,7 +225,7 @@ OnBoot
 		--
 		OnGetShellAuthorInfo
 		--
-		OnSendStats
+		"\![embed,OnSendStats]"
 		--
 		BootFinish
 	}
