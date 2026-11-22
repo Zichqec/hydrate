@@ -559,9 +559,9 @@ OnConfig.ShellScaling.SetCustom : all
 	"\![close,inputbox,__SYSTEM_ALL_INPUT__]"
 	"\![open,inputbox,OnConfig.ShellScaling.CustomInput,--reference=%(reference0)]"
 	
-	_axis = "both the X and Y axis"
-	if reference0 == "x"; _axis = "the X axis"
-	elseif reference0 == "y"; _axis = "the Y axis"
+	_axis = "both the X and Y"
+	if reference0 == "x"; _axis = "the X"
+	elseif reference0 == "y"; _axis = "the Y"
 	
 	"Write a custom scaling value for %(_axis) axis.\n\n"
 	"The value must be:\n"
