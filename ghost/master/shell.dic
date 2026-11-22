@@ -47,7 +47,7 @@ ShellChangedEnd : all
 	if Config.AutoDressupChange == "When shell changes"; "\![embed,OnRandomDressup]"
 	
 	OnGetShellAuthorInfo
-	OnSendStats
+	"\![embed,OnSendStats]"
 	
 	"\1\s[-1]\0\s[0]"
 	
